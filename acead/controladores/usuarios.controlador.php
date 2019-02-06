@@ -138,14 +138,18 @@ class ControladorUsuarios{
 
 	public function ctrBloquearUsuario(){
 
-		$tabla = "tbl_usuarios";
+if (isset($_POST['ingUsuario'])) {
+	// code...
+	$tabla = "tbl_usuarios";
 
-		$datos = array(
-					 "Usuario" => $_POST["ingUsuario"],
-					 "Id_Estado" => 2);
+	$datos = array(
+				 "Usuario" => $_POST["ingUsuario"],
+				 "Id_Estado" => 2);
 
-					 $respuesta = ModeloUsuarios::mdlBloquearUsuario($tabla, $datos);
-				 }
+				 $respuesta = ModeloUsuarios::mdlBloquearUsuario($tabla, $datos);
+			 }
+}
+
 
 	/*=============================================
 	REGISTRO DE USUARIO
