@@ -256,7 +256,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Telefono" pattern="[0-9]{8}">
+                    <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Telefono" minlength="8" maxlength="15" pattern="[0-9]{8}">
 
                   </div>
 
@@ -270,7 +270,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" pattern="[0-9]{13}">
+                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" maxlength="13" pattern="[0-9]">
 
                   </div>
 
@@ -298,7 +298,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" required>
 
               </div>
 
@@ -331,7 +331,7 @@ MODAL AGREGAR USUARIO
                   <option value="">Seleccionar Genero</option>
 
                   <?php
-
+/*
                   $item = null;
                   $valor = null;
 
@@ -340,7 +340,7 @@ MODAL AGREGAR USUARIO
                       echo $genero;
                     echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
                   }
-
+                    */
                    ?>
 
                 </select>

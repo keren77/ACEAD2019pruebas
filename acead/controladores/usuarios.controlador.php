@@ -18,12 +18,11 @@ class ControladorUsuarios{
 				$item = "Usuario";
 
 				$valor = strtoupper($_POST["ingUsuario"]);
-				//echo $valor;
+
 
 				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
-
-				if($respuesta["Usuario"] == $_POST["ingUsuario"] && password_verify($_POST["ingPassword"], $respuesta['Contrasena'])){
+				if($respuesta["Usuario"] == strtoupper($_POST["ingUsuario"]) && password_verify($_POST["ingPassword"], $respuesta['Contrasena'])){
 					$_SESSION['intentos']=0;
 
 					switch($respuesta["Id_Estado"]){
@@ -126,7 +125,7 @@ class ControladorUsuarios{
 
 				}
 
-			}
+			 }
 
 		}
 
@@ -138,17 +137,19 @@ class ControladorUsuarios{
 
 	public function ctrBloquearUsuario(){
 
-if (isset($_POST['ingUsuario'])) {
-	// code...
-	$tabla = "tbl_usuarios";
+		if (isset($_POST['ingUsuario'])) {
 
-	$datos = array(
-				 "Usuario" => $_POST["ingUsuario"],
-				 "Id_Estado" => 2);
+			$tabla = "tbl_usuarios";
 
-				 $respuesta = ModeloUsuarios::mdlBloquearUsuario($tabla, $datos);
-			 }
-}
+			$datos = array(
+						 "Usuario" => $_POST["ingUsuario"],
+						 "Id_Estado" => 2);
+
+						 $respuesta = ModeloUsuarios::mdlBloquearUsuario($tabla, $datos);
+						 
+					 }
+		}
+
 
 
 	/*=============================================

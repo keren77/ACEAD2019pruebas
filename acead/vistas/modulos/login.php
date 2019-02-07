@@ -41,15 +41,22 @@
 
       <div class="form-group has-feedback">
 
-        <input type="text" class="form-control" placeholder="Usuario" id="user" name="ingUsuario" maxlength="30" style="text-transform: uppercase" autofocus required>
-        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
+              <!--<span class="glyphicon glyphicon-user form-control-feedback"></span> -->
+              <input type="text" class="form-control" placeholder="Usuario" id="user" name="ingUsuario" maxlength="30" style="text-transform: uppercase" autofocus autocomplete="off" required>
+
+            </div>
       </div>
 
       <div class="form-group has-feedback">
 
-        <input type="password" class="form-control" placeholder="CONTRASEÑA" name="ingPassword" id="pass" required>
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+        <input type="password" class="form-control" placeholder="CONTRASEÑA" name="ingPassword" id="pass" autocomplete="off" required>
+        <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
+      </div>
 
       </div>
 

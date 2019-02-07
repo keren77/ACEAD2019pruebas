@@ -206,7 +206,7 @@ static public function mdlObtenerIntentos(){
 	}
 
 
-	
+
 
 	static public function mdlCargarSelect($tabla, $item, $valor){
 
