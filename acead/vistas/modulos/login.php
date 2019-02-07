@@ -43,7 +43,6 @@
 
           <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-user"></i></span>
-
               <!--<span class="glyphicon glyphicon-user form-control-feedback"></span> -->
               <input type="text" class="form-control" placeholder="Usuario" id="user" name="ingUsuario" maxlength="30" style="text-transform: uppercase" autofocus autocomplete="off" required>
 
@@ -52,11 +51,16 @@
 
       <div class="form-group has-feedback">
 
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-        <input type="password" class="form-control" placeholder="CONTRASEÑA" name="ingPassword" id="pass" autocomplete="off" required>
-        <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
-      </div>
+          <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <input type="password" class="form-control pwd1" placeholder="CONTRASEÑA" name="ingPassword" id="pass" autocomplete="off" required>
+              <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
+
+              <span class="input-group-btn">
+                  <button class="btn btn-default reveal1" type="button"><i class="glyphicon glyphicon-eye-open"></i></button></span>
+
+                  <script src="vistas/js/showpass.js"></script>
+          </div>
 
       </div>
 
