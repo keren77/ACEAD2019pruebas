@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2019 at 05:39 AM
+-- Generation Time: Feb 08, 2019 at 08:06 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -582,7 +582,7 @@ INSERT INTO `tbl_estado` (`Id_Estado`, `DescripEstatus`) VALUES
 --
 
 CREATE TABLE `tbl_estadocivil` (
-  `Id_estadocivil` int(11) NOT NULL,
+  `Id_EstadoCivil` int(11) NOT NULL,
   `Descripcion` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -590,7 +590,7 @@ CREATE TABLE `tbl_estadocivil` (
 -- Dumping data for table `tbl_estadocivil`
 --
 
-INSERT INTO `tbl_estadocivil` (`Id_estadocivil`, `Descripcion`) VALUES
+INSERT INTO `tbl_estadocivil` (`Id_EstadoCivil`, `Descripcion`) VALUES
 (1, 'Soltero'),
 (2, 'Casado');
 
@@ -621,17 +621,17 @@ INSERT INTO `tbl_estadopago` (`Id_Estado`, `EstadoPago`, `Descripcion`) VALUES
 --
 
 CREATE TABLE `tbl_genero` (
-  `Id_genero` int(11) NOT NULL,
-  `Descripcion` char(1) NOT NULL
+  `Id_Genero` int(11) NOT NULL,
+  `Descripcion` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_genero`
 --
 
-INSERT INTO `tbl_genero` (`Id_genero`, `Descripcion`) VALUES
-(1, 'F'),
-(2, 'M');
+INSERT INTO `tbl_genero` (`Id_Genero`, `Descripcion`) VALUES
+(1, 'FEMENINO'),
+(2, 'MASCULINO');
 
 -- --------------------------------------------------------
 
@@ -1169,8 +1169,8 @@ CREATE TABLE `tbl_usuarios` (
 --
 
 INSERT INTO `tbl_usuarios` (`Id_usuario`, `Usuario`, `Contrasena`, `FechaUltimaConex`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Telefono`, `Cedula`, `PreguntasContestadas`, `PrimerIngreso`, `FechaVencimiento`, `CorreoElectronico`, `Id_Departamento`, `Id_EstadoCivil`, `Id_Genero`, `Id_Estado`, `Id_Rol`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`, `code`) VALUES
-(1, 'ADMIN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-07 04:25:17', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 3, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
-(2, 'PRUEBA', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-06 06:34:03', 'Prueba', NULL, '', NULL, 0, 0, 3, NULL, '2018-11-30', 'prueba@prueba.com', 0, 0, 0, 2, 1, '2018-11-07', NULL, '1', NULL, NULL),
+(1, 'ADMIN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-08 06:56:47', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 3, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
+(2, 'PRUEBA', '$2y$10$b71y0mcZPI1ZXOH96IHNXugJdXsRI1egVdginLzegXAeDCW1x8d4e', '2019-02-08 06:59:48', 'Pruebaa', 'Testa', 'Shikena', 'Examena', 99999999, 2147483647, 3, NULL, '2018-11-30', 'prueba1@prueba.com', 2, 2, 2, 2, 3, '2018-11-07', NULL, '1', NULL, NULL),
 (6, 'florinda', '$2y$10$jStFsll4d2Zqgftn0ZbjXOOvRAiSYwY9oiABB.Nha3bjlTBZZGg0K', '2018-11-09 04:16:53', '', NULL, '', NULL, 0, 0, 3, NULL, '2018-11-30', 'flor@venenosa.com', 0, 0, 0, 1, 3, '2018-11-09', '2018-11-09', 'Admin', NULL, NULL),
 (7, 'rocko', 'Adm@1212', '2019-02-06 05:58:17', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-16', 'leonardo@yahoo.com', 0, 0, 0, 3, 4, '2018-11-16', '2018-11-16', 'Autoregistro', NULL, NULL),
 (8, 'pamela23', 'Adm@1212', '2018-11-16 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-16', 'yency@yahoo.com', 0, 0, 0, 1, 4, '2018-11-16', '2018-11-16', 'Autoregistro', NULL, NULL),
@@ -1189,7 +1189,9 @@ INSERT INTO `tbl_usuarios` (`Id_usuario`, `Usuario`, `Contrasena`, `FechaUltimaC
 (22, 'axel1', '$2y$10$O0R0V3Vf2Uo4u.HVpd0XF.E5o9Jr9BxGlPUiN/57RitQd/.4qWPJS', '2018-12-01 07:45:46', '', NULL, '', NULL, 0, 0, 0, NULL, '2019-02-02', 'juanc.romeroruiz@hotmail.com', 0, 0, 0, 3, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, 'fncipbBJR'),
 (23, 'irma1', '$2y$10$gcXEHMYNETkyJ6zkNkbfse2qsKoabGm7cY6GlbAd9Gq2gKNQNledO', '2019-02-06 04:49:10', '', NULL, '', NULL, 0, 0, 0, NULL, '2019-02-02', 'irma.alonzo1@hotmail.com', 0, 0, 0, 2, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, NULL),
 (30, 'KEREN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-06 05:05:29', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 2, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
-(31, 'USO', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-06 06:00:29', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 2, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL);
+(31, 'USO', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-06 06:00:29', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 2, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
+(37, 'KERENo', '$2y$10$CsrEAELNp9tvaPrgOsO9hOy4ygPg1Q4/OguE9FCdSBmgHCJ0chaFS', '2019-02-08 03:54:46', 'KEREN', NULL, 'YANES', NULL, 88888888, 2147483647, NULL, NULL, NULL, 'abc@abc.com', 2, 0, 0, 1, 3, NULL, NULL, NULL, NULL, NULL),
+(38, 'KERENT', '$2y$10$XNFh7pvPQBYnzb0aPbfBeeg3V6YanY28IOq/U0bcM7RhILapbwoFe', '2019-02-08 04:15:28', 'KEREN', NULL, 'YANES', NULL, 88888888, 2147483647, NULL, NULL, NULL, 'abc@abc.com', 0, 0, 0, 1, 1, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1292,7 +1294,7 @@ ALTER TABLE `tbl_estado`
 -- Indexes for table `tbl_estadocivil`
 --
 ALTER TABLE `tbl_estadocivil`
-  ADD PRIMARY KEY (`Id_estadocivil`);
+  ADD PRIMARY KEY (`Id_EstadoCivil`);
 
 --
 -- Indexes for table `tbl_estadopago`
@@ -1304,7 +1306,7 @@ ALTER TABLE `tbl_estadopago`
 -- Indexes for table `tbl_genero`
 --
 ALTER TABLE `tbl_genero`
-  ADD PRIMARY KEY (`Id_genero`);
+  ADD PRIMARY KEY (`Id_Genero`);
 
 --
 -- Indexes for table `tbl_hist_contrasena`
@@ -1538,7 +1540,7 @@ ALTER TABLE `tbl_estado`
 -- AUTO_INCREMENT for table `tbl_estadocivil`
 --
 ALTER TABLE `tbl_estadocivil`
-  MODIFY `Id_estadocivil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id_EstadoCivil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_estadopago`
@@ -1550,7 +1552,7 @@ ALTER TABLE `tbl_estadopago`
 -- AUTO_INCREMENT for table `tbl_genero`
 --
 ALTER TABLE `tbl_genero`
-  MODIFY `Id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id_Genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_hist_contrasena`
@@ -1658,7 +1660,7 @@ ALTER TABLE `tbl_tipocontacto`
 -- AUTO_INCREMENT for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables

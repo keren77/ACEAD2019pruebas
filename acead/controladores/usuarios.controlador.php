@@ -235,6 +235,8 @@ class ControladorUsuarios{
 
 				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
 										 "PrimerApellido"	=> $_POST["nuevoApellido1"],
+										 "SegundoNombre"	=> $_POST["nuevoNombre2"],
+										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
 										 "Cedula" => $_POST["nuevoCedula"],
@@ -332,7 +334,7 @@ class ControladorUsuarios{
 
 		if(isset($_POST["editarUsuario"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
 
 				/*=============================================
 				VALIDAR IMAGEN
@@ -460,14 +462,24 @@ class ControladorUsuarios{
 
 						  	</script>';
 
-
 										}
 
-				$datos = array(//"Usuario" => $_POST["editarNombre"],
-							   "Usuario" => $_POST["editarUsuario"],
-							   "Contrasena" => $encriptar,
+				$datos = array("PrimerNombre" => $_POST["editarNombre1"],
+										 "PrimerApellido"	=> $_POST["editarApellido1"],
+										 "SegundoNombre"	=> $_POST["editarNombre2"],
+										 "SegundoApellido"	=> $_POST["editarApellido2"],
+										 "CorreoElectronico" => $_POST["editarEmail"],
+										 "Telefono" => $_POST["editarTelefono"],
+										 "Cedula" => $_POST["editarCedula"],
+					           "Contrasena" => $encriptar,
+										 "Id_Departamento" => $_POST["editarDpto"],
+										 "Id_EstadoCivil" => $_POST["editarEstCivil"],
+										 "Id_Genero" => $_POST["editarGenero"],
+										 "Usuario" => $_POST["editarUsuario"],
+										 "Id_Rol" => $_POST["editarRol"]);
+
 							  // "Id_Rol" => $_POST["editarPerfil"]
-							);
+
 							   //"foto" => $ruta)
 
 

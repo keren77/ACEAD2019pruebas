@@ -270,7 +270,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" maxlength="13" pattern="[0-9]{13}">
+                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" minlength="8" maxlength="13" pattern="[0-9]{13}">
 
                   </div>
 
@@ -386,7 +386,7 @@ MODAL AGREGAR USUARIO
 
                   $genero = ControladorUsuarios::ctrCargarSelectGenero();
                   foreach ($genero as $key => $value) {
-                    echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
+                    echo "<option value='".$value['Id_Genero']."'>".$value['Descripcion']."</option>";
                   }
                   ?>
 
@@ -489,7 +489,7 @@ MODAL EDITAR USUARIO
         CABEZA DEL MODAL
         ======================================-->
 
-        <div class="modal-header" style="background:#3c8dbc; color:white">
+        <div class="modal-header" style="background:#f39c12; color:white">
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -505,19 +505,6 @@ MODAL EDITAR USUARIO
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA EL NOMBRE -->
-
-            <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-
-                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
-
-              </div>
-
-            </div>
 
             <!-- ENTRADA PARA EL USUARIO -->
 
@@ -525,11 +512,112 @@ MODAL EDITAR USUARIO
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
 
 
-                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="">
+                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" readonly value="">
 
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL PRIMER NOMBRE -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control input-lg" name="editarNombre1" id="editarNombre1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+
+              </div>
+
+            </div>
+
+
+          <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
+
+          <div class="form-group">
+
+            <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+
+              </div>
+
+          </div>
+
+
+
+            <!-- ENTRADA PARA EL PRIMER APELLIDO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control input-lg" name="editarApellido1" id="editarApellido1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL PRIMER APELLIDO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control input-lg" name="editarApellido2" id="editarApellido2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL TELEFONO -->
+
+            <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+
+                    <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" value="" minlength="8" maxlength="15" pattern="[0-9]{8}">
+
+                  </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL NUMERO DE IDENTIDAD -->
+
+            <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+
+                    <input type="text" class="form-control input-lg" name="editarCedula" id="editarCedula" value="" maxlength="13" pattern="[0-9]{13}">
+
+                  </div>
+
+            </div>
+
+        <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-at"></i></span>
+
+                <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" value="" required>
 
               </div>
 
@@ -543,31 +631,110 @@ MODAL EDITAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
-                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
-
-                <input type="hidden" id="passwordActual" name="passwordActual">
+                <input type="password" class="form-control input-lg" name="editarPassword" id="nuevoPassword" placeholder="Escriba la Nueva Contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}$" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
 
             <div class="form-group">
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
 
-                <select class="form-control input-lg" name="editarPerfil">
+                <select class="form-control input-lg" id="editarDpto" name="editarDpto">
 
-                  <option value="" id="editarPerfil"></option>
+                  <option value="">Seleccionar Departmento</option>
 
-                  <option value="Administrador">Administrador</option>
+                  <?php
 
-                  <option value="Especial">Especial</option>
+                  $dpto = ControladorUsuarios::ctrCargarSelectDepartamento();
+                  foreach ($dpto as $key => $value) {
+                    echo "<option value='".$value['Id_Departamentos']."'>".$value['DescripDepart']."</option>";
+                  }
+                  ?>
 
-                  <option value="Vendedor">Vendedor</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU ESTADO CIVIL -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" id="editarEstCivil" name="editarEstCivil">
+
+                  <option value="">Seleccionar Estado Civil</option>
+
+                  <?php
+
+                  $civil = ControladorUsuarios::ctrCargarSelectEstCivil();
+                  foreach ($civil as $key => $value) {
+                    echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU GENERO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" id="editarGenero" name="editarGenero">
+
+                  <option value="">Seleccionar Genero</option>
+
+                  <?php
+
+                  $genero = ControladorUsuarios::ctrCargarSelectGenero();
+                  foreach ($genero as $key => $value) {
+                    echo "<option value='".$value['Id_Genero']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU ROL -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" id="editarRol" name="editarRol">
+
+                  <option value="">Seleccionar Rol de Usuario</option>
+
+                  <?php
+
+                  $role = ControladorUsuarios::ctrCargarSelectRol();
+                  foreach ($role as $key => $value) {
+                    echo "<option value='".$value['Id_Rol']."'>".$value['Rol']."</option>";
+                  }
+                  	echo $_POST['nuevoRol'];
+                  ?>
 
                 </select>
 
