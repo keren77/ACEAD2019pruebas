@@ -146,7 +146,7 @@ class ControladorUsuarios{
 						 "Id_Estado" => 2);
 
 						 $respuesta = ModeloUsuarios::mdlBloquearUsuario($tabla, $datos);
-						 
+
 					 }
 		}
 
@@ -230,7 +230,7 @@ class ControladorUsuarios{
 				}
 */
 				$tabla = "tbl_usuarios";
-
+				$nuevo = 1;
 				$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);
 
 				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
@@ -238,11 +238,14 @@ class ControladorUsuarios{
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
 										 "Cedula" => $_POST["nuevoCedula"],
-					           "Usuario" => $_POST["nuevoUsuario"],
-					           "Contrasena" => $encriptar);
-					          /* "perfil" => $_POST["nuevoPerfil"],*/
+					           "Usuario" => strtoupper($_POST["nuevoUsuario"]),
+					           "Contrasena" => $encriptar,
+										 "Id_Departamento" => $_POST["nuevoDpto"],
+										 "Id_EstadoCivil" => $_POST["nuevoEstCivil"],
+										 "Id_Genero" => $_POST["nuevoGenero"],
+										 "Id_Rol" => $_POST["nuevoRol"],
+									 	 "Id_Estado" => $nuevo);
 
-					           /*"foto"=>$ruta)*/
 
 				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
 
@@ -567,14 +570,57 @@ class ControladorUsuarios{
 	MOSTRAR GENERO
 	=============================================*/
 
-	static public function ctrCargarSelectGenero($item, $valor){
+	static public function ctrCargarSelectGenero(){
 
 		$tabla = "tbl_genero";
 
-		$respuesta = ModeloUsuarios::mdlCargarSelect($tabla, $item, $valor);
+		$respuesta = ModeloUsuarios::mdlCargarSelect($tabla);
 
 		return $respuesta;
 
 	}
+
+	/*=============================================
+	MOSTRAR DEPARTAMENTOS
+	=============================================*/
+
+	static public function ctrCargarSelectDepartamento(){
+
+		$tabla = "tbl_departamentos";
+
+		$respuesta = ModeloUsuarios::mdlCargarSelect($tabla);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
+	MOSTRAR ESTADO CIVIL
+	=============================================*/
+
+	static public function ctrCargarSelectEstCivil(){
+
+		$tabla = "tbl_estadocivil";
+
+		$respuesta = ModeloUsuarios::mdlCargarSelect($tabla);
+
+		return $respuesta;
+
+	}
+
+	/*=============================================
+	MOSTRAR ESTADO CIVIL
+	=============================================*/
+
+	static public function ctrCargarSelectRol(){
+
+		$tabla = "tbl_roles";
+
+		$respuesta = ModeloUsuarios::mdlCargarSelect($tabla);
+
+		return $respuesta;
+
+	}
+
 
 }

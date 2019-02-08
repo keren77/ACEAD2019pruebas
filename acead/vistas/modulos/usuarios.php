@@ -298,7 +298,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" style="text-transform: uppercase" required>
 
               </div>
 
@@ -318,36 +318,111 @@ MODAL AGREGAR USUARIO
 
             </div>
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
 
             <div class="form-group">
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
 
-                <select class="form-control input-lg" name="nuevoPerfil">
+                <select class="form-control input-lg" name="nuevoDpto">
 
-                  <option value="">Seleccionar Genero</option>
+                  <option value="">Seleccionar Departmento</option>
 
                   <?php
-/*
-                  $item = null;
-                  $valor = null;
 
-                  $genero = ControladorUsuarios::ctrCargarSelectGenero($item, $valor);
-                  foreach ($genero as $key => $value) {
-                      echo $genero;
-                    echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
+                  $dpto = ControladorUsuarios::ctrCargarSelectDepartamento();
+                  foreach ($dpto as $key => $value) {
+                    echo "<option value='".$value['Id_Departamentos']."'>".$value['DescripDepart']."</option>";
                   }
-                    */
-                   ?>
+                  ?>
 
                 </select>
 
               </div>
 
             </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU ESTADO CIVIL -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" name="nuevoEstCivil">
+
+                  <option value="">Seleccionar Estado Civil</option>
+
+                  <?php
+
+                  $civil = ControladorUsuarios::ctrCargarSelectEstCivil();
+                  foreach ($civil as $key => $value) {
+                    echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU GENERO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" name="nuevoGenero">
+
+                  <option value="">Seleccionar Genero</option>
+
+                  <?php
+
+                  $genero = ControladorUsuarios::ctrCargarSelectGenero();
+                  foreach ($genero as $key => $value) {
+                    echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU ROL -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" name="nuevoRol">
+
+                  <option value="">Seleccionar Rol de Usuario</option>
+
+                  <?php
+
+                  $role = ControladorUsuarios::ctrCargarSelectRol();
+                  foreach ($role as $key => $value) {
+                    echo "<option value='".$value['Id_Rol']."'>".$value['Rol']."</option>";
+                  }
+                  	echo $_POST['nuevoRol'];
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
 
 
             <!-- ENTRADA PARA SUBIR FOTO

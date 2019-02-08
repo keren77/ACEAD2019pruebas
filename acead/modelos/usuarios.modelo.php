@@ -55,8 +55,8 @@ static public function mdlObtenerIntentos(){
 	static public function mdlIngresarUsuario($tabla, $datos){
 
 
-		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, PrimerApellido, CorreoElectronico, Telefono, Cedula, Usuario, Contrasena)
-																									VALUES (:nombre1, :apellido1, :email, :telefono, :cedula, :usuario, :password)");
+		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, PrimerApellido, CorreoElectronico, Telefono, Cedula, Usuario, Contrasena, Id_Departamento, Id_Estado, Id_EstadoCivil, Id_Genero, Id_Rol)
+																									VALUES (:nombre1, :apellido1, :email, :telefono, :cedula, :usuario, :password, :departmento, :estado, :estcivil, :genero, :rol)");
 
 
 		$stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
@@ -65,7 +65,13 @@ static public function mdlObtenerIntentos(){
 		$stmt->bindParam(":telefono", $datos["Telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":cedula", $datos["Cedula"], PDO::PARAM_STR);
 		$stmt->bindParam(":usuario", $datos["Usuario"], PDO::PARAM_STR);
-		$stmt->bindParam(":password", $datos["Contrasena"], PDO::PARAM_STR);
+    $stmt->bindParam(":password", $datos["Contrasena"], PDO::PARAM_STR);
+		$stmt->bindParam(":departmento", $datos["Id_Departamento"], PDO::PARAM_STR);
+    $stmt->bindParam(":estado", $datos["Id_Estado"], PDO::PARAM_STR);
+    $stmt->bindParam(":estcivil", $datos["Id_EstadoCivil"], PDO::PARAM_STR);
+    $stmt->bindParam(":genero", $datos["Id_Genero"], PDO::PARAM_STR);
+    $stmt->bindParam(":rol", $datos["Id_Rol"], PDO::PARAM_STR);
+
 		//$stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
 		//$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 
@@ -208,7 +214,7 @@ static public function mdlObtenerIntentos(){
 
 
 
-	static public function mdlCargarSelect($tabla, $item, $valor){
+	static public function mdlCargarSelect0($tabla, $item, $valor){
 
 		if($item != null){
 
@@ -235,5 +241,16 @@ static public function mdlObtenerIntentos(){
 		$stmt = null;
 
 	}
+
+  static public function mdlCargarSelect($tabla){
+
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT * FROM $tabla");
+  	$stmt -> execute();
+
+  	return $stmt -> fetchall();
+
+    }
+
+
 
 }
