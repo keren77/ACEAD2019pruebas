@@ -1,245 +1,34 @@
 <?php
 
-class ControladorUsuarios{
+class ControladorAlumnos{
 
 	/*=============================================
-	INGRESO DE USUARIO
+	REGISTRO DE ALUMNOS
 	=============================================*/
 
-	static public function ctrIngresoUsuario(){
+	static public function ctrCrearAlumno(){
 
-
-	if(isset($_POST["ingUsuario"])){
-
-			if(preg_match('/^[A-Za-z0-9]+$/', $_POST["ingUsuario"])){
-
-				$tabla = "tbl_usuarios";
-
-				$item = "Usuario";
-
-				$valor = strtoupper($_POST["ingUsuario"]);
-				//echo $valor;
-
-				$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
-
-
-				if($respuesta["Usuario"] == $_POST["ingUsuario"] && password_verify($_POST["ingPassword"], $respuesta['Contrasena'])){
-					$_SESSION['intentos']=0;
-
-					switch($respuesta["Id_Estado"]){
-						case '3':
-
-						$_SESSION["iniciarSesion"] = "ok";
-						$_SESSION["id"] = $respuesta["Id_usuario"];
-						$_SESSION["usuario"] = $respuesta["Id_usuario"];
-						$_SESSION["nombre"] = $respuesta["PrimerNombre"];
-						$_SESSION["perfil"] = $respuesta["Id_Rol"];
-
-
-						/*=============================================
-						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
-						=============================================*/
-
-						date_default_timezone_set('America/Tegucigalpa');
-
-						$fecha = date('Y-m-d');
-						$hora = date('H:i:s');
-
-						$fechaActual = $fecha.' '.$hora;
-
-						$item1 = "FechaUltimaConex";
-						$valor1 = $fechaActual;
-
-						$item2 = "Id_usuario";
-						$valor2 = $respuesta["Id_usuario"];
-
-						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
-
-						if($ultimoLogin == "ok"){
-
-							echo '<script>
-
-								window.location = "inicio";
-
-							</script>';
-
-						}
-
-						break;
-
-
-						case '2':
-						echo '<br><div class="alert alert-danger">El usuario no está activo, contacte a su administrador.</div>';
-
-						break;
-
-
-						case '1':
-
-						$_SESSION["iniciarSesion"] = "ok";
-						$_SESSION["id"] = $respuesta["Id_usuario"];
-						$_SESSION["usuario"] = $respuesta["Id_usuario"];
-						$_SESSION["nombre"] = $respuesta["PrimerNombre"];
-						$_SESSION["perfil"] = $respuesta["Id_Rol"];
-
-
-						/*=============================================
-						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
-						=============================================*/
-
-						date_default_timezone_set('America/Tegucigalpa');
-
-						$fecha = date('Y-m-d');
-						$hora = date('H:i:s');
-
-						$fechaActual = $fecha.' '.$hora;
-
-						$item1 = "FechaUltimaConex";
-						$valor1 = $fechaActual;
-
-						$item2 = "Id_usuario";
-						$valor2 = $respuesta["Id_usuario"];
-
-						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
-
-						if($ultimoLogin == "ok"){
-
-							echo '<script>
-
-								window.location = "categorias";
-
-							</script>';
-
-						}
-
-						break;
-
-					}
-
-
-					}else{
-
-					$_SESSION['intentos']+=1;
-
-					echo '<br><div class="alert alert-danger">Error al ingresar, Usuario y/o Contraseña Invalidos</div>';
-
-
-				}
-
-			}
-
-		}
-
-	}
-
-	/*=============================================
-   BLOQUEO DE USUARIO
-	=============================================*/
-
-	public function ctrBloquearUsuario(){
-
-		$tabla = "tbl_usuarios";
-
-		$datos = array(
-					 "Usuario" => $_POST["ingUsuario"],
-					 "Id_Estado" => 2);
-
-					 $respuesta = ModeloUsuarios::mdlBloquearUsuario($tabla, $datos);
-				 }
-
-	/*=============================================
-	REGISTRO DE USUARIO
-	=============================================*/
-
-	static public function ctrCrearUsuario(){
-
-		if(isset($_POST["nuevoUsuario"])){
+		if(isset($_POST["nuevoAlumno"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre1"])){
 
-			   	/*=============================================
-				VALIDAR IMAGEN
-				=============================================*/
-/*
-				$ruta = "";
 
-				if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+				$tabla = "tbl_alumnos";
+				$nuevo = 1;
 
-					list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-
-					$nuevoAncho = 500;
-					$nuevoAlto = 500;
-*/
-					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
-/*
-					$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
-
-					mkdir($directorio, 0755);
-*/
-					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
-/*
-					if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
-*/
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-/*
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
-
-						$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
-
-					}
-
-					if($_FILES["nuevaFoto"]["type"] == "image/png"){
-*/
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-/*
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
-
-						$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino, $ruta);
-
-					}
-
-				}
-*/
-				$tabla = "tbl_usuarios";
-
-				$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);
+			/*	$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);*/
 
 				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
+				             "SegundoNombre" => $_POST["nuevoNombre2"],
 										 "PrimerApellido"	=> $_POST["nuevoApellido1"],
+										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
+										 "FechaNacimientno"	=> $_POST["nuevoFechanac"],
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
-										 "Cedula" => $_POST["nuevoCedula"],
-					           "Usuario" => $_POST["nuevoUsuario"],
-					           "Contrasena" => $encriptar);
-					          /* "perfil" => $_POST["nuevoPerfil"],*/
+										 "Cedula" => $_POST["nuevoCedula"]);
 
-					           /*"foto"=>$ruta)*/
 
-				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
+				$respuesta = ModeloAlumnos::mdlIngresarAlumno($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -248,7 +37,7 @@ class ControladorUsuarios{
 					swal({
 
 						type: "success",
-						title: "¡El usuario ha sido guardado correctamente!",
+						title: "¡El Alumno ha sido guardado correctamente!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar",
 						closeOnConfirm: false
@@ -257,7 +46,7 @@ class ControladorUsuarios{
 
 						if(result.value){
 
-							window.location = "usuarios";
+							window.location = "alumnos";
 
 						}
 
@@ -277,7 +66,7 @@ class ControladorUsuarios{
 					swal({
 
 						type: "error",
-						title: "¡El usuario no puede ir vacío o llevar caracteres especiales!",
+						title: "¡El Alumno no puede ir vacío o llevar caracteres especiales!",
 						showConfirmButton: true,
 						confirmButtonText: "Cerrar",
 						closeOnConfirm: false
@@ -286,7 +75,7 @@ class ControladorUsuarios{
 
 						if(result.value){
 
-							window.location = "usuarios";
+							window.location = "alumnos";
 
 						}
 
@@ -304,131 +93,35 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-	MOSTRAR USUARIO
+	MOSTRAR ALUMNOS
 	=============================================*/
 
-	static public function ctrMostrarUsuarios($item, $valor){
+	static public function ctrMostrarAlumnos($item, $valor){
 
-		$tabla = "tbl_usuarios";
+		$tabla = "tbl_alumnos";
 
-		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+		$respuesta = ModeloAlumnos::MdlMostrarAlumnos($tabla, $item, $valor);
 
 		return $respuesta;
 	}
 
 	/*=============================================
-	EDITAR USUARIO
+	EDITAR ALUMNOS
 	=============================================*/
 
-	static public function ctrEditarUsuario(){
+	static public function ctrEditarAlumno(){
 
-		if(isset($_POST["editarUsuario"])){
+		if(isset($_POST["editarAlumno"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])){
 
-				/*=============================================
-				VALIDAR IMAGEN
-				=============================================*/
+
+				$tabla = "tbl_alumnos";
+
+				$datos = $_GET["id_Alumno"];
 
 
-	/*			$ruta = $_POST["fotoActual"];
-
-
-				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
-
-					list($ancho, $alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
-
-					$nuevoAncho = 500;
-
-					$nuevoAlto = 500;     */
-
-
-					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
-
-			/*		$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];   */
-
-
-					/*=============================================
-					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
-					=============================================*/
-
-
-			/*		if(!empty($_POST["fotoActual"])){
-
-
-						unlink($_POST["fotoActual"]);
-
-					}else{
-
-						mkdir($directorio, 0755);
-
-					}
-
-*/
-
-					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
-
-
-/*					if($_FILES["editarFoto"]["type"] == "image/jpeg"){    */
-
-
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-
-
-	/*					$aleatorio = mt_rand(100,999);
-
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".jpg";
-
-						$origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
-
-					}
-
-					if($_FILES["editarFoto"]["type"] == "image/png"){    */
-
-
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-
-
-/*						$aleatorio = mt_rand(100,999);
-
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
-
-						$origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino, $ruta);
-
-					}
-
-				}
-
-*/
-
-				$tabla = "tbl_usuarios";
-
-				if($_POST["editarPassword"] != ""){
-
-
-					$encriptar = password_hash($_POST["editarPassword"], PASSWORD_DEFAULT);
+				/*	$encriptar = password_hash($_POST["editarPassword"], PASSWORD_DEFAULT);
 
 					}else{
 
@@ -461,10 +154,10 @@ class ControladorUsuarios{
 							  // "Id_Rol" => $_POST["editarPerfil"]
 							);
 							   //"foto" => $ruta)
+*/
 
 
-
-				$respuesta = ModeloUsuarios::mdlEditarUsuario($tabla, $datos);
+				$respuesta = Modeloalumnos::mdlEditaralumno($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -472,14 +165,14 @@ class ControladorUsuarios{
 
 					swal({
 						  type: "success",
-						  title: "El usuario ha sido editado correctamente",
+						  title: "El alumno ha sido editado correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar",
 						  closeOnConfirm: false
 						  }).then((result) => {
 									if (result.value) {
 
-									window.location = "usuarios";
+									window.location = "alumnos";
 
 									}
 								})
@@ -502,7 +195,7 @@ class ControladorUsuarios{
 						  }).then((result) => {
 							if (result.value) {
 
-							window.location = "usuarios";
+							window.location = "alumnos";
 
 							}
 						})
@@ -516,20 +209,20 @@ class ControladorUsuarios{
 	}
 
 	/*=============================================
-	BORRAR USUARIO
+	BORRAR ALUMNO
 	=============================================*/
 
-	static public function ctrBorrarUsuario(){
+	static public function ctrBorrarAlumno(){
 
-		if(isset($_GET["idUsuario"])){
-
-
-			$tabla ="tbl_usuarios";
-			$datos = $_GET["idUsuario"];
+		if(isset($_GET["id_Alumno"])){
 
 
+			$tabla ="tbl_alumnos";
+			$datos = $_GET["id_Alumno"];
 
-			$respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $datos);
+
+
+			$respuesta = ModeloAlumnos::mdlBorrarAlumno($tabla, $datos);
 
 			if($respuesta == "ok"){
 
@@ -537,14 +230,14 @@ class ControladorUsuarios{
 
 				swal({
 					  type: "success",
-					  title: "El usuario ha sido borrado correctamente",
+					  title: "El Alumno ha sido borrado correctamente",
 					  showConfirmButton: true,
 					  confirmButtonText: "Cerrar",
 					  closeOnConfirm: false
 					  }).then((result) => {
 								if (result.value) {
 
-								window.location = "usuarios";
+								window.location = "alumnos";
 
 								}
 							})

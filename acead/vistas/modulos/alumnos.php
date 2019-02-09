@@ -10,7 +10,7 @@
 
     <ol class="breadcrumb">
 
-      <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
       <li class="active">Administrar Alumnos</li>
 
@@ -42,14 +42,13 @@
 
            <th style="width:10px">#</th>
            <th style="width:10px">Id</th>
-           <th>Nombre</th>
-           <th>Apellido</th>
-           <th>Telefono</th>
-           <th>Usuario</th>
-           <th style="width:100px">Correo Electronico</th>
-           <th style="width:50px">Perfil</th>
-           <th>Estado</th>
-           <th>Último login</th>
+           <th>Primer Nombre</th>
+           <th>Segundo Nombre</th>
+           <th>Primer Apellido</th>
+           <th>Segundo Apellido</th>
+           <th>Teléfono</th>
+           <th>Fecha Nac</th>
+           <th>Cédula</th>
            <th>Acciones</th>
 
          </tr>
@@ -63,77 +62,28 @@
         $item = null;
         $valor = null;
 
-        $usuarios = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
+        $alumnos = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
 
-       foreach ($usuarios as $key => $value){
+       foreach ($alumnos as $key => $value){
 
           echo ' <tr>
                   <td>'.($key+1).'</td>
-                  <td>'.$value["Id_usuario"].'</td>
+                  <td>'.$value["Id_Alumno"].'</td>
                   <td>'.$value["PrimerNombre"].'</td>
+                  <td>'.$value["SegundoNombre"].'</td>
                   <td>'.$value["PrimerApellido"].'</td>
+                  <td>'.$value["SegundoApellido"].'</td>
                   <td>'.$value["Telefono"].'</td>
-                  <td>'.$value["Usuario"].'</td>
-                  <td>'.$value["CorreoElectronico"].'</td>   ';
+                  <td>'.$value["FechaNacimiento"].'</td>
+                  <td>'.$value["Cedula"].'</td> ';
 
-              /*
-<td>'.$value["nombre"].'</td>
-              if($value["foto"] != ""){
-
-                    echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-
-                  }else{
-
-                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
-
-                  }*/
-
-
-                  switch ($value["Id_Rol"]) {
-                    case '1':
-                      echo '<td><idUsuario="'.$value["Id_usuario"].'" perfil="1">Administador</td>';
-                      break;
-
-                      case '2':
-                        echo '<td><idUsuario="'.$value["Id_usuario"].'" perfil="2">Director</td>';
-                        break;
-
-                        case '3':
-                          echo '<td><idUsuario="'.$value["Id_usuario"].'" perfil="3">Docente</td>';
-                          break;
-
-                          case '4':
-                            echo '<td><idUsuario="'.$value["Id_usuario"].'" perfil="4">Autenticado</td>';
-                            break;
-
-                  }
-
-
-                  switch ($value["Id_Estado"]) {
-                    case '1':
-                        echo '<td><button class="btn btn-warning btn-xs btnActivar" idUsuario="'.$value["Id_usuario"].'" estadoUsuario="1">Nuevo</button></td>';
-                      break;
-
-                    case '2':
-                        echo '<td><button class="btn btn-danger btn-xs btnActivar" idUsuario="'.$value["Id_usuario"].'" estadoUsuario="2">Inactivo</button></td>';
-                      break;
-
-                    case '3':
-                        echo '<td><button class="btn btn-success btn-xs btnActivar" idUsuario="'.$value["Id_usuario"].'" estadoUsuario="3">Activo</button></td>';
-                      break;
-
-                  }
-
-
-                  echo '<td>'.$value["FechaUltimaConex"].'</td>
-
-                  <td>
+            echo '    <td>
 
                     <div class="btn-group">
 
-                      <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["Id_usuario"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-warning btnEditarAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalEditarAlumno"><i class="fa fa-pencil"></i></button>
 
-                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["Id_usuario"].'" usuario="'.$value["Usuario"].'"><i class="fa fa-times"></i></button>
+                      <button class="btn btn-danger btnEliminarAlumno" idAlumno="'.$value["Id_Alumno"].'" alumno="'.$value["PrimerNombre"].'"><i class="fa fa-times"></i></button>
 
                     </div>
 
@@ -161,7 +111,7 @@
 MODAL AGREGAR ALUMNOS
 ======================================-->
 
-<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+<div id="modalAgregarAlumno" class="modal fade" role="dialog">
 
   <div class="modal-dialog">
 
@@ -270,7 +220,7 @@ MODAL AGREGAR ALUMNOS
 
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" maxlength="13" pattern="[0-9]">
+                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" maxlength="13" pattern="[0-9]{13}">
 
                   </div>
 
@@ -292,62 +242,137 @@ MODAL AGREGAR ALUMNOS
 
             <!-- ENTRADA PARA EL USUARIO -->
 
-             <div class="form-group">
+          <!--   <div class="form-group">
 
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" style="text-transform: uppercase" required>
 
               </div>
 
-            </div>
+            </div> -->
 
             <!-- ENTRADA PARA LA CONTRASEÑA -->
 
-             <div class="form-group">
+          <!--      <div class="form-group">
 
               <div class="input-group">
 
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
-                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}$" required>
+                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}${30}" required>
 
               </div>
 
-            </div>
+            </div> -->
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
+
+          <!--    <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" name="nuevoDpto">
+
+                  <option value="">Seleccionar Departmento</option>
+
+
+
+              /*    $dpto = ControladorUsuarios::ctrCargarSelectDepartamento();
+                  foreach ($dpto as $key => $value) {
+                    echo "<option value='".$value['Id_Departamentos']."'>".$value['DescripDepart']."</option>";
+                  }*/
+
+
+                </select>
+
+              </div>
+
+            </div>   -->
+
+            <!-- ENTRADA PARA SELECCIONAR SU ESTADO CIVIL -->
 
             <div class="form-group">
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
 
-                <select class="form-control input-lg" name="nuevoPerfil">
+                <select class="form-control input-lg" name="nuevoEstCivil">
 
-                  <option value="">Seleccionar Genero</option>
+                  <option value="">Seleccionar Estado Civil</option>
 
                   <?php
-/*
-                  $item = null;
-                  $valor = null;
 
-                  $genero = ControladorUsuarios::ctrCargarSelectGenero($item, $valor);
-                  foreach ($genero as $key => $value) {
-                      echo $genero;
-                    echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
+                  $civil = Controladoralumnos::ctrCargarSelectEstCivil();
+                  foreach ($civil as $key => $value) {
+                    echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
                   }
-                    */
-                   ?>
+                  ?>
 
                 </select>
 
               </div>
 
             </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU GENERO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" name="nuevoGenero">
+
+                  <option value="">Seleccionar Genero</option>
+
+                  <?php
+
+                  $genero = ControladorAlumnos::ctrCargarSelectGenero();
+                  foreach ($genero as $key => $value) {
+                    echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+            <!-- ENTRADA PARA SELECCIONAR SU ROL -->
+
+            <!--  <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" name="nuevoRol">
+
+                  <option value="">Seleccionar Rol de Usuario</option>
+
+
+
+                /*  $role = ControladorUsuarios::ctrCargarSelectRol();
+                  foreach ($role as $key => $value) {
+                    echo "<option value='".$value['Id_Rol']."'>".$value['Rol']."</option>";
+                  }
+                  	echo $_POST['nuevoRol'];*/
+
+
+                </select>
+
+              </div>
+
+            </div> -->
+
 
 
             <!-- ENTRADA PARA SUBIR FOTO
@@ -378,14 +403,14 @@ MODAL AGREGAR ALUMNOS
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-          <button type="submit" class="btn btn-primary">Guardar usuario</button>
+          <button type="submit" class="btn btn-primary">Guardar Alumno</button>
 
         </div>
 
         <?php
 
-          $crearUsuario = new ControladorUsuarios();
-          $crearUsuario -> ctrCrearUsuario();
+          $crearAlumno = new ControladorAlumnos();
+          $crearAlumno -> ctrCrearAlumno();
 
         ?>
         <script src="vistas/js/ctrespacios.js"></script>
@@ -402,7 +427,7 @@ MODAL AGREGAR ALUMNOS
 MODAL EDITAR ALUMNO
 ======================================-->
 
-<div id="modalEditarUsuario" class="modal fade" role="dialog">
+<div id="modalEditarAlumno" class="modal fade" role="dialog">
 
   <div class="modal-dialog">
 
@@ -446,7 +471,7 @@ MODAL EDITAR ALUMNO
 
             <!-- ENTRADA PARA EL USUARIO -->
 
-             <div class="form-group">
+            <!--   <div class="form-group">
 
               <div class="input-group">
 
@@ -458,11 +483,11 @@ MODAL EDITAR ALUMNO
 
               </div>
 
-            </div>
+            </div> -->
 
             <!-- ENTRADA PARA LA CONTRASEÑA -->
 
-             <div class="form-group">
+              <!-- <div class="form-group">
 
               <div class="input-group">
 
@@ -474,11 +499,11 @@ MODAL EDITAR ALUMNO
 
               </div>
 
-            </div>
+            </div> -->
 
             <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
 
-            <div class="form-group">
+            <!--  <div class="form-group">
 
               <div class="input-group">
 
@@ -498,7 +523,7 @@ MODAL EDITAR ALUMNO
 
               </div>
 
-            </div>
+            </div> -->
 
 
             <!-- ENTRADA PARA SUBIR FOTO
@@ -535,12 +560,12 @@ MODAL EDITAR ALUMNO
 
         </div>
 
-     <?php
+          <?php
 
-          $editarUsuario = new ControladorUsuarios();
-          $editarUsuario -> ctrEditarUsuario();
+            $editarAlumno = new ControladorAlumnos();
+            $editarAlumno -> ctrEditaralumno();
 
-        ?>
+          ?>
 
       </form>
 
@@ -552,7 +577,7 @@ MODAL EDITAR ALUMNO
 
 <?php
 
-  $borrarUsuario = new ControladorUsuarios();
-  $borrarUsuario -> ctrBorrarUsuario();
+  $borrarAlumno = new ControladorAlumnos();
+  $borrarAlumno -> ctrBorrarAlumno();
 
 ?>
