@@ -239,7 +239,7 @@ class ControladorUsuarios{
 										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
-										 "Cedula" => $_POST["nuevoCedula"],
+										 "Cedula" => $_POST['nuevoCedula'],
 					           "Usuario" => strtoupper($_POST["nuevoUsuario"]),
 					           "Contrasena" => $encriptar,
 										 "Id_Departamento" => $_POST["nuevoDpto"],
@@ -248,6 +248,7 @@ class ControladorUsuarios{
 										 "Id_Rol" => $_POST["nuevoRol"],
 									 	 "Id_Estado" => $nuevo);
 
+										 echo $_POST['nuevoCedula'];
 
 				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
 

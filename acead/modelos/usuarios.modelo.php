@@ -56,7 +56,7 @@ static public function mdlObtenerIntentos(){
 
 
 		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, CorreoElectronico, Telefono, Cedula, Usuario, Contrasena, Id_Departamento, Id_Estado, Id_EstadoCivil, Id_Genero, Id_Rol)
-																									VALUES (:nombre1, :apellido1, :email, :telefono, :cedula, :usuario, :password, :departmento, :estado, :estcivil, :genero, :rol)");
+																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :email, :telefono, :cedula, :usuario, :password, :departmento, :estado, :estcivil, :genero, :rol)");
 
 
 		$stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
@@ -110,7 +110,7 @@ static public function mdlObtenerIntentos(){
                                                                    Cedula = :cedula,
                                                                    Contrasena = :password,
                                                                    Id_Departamento = :departmento,
-                                                                   Id_EstadoCivil = :estcivil, 
+                                                                   Id_EstadoCivil = :estcivil,
                                                                    Id_Genero = :genero,
                                                                    Id_Rol = :rol
                                                                 WHERE Usuario = :usuario");
@@ -264,6 +264,10 @@ static public function mdlObtenerIntentos(){
 
 	}
 
+
+  /*=============================================
+  CARGAR SELECT
+  =============================================*/
   static public function mdlCargarSelect($tabla){
 
     $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT * FROM $tabla");
