@@ -240,60 +240,6 @@ MODAL AGREGAR ALUMNOS
 
             </div>
 
-            <!-- ENTRADA PARA EL USUARIO -->
-
-          <!--   <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
-
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" style="text-transform: uppercase" required>
-
-              </div>
-
-            </div> -->
-
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
-
-          <!--      <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-
-                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}${30}" required>
-
-              </div>
-
-            </div> -->
-
-            <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
-
-          <!--    <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-
-                <select class="form-control input-lg" name="nuevoDpto">
-
-                  <option value="">Seleccionar Departmento</option>
-
-
-
-              /*    $dpto = ControladorUsuarios::ctrCargarSelectDepartamento();
-                  foreach ($dpto as $key => $value) {
-                    echo "<option value='".$value['Id_Departamentos']."'>".$value['DescripDepart']."</option>";
-                  }*/
-
-
-                </select>
-
-              </div>
-
-            </div>   -->
-
             <!-- ENTRADA PARA SELECCIONAR SU ESTADO CIVIL -->
 
             <div class="form-group">
@@ -345,51 +291,6 @@ MODAL AGREGAR ALUMNOS
               </div>
 
             </div>
-
-            <!-- ENTRADA PARA SELECCIONAR SU ROL -->
-
-            <!--  <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-
-                <select class="form-control input-lg" name="nuevoRol">
-
-                  <option value="">Seleccionar Rol de Usuario</option>
-
-
-
-                /*  $role = ControladorUsuarios::ctrCargarSelectRol();
-                  foreach ($role as $key => $value) {
-                    echo "<option value='".$value['Id_Rol']."'>".$value['Rol']."</option>";
-                  }
-                  	echo $_POST['nuevoRol'];*/
-
-
-                </select>
-
-              </div>
-
-            </div> -->
-
-
-
-            <!-- ENTRADA PARA SUBIR FOTO
-
-
-             <div class="form-group">
-
-              <div class="panel">SUBIR FOTO</div>
-
-              <input type="file" class="nuevaFoto" name="nuevaFoto">
-
-              <p class="help-block">Peso máximo de la foto 2MB</p>
-
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-            </div>   -->
-
 
           </div>
 
@@ -469,79 +370,6 @@ MODAL EDITAR ALUMNO
 
             </div>
 
-            <!-- ENTRADA PARA EL USUARIO -->
-
-            <!--   <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-key"></i></span>
-
-
-                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="">
-
-
-              </div>
-
-            </div> -->
-
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
-
-              <!-- <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-
-                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
-
-                <input type="hidden" id="passwordActual" name="passwordActual">
-
-              </div>
-
-            </div> -->
-
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
-
-            <!--  <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
-
-                <select class="form-control input-lg" name="editarPerfil">
-
-                  <option value="" id="editarPerfil"></option>
-
-                  <option value="Administrador">Administrador</option>
-
-                  <option value="Especial">Especial</option>
-
-                  <option value="Vendedor">Vendedor</option>
-
-                </select>
-
-              </div>
-
-            </div> -->
-
-
-            <!-- ENTRADA PARA SUBIR FOTO
-
-             <div class="form-group">
-
-              <div class="panel">SUBIR FOTO</div>
-
-              <input type="file" class="nuevaFoto" name="editarFoto">
-
-              <p class="help-block">Peso máximo de la foto 2MB</p>
-
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="fotoActual" id="fotoActual">
-
-
-            </div> -->
 
 
           </div>
