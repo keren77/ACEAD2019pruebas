@@ -28,7 +28,7 @@
 
 			<li>
 
-				<a href="alumnos">
+				<a href="categorias">
 
 					<i class="fa fa-users"></i>
 					<span>Alumnos</span>

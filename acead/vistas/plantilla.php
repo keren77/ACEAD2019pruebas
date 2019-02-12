@@ -105,7 +105,7 @@ CUERPO DOCUMENTO
 
       if($_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "usuarios" ||
-         $_GET["ruta"] == "alumnos" ||
+         $_GET["ruta"] == "categorias" ||
          $_GET["ruta"] == "productos" ||
          $_GET["ruta"] == "clientes" ||
          $_GET["ruta"] == "ventas" ||
@@ -124,8 +124,6 @@ CUERPO DOCUMENTO
     }else{
 
       include "modulos/inicio.php";
-
-
 
     }
 

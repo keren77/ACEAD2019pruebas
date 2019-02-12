@@ -44,13 +44,14 @@
            <th style="width:10px">Id</th>
            <th>Nombre</th>
            <th>Apellido</th>
-           <th>Telefono</th>
            <th>Usuario</th>
+           <th>Telefono</th>
            <th style="width:100px">Correo Electronico</th>
            <th style="width:50px">Perfil</th>
            <th>Estado</th>
            <th>Último login</th>
            <th>Acciones</th>
+
 
          </tr>
 
@@ -72,21 +73,10 @@
                   <td>'.$value["Id_usuario"].'</td>
                   <td>'.$value["PrimerNombre"].'</td>
                   <td>'.$value["PrimerApellido"].'</td>
-                  <td>'.$value["Telefono"].'</td>
                   <td>'.$value["Usuario"].'</td>
+                  <td>'.$value["Telefono"].'</td>
                   <td>'.$value["CorreoElectronico"].'</td>   ';
 
-              /*
-<td>'.$value["nombre"].'</td>
-              if($value["foto"] != ""){
-
-                    echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
-
-                  }else{
-
-                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
-
-                  }*/
 
 
                   switch ($value["Id_Rol"]) {
@@ -127,17 +117,21 @@
 
                   echo '<td>'.$value["FechaUltimaConex"].'</td>
 
+
                   <td>
 
                     <div class="btn-group">
 
+                    <button class="btn btn-success btnMatriculaAlumno" idUsuario="'.$value["Id_usuario"].'" data-toggle="modal" data-target="#modalMatriculaAlumno"><i class="fa fa-building"></i></button>
+
                       <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["Id_usuario"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+
+
 
                       <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["Id_usuario"].'" usuario="'.$value["Usuario"].'"><i class="fa fa-times"></i></button>
 
                     </div>
 
-                  </td>
 
                 </tr>';
         }
@@ -256,7 +250,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Telefono" minlength="8" maxlength="15" pattern="[0-9]{8}">
+                    <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Telefono" minlength="8" maxlength="15" pattern="[0-9]{8,15}">
 
                   </div>
 
@@ -270,7 +264,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" minlength="8" maxlength="13" pattern="[0-9]{13}">
+                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" minlength="8" maxlength="15" pattern="[0-9]{13}">
 
                   </div>
 
@@ -312,7 +306,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
-                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}${30}" required>
+                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}$" title="Debe incluir minimo 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial." required>
 
               </div>
 
@@ -423,22 +417,6 @@ MODAL AGREGAR USUARIO
 
             </div>
 
-
-
-            <!-- ENTRADA PARA SUBIR FOTO
-
-
-             <div class="form-group">
-
-              <div class="panel">SUBIR FOTO</div>
-
-              <input type="file" class="nuevaFoto" name="nuevaFoto">
-
-              <p class="help-block">Peso máximo de la foto 2MB</p>
-
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-            </div>   -->
 
 
           </div>
@@ -742,25 +720,6 @@ MODAL EDITAR USUARIO
 
             </div>
 
-
-            <!-- ENTRADA PARA SUBIR FOTO
-
-             <div class="form-group">
-
-              <div class="panel">SUBIR FOTO</div>
-
-              <input type="file" class="nuevaFoto" name="editarFoto">
-
-              <p class="help-block">Peso máximo de la foto 2MB</p>
-
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-              <input type="hidden" name="fotoActual" id="fotoActual">
-
-
-            </div> -->
-
-
           </div>
 
         </div>
@@ -772,6 +731,12 @@ MODAL EDITAR USUARIO
         <div class="modal-footer">
 
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+<script type="text/javascript">
+$('#modalEditarUsuario').on('hidden.bs.modal', function() {
+     $('.modal-body').find('editarTelefono,editarRol,editarDpto,editarEmail, editarCedula, editarGenero, editarUsuario, editarNombre1, editarApellido1, editarNombre2, editarApellido2').val('');
+});
+
+</script>
 
           <button type="submit" class="btn btn-primary">Modificar usuario</button>
 
@@ -790,6 +755,156 @@ MODAL EDITAR USUARIO
 
   </div>
 
+</div>
+
+
+
+
+
+<!--=====================================
+MODAL MATRICULA ALUMNO
+======================================-->
+
+<div id="modalMatriculaAlumno" class="modal fade" role="dialog">
+
+  <div class="modal-dialog" style="width:1300px;">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#D81B60; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Matricula Alumno</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <div class="container">
+
+            <!-- ENTRADA PARA EL USUARIO -->
+
+             <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+
+                <input type="text" class="form-control input-lg" id="matriculaAlumno" name="matriculaAlumno" readonly value="">
+
+
+              </div>
+
+            </div>
+
+
+
+
+            <!-- ENTRADA PARA SELECCIONAR LA MODALIDAD -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" id="matriculaModalidad" name="matriculaModalidad">
+
+                  <option value="">Seleccionar Modalidad</option>
+
+                  <?php
+
+                  $mod = ControladorMatricula::ctrCargarSelectModalidades();
+                  foreach ($mod as $key => $value) {
+                    echo "<option value='".$value['Id_Modalidad']."'>".$value['DescripModalidad']."</option>";
+                  }
+                  ?>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+
+            <!-- MATRICULA DE CLASES -->
+
+              <div id="row">
+                <div class="card-deck mb-3 text-center">
+
+                  <div class="card mb-4 box-shadow">
+
+                        <div class="card-header">
+                          <h4 class="my-0-font-weight-normal">Matricula</h4>
+                        </div>
+
+                        <div class="card-body">
+
+                                <div class="row">
+                                  <div class="col-xl-4 col-sm-6 mb-3">
+                                    <select class="form-control" id="adicionar1" size="9"></select>
+                                  </div>
+
+                                  <div class="col-xl-4 col-sm-6 mb-3">
+                                    <select class="form-control" id="adicionar2" size="9"></select>
+                                  </div>
+
+                                  <div class="col-xl-4 col-sm-6 mb-3">
+                                    <select class="form-control" id="adicionar3" size="9"></select>
+                                  </div>
+                                </div>
+
+                        </div>
+                  </div>
+                </div>
+              </div>
+
+
+</div>
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Matricular Alumno</button>
+
+        </div>
+
+     <?php
+
+          $editarUsuario = new ControladorUsuarios();
+          $editarUsuario -> ctrEditarUsuario();
+
+        ?>
+
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
 </div>
 
 <?php
