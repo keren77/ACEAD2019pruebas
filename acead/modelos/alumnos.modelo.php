@@ -4,17 +4,6 @@ require_once "conexion.php";
 
 class ModeloAlumnos{
 
-	/*OBTENER VALOR DE BD PARA LOS INTENTOS*/
-//static public function mdlObtenerIntentos(){
-
-  //$stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
-//	$stmt -> execute();
-
-	//return $stmt -> fetch();
-
-  //}
-
-
 	/*=============================================
 	MOSTRAR ALUMNOS
 	=============================================*/
@@ -67,8 +56,6 @@ class ModeloAlumnos{
 		$stmt->bindParam(":email", $datos["CorreoElectronico"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["Telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":cedula", $datos["Cedula"], PDO::PARAM_STR);
-		//$stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-		//$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 
 
 		if($stmt->execute()){
@@ -87,69 +74,6 @@ class ModeloAlumnos{
 
 	}
 
-	/*=============================================
-	EDITAR USUARIO
-	=============================================*/
-
-	//static public function mdlEditarAlumno($tabla, $datos){
-
-
-		//$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET Contrasena = :password WHERE Usuario = :usuario");
-
-	//	$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":password", $datos["Contrasena"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-		//$stmt -> bindParam(":usuario", $datos["Usuario"], PDO::PARAM_STR);
-
-
-		//if($stmt -> execute()){
-
-			//return "ok";
-
-		//}else{
-
-			//return "error";
-
-		//}
-
-		//$stmt -> close();
-
-		//$stmt = null;
-
-	//}
-
-	/*=============================================
-	BLOQUEAR USUARIO
-	=============================================*/
-
-//	static public function mdlBloquearUsuario($tabla, $datos){
-
-
-//		$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET Id_Estado = :estado WHERE Usuario = :usuario");
-
-	//	$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":estado", $datos["Id_Estado"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":usuario", $datos["Usuario"], PDO::PARAM_STR);
-
-
-	//	if($stmt -> execute()){
-
-//			return "ok";
-
-	//	}else{
-
-	//		return "error";
-
-	//	}
-
-	//	$stmt -> close();
-
-	//	$stmt = null;
-
-//	}
 
 	/*=============================================
 	ACTUALIZAR ALUMNO
