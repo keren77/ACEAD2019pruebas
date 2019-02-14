@@ -2,18 +2,20 @@
 
 require_once "../controladores/usuarios.controlador.php";
 require_once "../modelos/usuarios.modelo.php";
+require_once "../controladores/matricula.controlador.php";
+require_once "../modelos/matricula.modelo.php";
 
 class AjaxUsuarios{
 
 	/*=============================================
 	EDITAR USUARIO
-	=============================================*/	
+	=============================================*/
 
 	public $idUsuario;
 
 	public function ajaxEditarUsuario(){
 
-		$item = "id";
+		$item = "Id_usuario";
 		$valor = $this->idUsuario;
 
 		$respuesta = ControladorUsuarios::ctrMostrarUsuarios($item, $valor);
@@ -24,7 +26,7 @@ class AjaxUsuarios{
 
 	/*=============================================
 	ACTIVAR USUARIO
-	=============================================*/	
+	=============================================*/
 
 	public $activarUsuario;
 	public $activarId;
@@ -46,7 +48,7 @@ class AjaxUsuarios{
 
 	/*=============================================
 	VALIDAR NO REPETIR USUARIO
-	=============================================*/	
+	=============================================*/
 
 	public $validarUsuario;
 
@@ -75,7 +77,7 @@ if(isset($_POST["idUsuario"])){
 
 /*=============================================
 ACTIVAR USUARIO
-=============================================*/	
+=============================================*/
 
 if(isset($_POST["activarUsuario"])){
 

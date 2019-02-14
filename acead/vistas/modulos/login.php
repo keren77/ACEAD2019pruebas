@@ -43,7 +43,8 @@
 
           <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-user"></i></span>
-              <input type="text" class="form-control" placeholder="Usuario" id="user" name="ingUsuario" maxlength="30" style="text-transform: uppercase" autofocus autocomplete="off" required>
+              <!--<span class="glyphicon glyphicon-user form-control-feedback"></span> -->
+              <input type="text" class="form-control" placeholder="Usuario" id="user" name="ingUsuario" maxlength="15" minlength="5" style="text-transform: uppercase" autofocus autocomplete="off" required>
 
             </div>
       </div>
@@ -52,7 +53,8 @@
 
           <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-              <input type="password" class="form-control pwd1" placeholder="CONTRASEÑA" name="ingPassword" id="pass" autocomplete="off" required>
+              <input type="password" class="form-control pwd1" placeholder="CONTRASEÑA" name="ingPassword" id="pass" maxlength="15" minlength="5"autocomplete="off" required>
+              <!-- <span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
 
               <span class="input-group-btn">
                   <button class="btn btn-default reveal1" type="button"><i class="glyphicon glyphicon-eye-open"></i></button></span>
@@ -78,10 +80,18 @@
         </div>
       </div>
 
+  <!-- Recuperar contraseña y auto refistro -->
+
+  <button class="btn btn-link" type="button"><a href="php/recupera.php">¿Olvidaste tu usuario y/o contraseña?</a></button>
+  <button class="btn btn-link" type="button"><a href="php/autoregistro.php">Registrate en el sistema</a></button>
+
+
       <?php
+
 
         $login = new ControladorUsuarios();
         $login -> ctrIngresoUsuario();
+
 
       ?>
 

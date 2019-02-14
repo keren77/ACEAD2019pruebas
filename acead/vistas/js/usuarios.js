@@ -70,10 +70,20 @@ $(".btnEditarUsuario").click(function(){
 		dataType: "json",
 		success: function(respuesta){
 
-			$("#editarNombre").val(respuesta["nombre"]);
-			$("#editarUsuario").val(respuesta["usuario"]);
-			$("#editarPerfil").html(respuesta["perfil"]);
-			$("#editarPerfil").val(respuesta["perfil"]);
+			$("#editarUsuario").val(respuesta["Usuario"]);
+			$("#editarNombre1").val(respuesta["PrimerNombre"]);
+			$("#editarNombre2").val(respuesta["SegundoNombre"]);
+			$("#editarApellido1").val(respuesta["PrimerApellido"]);
+			$("#editarApellido2").val(respuesta["SegundoApellido"]);
+			$("#editarTelefono").val(respuesta["Telefono"]);
+			$("#editarCedula").val(respuesta["Cedula"]);
+			$("#editarEmail").val(respuesta["CorreoElectronico"]);
+			$("#editarDpto").val(respuesta["Id_Departamento"]);
+			$("#editarEstCivil").val(respuesta["Id_EstadoCivil"]);
+			$("#editarGenero").val(respuesta["Id_Genero"]);
+			$("#editarRol").val(respuesta["Id_Rol"]);
+
+
 			$("#fotoActual").val(respuesta["foto"]);
 
 			$("#passwordActual").val(respuesta["password"]);
@@ -176,9 +186,6 @@ ELIMINAR USUARIO
 $(".btnEliminarUsuario").click(function(){
 
   var idUsuario = $(this).attr("idUsuario");
-
-  //var fotoUsuario = $(this).attr("fotoUsuario");
-
   var usuario = $(this).attr("usuario");
 
   swal({
@@ -203,4 +210,3 @@ $(".btnEliminarUsuario").click(function(){
   })
 
 })
-
