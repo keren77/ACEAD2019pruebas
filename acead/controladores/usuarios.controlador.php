@@ -380,11 +380,9 @@ class ControladorUsuarios{
 
 		if(isset($_GET["idUsuario"])){
 
-			$tabla ="usuarios";
+
+			$tabla = "tbl_usuarios";
 			$datos = $_GET["idUsuario"];
-
-			echo "<script type='text/javascript'>alert(".$datos.")</script>";
-
 
 			$respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $datos);
 

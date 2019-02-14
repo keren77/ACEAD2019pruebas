@@ -4,9 +4,18 @@ require_once "conexion.php";
 
 class ModeloUsuarios{
 
+	/*OBTENER VALOR DE BD PARA LOS INTENTOS*/
+static public function mdlObtenerIntentos(){
+
+  $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
+	$stmt -> execute();
+
+	return $stmt -> fetch();
+
+  }
 
 
-  /*=============================================
+	/*=============================================
 	MOSTRAR USUARIOS
 	=============================================*/
 
@@ -200,17 +209,13 @@ class ModeloUsuarios{
 
 	static public function mdlBorrarUsuario($tabla, $datos){
 
-    echo "<script type='text/javascript'>alert(".$datos.")</script>";
 
-
-
-    $stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM $tabla WHERE	Id_usuario = :id");
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM tbl_usuarios WHERE Id_usuario = :id");
 
     $stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
 
-    echo "<script type='text/javascript'>alert(".$tabla.")</script>";
 
-		if($stmt -> execute()){
+		if($stmt -> execute() ){
 
 			return "ok";
        echo "<script type='text/javascript'>alert('aqui')</script>";
@@ -242,20 +247,8 @@ class ModeloUsuarios{
 
   	return $stmt -> fetchall();
 
-  }
+    }
 
-
- /*=============================================
-  OBTENER VALOR DE BD PARA LOS INTENTOS
-  =============================================*/
-  static public function mdlObtenerIntentos(){
-
-    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
-    $stmt -> execute();
-
-    return $stmt -> fetch();
-
-  }
 
 
 }
