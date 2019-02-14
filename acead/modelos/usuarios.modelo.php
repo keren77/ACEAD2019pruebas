@@ -4,22 +4,14 @@ require_once "conexion.php";
 
 class ModeloUsuarios{
 
-	/*OBTENER VALOR DE BD PARA LOS INTENTOS*/
-static public function mdlObtenerIntentos(){
-
-  $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
-	$stmt -> execute();
-
-	return $stmt -> fetch();
-
-  }
 
 
-	/*=============================================
+  /*=============================================
 	MOSTRAR USUARIOS
 	=============================================*/
 
 	static public function mdlMostrarUsuarios($tabla, $item, $valor){
+
 
 		if($item != null){
 
@@ -155,10 +147,7 @@ static public function mdlObtenerIntentos(){
 
 		$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET Id_Estado = :estado WHERE Usuario = :usuario");
 
-	//	$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
 		$stmt -> bindParam(":estado", $datos["Id_Estado"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
 		$stmt -> bindParam(":usuario", $datos["Usuario"], PDO::PARAM_STR);
 
 
@@ -211,19 +200,26 @@ static public function mdlObtenerIntentos(){
 
 	static public function mdlBorrarUsuario($tabla, $datos){
 
+    echo "<script type='text/javascript'>alert(".$datos.")</script>";
 
-		$stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM $tabla WHERE Id_usuario = :id");
 
-		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM $tabla WHERE	Id_usuario = :id");
+
+    $stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+
+    echo "<script type='text/javascript'>alert(".$tabla.")</script>";
 
 		if($stmt -> execute()){
 
 			return "ok";
+       echo "<script type='text/javascript'>alert('aqui')</script>";
+
 
 		}else{
 
 			return "error";
-
+       echo "<script type='text/javascript'>alert('desconchabe')</script>";
 		}
 
 		$stmt -> close();
@@ -236,36 +232,7 @@ static public function mdlObtenerIntentos(){
 
 
 
-	static public function mdlCargarSelect0($tabla, $item, $valor){
-
-		if($item != null){
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-
-			$stmt -> execute();
-
-			return $stmt -> fetch();
-
-		}else{
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-
-			$stmt -> execute();
-
-			return $stmt -> fetchAll();
-
-		}
-
-		$stmt -> close();
-
-		$stmt = null;
-
-	}
-
-
-  /*=============================================
+ /*=============================================
   CARGAR SELECT
   =============================================*/
   static public function mdlCargarSelect($tabla){
@@ -275,8 +242,20 @@ static public function mdlObtenerIntentos(){
 
   	return $stmt -> fetchall();
 
-    }
+  }
 
+
+ /*=============================================
+  OBTENER VALOR DE BD PARA LOS INTENTOS
+  =============================================*/
+  static public function mdlObtenerIntentos(){
+
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
+    $stmt -> execute();
+
+    return $stmt -> fetch();
+
+  }
 
 
 }
