@@ -84,6 +84,8 @@
 
                     <div class="btn-group">
 
+                    <button class="btn btn-success btnMatriculaAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalMatriculaAlumno"><i class="fa fa-building"></i></button>
+
                     <button class="btn btn-warning btnEditarAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalEditarAlumno"><i class="fa fa-pencil"></i></button>
 
                     <button class="btn btn-danger btnEliminarAlumno" idAlumno="'.$value["Id_Alumno"].'" alumno="'.$value["PrimerNombre"].'"><i class="fa fa-times"></i></button>
@@ -402,9 +404,9 @@ MODAL EDITAR ALUMNO
 
                   <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
-                </div>
-
               </div>
+
+            </div>
 
             <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
@@ -511,7 +513,7 @@ MODAL EDITAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
 
-                <select class="form-control input-lg" id="editarGenero" name="editarGenero">
+                <select class="form-control input-lg" name="nuevoGenero">
 
                   <option value="">Seleccionar Genero</option>
 
@@ -530,16 +532,11 @@ MODAL EDITAR ALUMNO
             </div>
 
 
-                </select>
-
-              </div>
-
-            </div>
-
 
           </div>
 
         </div>
+
 
         <!--=====================================
         PIE DEL MODAL
@@ -568,9 +565,167 @@ MODAL EDITAR ALUMNO
 
 </div>
 
+
+<!--=====================================
+MODAL MATRICULA ALUMNO
+======================================-->
+
+<div id="modalMatriculaAlumno" class="modal fade" role="dialog">
+
+  <div class="modal-dialog" style="width:1300px;">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#D81B60; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Matricula Alumno</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <div class="container">
+
+              <!-- ENTRADA PARA EL ALUMNO -->
+
+               <div class="form-group">
+
+                <div class="input-group">
+
+                  <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+
+                  <input type="text" class="form-control input-lg" id="matriculaAlumno" name="matriculaAlumno" readonly value="">
+
+
+                </div>
+
+               </div>
+
+
+
+
+              <!-- ENTRADA PARA SELECCIONAR LA MODALIDAD -->
+
+              <div class="form-group">
+
+                <div class="input-group">
+
+                  <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                  <select class="form-control input-lg" id="matriculaModalidad" name="matriculaModalidad">
+
+                    <option value="">Seleccionar Modalidad</option>
+
+                    <?php
+
+                    $mod = ControladorMatricula::ctrCargarSelectModalidades();
+                    foreach ($mod as $key => $value) {
+                      echo "<option value='".$value['Id_Modalidad']."'>".$value['DescripModalidad']."</option>";
+                    }
+                    ?>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+
+
+
+              <!-- MATRICULA DE CLASES -->
+
+                <div id="row">
+                  <div class="card-deck mb-3 text-center">
+
+                    <div class="card mb-4 box-shadow">
+
+                      <div class="card-header">
+                        <h4 class="my-0-font-weight-normal">Matricula</h4>
+                      </div>
+
+                      <div class="card-body">
+
+                        <div class="row">
+                          <div class="col-xl-4 col-sm-6 mb-3">
+                            <select class="form-control" id="adicionar1" size="9"></select>
+                          </div>
+
+                          <div class="col-xl-4 col-sm-6 mb-3">
+                            <select class="form-control" id="adicionar2" size="9"></select>
+                          </div>
+
+                          <div class="col-xl-4 col-sm-6 mb-3">
+                            <select class="form-control" id="adicionar3" size="9"></select>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Matricular Alumno</button>
+
+        </div>
+
+        <?php
+
+          $editarUsuario = new ControladorAlumnos();
+          $editarUsuario -> ctrEditarAlumno();
+
+        ?>
+
+
+
+      </form>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
 <?php
 
-  $borrarAlumno = new ControladorAlumno();
+  $borrarAlumno = new ControladorAlumnos();
   $borrarAlumno -> ctrBorrarAlumno();
 
 ?>

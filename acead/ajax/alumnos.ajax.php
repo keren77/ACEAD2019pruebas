@@ -14,7 +14,7 @@ class AjaxAlumnos{
 	public $idAlumno;
 
 	public function ajaxEditarAlumno(){
-
+		echo 'hiiii';
 		$item = "Id_Alumno";
 		$valor = $this->idAlumno;
 

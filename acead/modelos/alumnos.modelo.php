@@ -167,13 +167,13 @@ class ModeloAlumnos{
 		if($stmt -> execute() ){
 
 			return "ok";
-       echo "<script type='text/javascript'>alert('aqui')</script>";
+
 
 
 		}else{
 
 			return "error";
-       echo "<script type='text/javascript'>alert('desconchabe')</script>";
+       
 		}
 
 		$stmt -> close();

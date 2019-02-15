@@ -80,7 +80,7 @@ $("#nuevoAlumno").change(function(){
 /*=============================================
 ELIMINAR ALUMNO
 =============================================*/
-$(".btnEliminarAlumno").click(function(){
+$(".tablas").on("click", ".btnEliminarAlumno", function(){
 
   var idAlumno = $(this).attr("idAlumno");
   var alumno = $(this).attr("alumno");
