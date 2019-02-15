@@ -4,22 +4,12 @@ require_once "conexion.php";
 
 class ModeloAlumnos{
 
-	/*OBTENER VALOR DE BD PARA LOS INTENTOS*/
-//static public function mdlObtenerIntentos(){
-
-  //$stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
-//	$stmt -> execute();
-
-	//return $stmt -> fetch();
-
-  //}
-
-
 	/*=============================================
 	MOSTRAR ALUMNOS
 	=============================================*/
 
-	static public function mdlMostrarAlumnos($tabla, $item, $valor){
+	static public function MdlMostrarAlumnos($tabla, $item, $valor){
+
 
 		if($item != null){
 
@@ -52,24 +42,23 @@ class ModeloAlumnos{
 	REGISTRO DE ALUMNOS
 	=============================================*/
 
-	static public function mdlIngresarAlumnos($tabla, $datos){
+	static public function mdlIngresarAlumno($tabla, $datos){
 
 
-		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, SegundoNpmbre, PrimerApellido, SegundoApellido, FechaNacimiento, CorreoElectronico, Telefono, Cedula,)
-																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :fechanac :email, :telefono, :cedula)");
+		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento, CorreoElectronico, Telefono, Cedula,  Id_EstadoCivil, Id_Genero)
+																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :FechaNac :email, :telefono, :cedula, :estcivil, :genero)");
 
 
 		$stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
     $stmt->bindParam(":nombre2", $datos["SegundoNombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":apellido1", $datos["PrimerApellido"], PDO::PARAM_STR);
     $stmt->bindParam(":apellido2", $datos["SegundoApellido"], PDO::PARAM_STR);
-    $stmt->bindParam(":fechanac", $datos["FechaNacimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":FechaNac", $datos["FechaNacimiento"], PDO::PARAM_STR);
 		$stmt->bindParam(":email", $datos["CorreoElectronico"], PDO::PARAM_STR);
 		$stmt->bindParam(":telefono", $datos["Telefono"], PDO::PARAM_STR);
 		$stmt->bindParam(":cedula", $datos["Cedula"], PDO::PARAM_STR);
-		//$stmt->bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-		//$stmt->bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-
+    $stmt->bindParam(":estcivil", $datos["Id_EstadoCivil"], PDO::PARAM_STR);
+    $stmt->bindParam(":genero", $datos["Id_Genero"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
@@ -88,68 +77,53 @@ class ModeloAlumnos{
 	}
 
 	/*=============================================
-	EDITAR USUARIO
+	EDITAR ALUMNO
 	=============================================*/
 
-	//static public function mdlEditarAlumno($tabla, $datos){
+	static public function mdlEditarUsuario($tabla, $datos){
 
 
-		//$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET Contrasena = :password WHERE Usuario = :usuario");
+		$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET PrimerNombre = :nombre1,
+                                                                   SegundoNombre = :nombre2,
+                                                                   PrimerApellido = :apellido1,
+                                                                   SegundoApellido = :apellido2,
+																																	 FechaNacimiento = :FechaNac
+                                                                   CorreoElectronico = :email,
+                                                                   Telefono = :telefono,
+                                                                   Cedula = :cedula,
+                                                                   Id_EstadoCivil = :estcivil,
+                                                                   Id_Genero = :genero,
+                                                                WHERE Id_Alumno = :Id");
 
-	//	$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":password", $datos["Contrasena"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-		//$stmt -> bindParam(":usuario", $datos["Usuario"], PDO::PARAM_STR);
-
-
-		//if($stmt -> execute()){
-
-			//return "ok";
-
-		//}else{
-
-			//return "error";
-
-		//}
-
-		//$stmt -> close();
-
-		//$stmt = null;
-
-	//}
-
-	/*=============================================
-	BLOQUEAR USUARIO
-	=============================================*/
-
-//	static public function mdlBloquearUsuario($tabla, $datos){
+	  $stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
+    $stmt->bindParam(":nombre2", $datos["SegundoNombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":apellido1", $datos["PrimerApellido"], PDO::PARAM_STR);
+    $stmt->bindParam(":apellido2", $datos["SegundoApellido"], PDO::PARAM_STR);
+		$stmt->bindParam(":FechaNac", $datos["FechaNacimiento"], PDO::PARAM_STR);
+		$stmt->bindParam(":email", $datos["CorreoElectronico"], PDO::PARAM_STR);
+		$stmt->bindParam(":telefono", $datos["Telefono"], PDO::PARAM_STR);
+		$stmt->bindParam(":cedula", $datos["Cedula"], PDO::PARAM_STR);
+    $stmt->bindParam(":estcivil", $datos["Id_EstadoCivil"], PDO::PARAM_STR);
+    $stmt->bindParam(":genero", $datos["Id_Genero"], PDO::PARAM_STR);
 
 
-//		$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET Id_Estado = :estado WHERE Usuario = :usuario");
 
-	//	$stmt -> bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":estado", $datos["Id_Estado"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":perfil", $datos["perfil"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":foto", $datos["foto"], PDO::PARAM_STR);
-	//	$stmt -> bindParam(":usuario", $datos["Usuario"], PDO::PARAM_STR);
+		if($stmt -> execute()){
 
+			return "ok";
 
-	//	if($stmt -> execute()){
+		}else{
 
-//			return "ok";
+			return "error";
 
-	//	}else{
+		}
 
-	//		return "error";
+		$stmt -> close();
 
-	//	}
+		$stmt = null;
 
-	//	$stmt -> close();
+	}
 
-	//	$stmt = null;
-
-//	}
 
 	/*=============================================
 	ACTUALIZAR ALUMNO
@@ -185,18 +159,21 @@ class ModeloAlumnos{
 	static public function mdlBorrarAlumno($tabla, $datos){
 
 
-		$stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM $tabla WHERE Id_Alumno = :id");
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM tbl_alumnos WHERE Id_Alumno = :id");
 
-		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+    $stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
 
-		if($stmt -> execute()){
+
+		if($stmt -> execute() ){
 
 			return "ok";
+       echo "<script type='text/javascript'>alert('aqui')</script>";
+
 
 		}else{
 
 			return "error";
-
+       echo "<script type='text/javascript'>alert('desconchabe')</script>";
 		}
 
 		$stmt -> close();
@@ -209,32 +186,18 @@ class ModeloAlumnos{
 
 
 
-	static public function mdlCargarSelect($tabla, $item, $valor){
+ /*=============================================
+  CARGAR SELECT
+  =============================================*/
+  static public function mdlCargarSelect($tabla){
 
-		if($item != null){
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT * FROM $tabla");
+  	$stmt -> execute();
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+  	return $stmt -> fetchall();
 
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+    }
 
-			$stmt -> execute();
 
-			return $stmt -> fetch();
-
-		}else{
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-
-			$stmt -> execute();
-
-			return $stmt -> fetchAll();
-
-		}
-
-		$stmt -> close();
-
-		$stmt = null;
-
-	}
 
 }
