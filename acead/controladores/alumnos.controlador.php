@@ -8,13 +8,13 @@ class ControladorAlumnos{
 
 	static public function ctrCrearAlumno(){
 
-		if(isset($_POST["nuevoAlumno"])){
+		if(isset($_POST["nuevoNombre1"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre1"])){
 
 
 				$tabla = "tbl_alumnos";
-				$nuevo = 1;
+
 
 				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
 										 "PrimerApellido"	=> $_POST["nuevoApellido1"],
@@ -27,8 +27,7 @@ class ControladorAlumnos{
 										 "Id_EstadoCivil" => $_POST["nuevoEstCivil"],
 										 "Id_Genero" => $_POST["nuevoGenero"]);
 
-										 echo $_POST['nuevoCedula'];
-
+										
 				$respuesta = ModeloAlumnos::mdlIngresarAlumno($tabla, $datos);
 
 				if($respuesta == "ok"){

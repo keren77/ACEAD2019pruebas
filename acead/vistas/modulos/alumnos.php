@@ -114,7 +114,7 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR USUARIO
+MODAL AGREGAR ALUMNO
 ======================================-->
 
 <div id="modalAgregarAlumno" class="modal fade" role="dialog">
@@ -159,22 +159,19 @@ MODAL AGREGAR USUARIO
 
             </div>
 
+            <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
 
-          <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
+            <div class="form-group">
 
-          <div class="form-group">
+              <div class="input-group">
 
-            <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-
-                <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                  <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
-          </div>
-
-
+            </div>
 
             <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
@@ -218,7 +215,6 @@ MODAL AGREGAR USUARIO
 
             </div>
 
-
             <!-- ENTRADA PARA EL NUMERO DE IDENTIDAD -->
 
             <div class="form-group">
@@ -247,7 +243,7 @@ MODAL AGREGAR USUARIO
 
             </div>
 
-        <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
+            <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
 
             <div class="form-group">
 
@@ -345,6 +341,9 @@ MODAL AGREGAR USUARIO
   </div>
 
 </div>
+
+
+
 
 <!--=====================================
 MODAL EDITAR ALUMNO

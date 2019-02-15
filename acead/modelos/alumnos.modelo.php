@@ -45,8 +45,8 @@ class ModeloAlumnos{
 	static public function mdlIngresarAlumno($tabla, $datos){
 
 
-		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento, CorreoElectronico, Telefono, Cedula,  Id_EstadoCivil, Id_Genero)
-																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :FechaNac :email, :telefono, :cedula, :estcivil, :genero)");
+		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla (PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento, CorreoElectronico, Telefono, Cedula,  Id_estadocivil, Id_genero)
+																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :FechaNac, :email, :telefono, :cedula, :estcivil, :genero)");
 
 
 		$stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
@@ -67,7 +67,7 @@ class ModeloAlumnos{
 		}else{
 
 			return "error";
-
+			echo "<script type='text/javascript'>alert('neles')</script>";
 		}
 
 		$stmt->close();
