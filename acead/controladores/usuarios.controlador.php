@@ -55,12 +55,29 @@ class ControladorUsuarios{
 						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 
 						if($ultimoLogin == "ok"){
-
-							echo '<script>
+                                                            //aaQUI VA EL CODIGO PARA IR A LAS PREGUNTAS DE PRIMER ACCESO                                                    
+                                                    $valor3 = "PrimerIngreso";
+                                                    $revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
+                                                    
+                                                    /* Aquí hace el llamado de la funcion que inserta datos a la Bitacora
+                                                     * Este llamado debe hacerse asi, siempre que se necesite guardar X acción en la bitacora
+                                                     * Solo se debe ubicar en los lugares donde se realiza X acción que debe ser registrada en X objeto del sistema
+                                                     * Como en formularios, pantallas, tablas, etc.
+                                                     */
+                                                    
+                                                    ConexionBD::Inserta_bitacora($fechaActual, 'Ingreso al sistema', 'Accediendo por el Login del sistema', $_SESSION['id'], 1);
+                                                    
+                                                    
+                                                    if($revisaPacceso == true){
+                                                        echo '<script> window.location = "preguntas"; </script>';
+                                                    }else{
+                                                        echo '<script>
 
 								window.location = "inicio";
 
 							</script>';
+                                                    }
+							
 
 						}
 
@@ -162,7 +179,73 @@ class ControladorUsuarios{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre1"])){
 
+			   	/*=============================================
+				VALIDAR IMAGEN
+				=============================================*/
+/*
+				$ruta = "";
 
+				if(isset($_FILES["nuevaFoto"]["tmp_name"])){
+
+					list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
+
+					$nuevoAncho = 500;
+					$nuevoAlto = 500;
+*/
+					/*=============================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					=============================================*/
+/*
+					$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
+
+					mkdir($directorio, 0755);
+*/
+					/*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
+/*
+					if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
+*/
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+/*
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
+
+						$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagejpeg($destino, $ruta);
+
+					}
+
+					if($_FILES["nuevaFoto"]["type"] == "image/png"){
+*/
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+/*
+						$aleatorio = mt_rand(100,999);
+
+						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}
+
+				}
+*/
 				$tabla = "tbl_usuarios";
 				$nuevo = 1;
 				$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);
@@ -173,7 +256,7 @@ class ControladorUsuarios{
 										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
-										 "Cedula" => $_POST['nuevoCedula'],
+										 "Cedula" => $_POST["nuevoCedula"],
 					           "Usuario" => strtoupper($_POST["nuevoUsuario"]),
 					           "Contrasena" => $encriptar,
 										 "Id_Departamento" => $_POST["nuevoDpto"],
@@ -182,7 +265,6 @@ class ControladorUsuarios{
 										 "Id_Rol" => $_POST["nuevoRol"],
 									 	 "Id_Estado" => $nuevo);
 
-										 echo $_POST['nuevoCedula'];
 
 				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
 
@@ -271,7 +353,102 @@ class ControladorUsuarios{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
 
+				/*=============================================
+				VALIDAR IMAGEN
+				=============================================*/
 
+
+	/*			$ruta = $_POST["fotoActual"];
+
+
+				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
+
+					list($ancho, $alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
+
+					$nuevoAncho = 500;
+
+					$nuevoAlto = 500;     */
+
+
+					/*=============================================
+					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+					=============================================*/
+
+			/*		$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];   */
+
+
+					/*=============================================
+					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
+					=============================================*/
+
+
+			/*		if(!empty($_POST["fotoActual"])){
+
+
+						unlink($_POST["fotoActual"]);
+
+					}else{
+
+						mkdir($directorio, 0755);
+
+					}
+
+*/
+
+					/*=============================================
+					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+					=============================================*/
+
+
+/*					if($_FILES["editarFoto"]["type"] == "image/jpeg"){    */
+
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+
+	/*					$aleatorio = mt_rand(100,999);
+
+
+						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".jpg";
+
+						$origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagejpeg($destino, $ruta);
+
+					}
+
+					if($_FILES["editarFoto"]["type"] == "image/png"){    */
+
+
+						/*=============================================
+						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+						=============================================*/
+
+
+/*						$aleatorio = mt_rand(100,999);
+
+
+						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
+
+						$origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
+
+						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+						imagepng($destino, $ruta);
+
+					}
+
+				}
+
+*/
 
 				$tabla = "tbl_usuarios";
 
@@ -318,6 +495,9 @@ class ControladorUsuarios{
 										 "Usuario" => $_POST["editarUsuario"],
 										 "Id_Rol" => $_POST["editarRol"]);
 
+							  // "Id_Rol" => $_POST["editarPerfil"]
+
+							   //"foto" => $ruta)
 
 
 
@@ -381,8 +561,10 @@ class ControladorUsuarios{
 		if(isset($_GET["idUsuario"])){
 
 
-			$tabla = "tbl_usuarios";
+			$tabla ="tbl_usuarios";
 			$datos = $_GET["idUsuario"];
+
+
 
 			$respuesta = ModeloUsuarios::mdlBorrarUsuario($tabla, $datos);
 

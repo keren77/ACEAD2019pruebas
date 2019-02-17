@@ -111,6 +111,8 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "ventas" ||
          $_GET["ruta"] == "crear-venta" ||
          $_GET["ruta"] == "reportes" ||
+         $_GET["ruta"] == "preguntas" ||
+         $_GET["ruta"] == "cambiopass" ||
          $_GET["ruta"] == "salir"){
 
         include "modulos/".$_GET["ruta"].".php";
@@ -149,7 +151,6 @@ CUERPO DOCUMENTO
 <script src="vistas/js/plantilla.js"></script>
 <script src="vistas/js/usuarios.js"></script>
 <script src="vistas/js/ctrespacios.js"></script>
-<script src="vistas/js/matricula.js"></script>
 
 
 </body>

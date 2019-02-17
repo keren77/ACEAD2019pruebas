@@ -8,26 +8,26 @@ class ControladorAlumnos{
 
 	static public function ctrCrearAlumno(){
 
-		if(isset($_POST["nuevoNombre1"])){
+		if(isset($_POST["nuevoAlumno"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre1"])){
 
 
 				$tabla = "tbl_alumnos";
+				$nuevo = 1;
 
+			/*	$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);*/
 
 				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
+				             "SegundoNombre" => $_POST["nuevoNombre2"],
 										 "PrimerApellido"	=> $_POST["nuevoApellido1"],
-										 "SegundoNombre"	=> $_POST["nuevoNombre2"],
 										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
-										 "FechaNacimiento" => $_POST["nuevoFechaNac"],
+										 "FechaNacimientno"	=> $_POST["nuevoFechanac"],
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
-										 "Cedula" => $_POST['nuevoCedula'],
-										 "Id_EstadoCivil" => $_POST["nuevoEstCivil"],
-										 "Id_Genero" => $_POST["nuevoGenero"]);
+										 "Cedula" => $_POST["nuevoCedula"]);
 
-										
+
 				$respuesta = ModeloAlumnos::mdlIngresarAlumno($tabla, $datos);
 
 				if($respuesta == "ok"){
@@ -93,7 +93,7 @@ class ControladorAlumnos{
 	}
 
 	/*=============================================
-	MOSTRAR ALUMNO
+	MOSTRAR ALUMNOS
 	=============================================*/
 
 	static public function ctrMostrarAlumnos($item, $valor){
@@ -106,32 +106,58 @@ class ControladorAlumnos{
 	}
 
 	/*=============================================
-	EDITAR ALUMNO
+	EDITAR ALUMNOS
 	=============================================*/
 
 	static public function ctrEditarAlumno(){
 
 		if(isset($_POST["editarAlumno"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
-
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre"])){
 
 
 				$tabla = "tbl_alumnos";
 
+				$datos = $_GET["id_Alumno"];
 
-				$datos = array("PrimerNombre" => $_POST["editarNombre1"],
-										 "PrimerApellido"	=> $_POST["editarApellido1"],
-										 "SegundoNombre"	=> $_POST["editarNombre2"],
-										 "SegundoApellido"	=> $_POST["editarApellido2"],
-										 "FechaNacimiento" => $_POST["editarFechaNac"],
-										 "CorreoElectronico" => $_POST["editarEmail"],
-										 "Telefono" => $_POST["editarTelefono"],
-										 "Cedula" => $_POST["editarCedula"],
-										 "Id_EstadoCivil" => $_POST["editarEstCivil"],
-										 "Id_Genero" => $_POST["editarGenero"]);
 
-				$respuesta = ModeloAlumnos::mdlEditarAlumno($tabla, $datos);
+				/*	$encriptar = password_hash($_POST["editarPassword"], PASSWORD_DEFAULT);
+
+					}else{
+
+						echo'<script>
+
+								swal({
+									  type: "error",
+
+									  title: "¡La contraseña no puede ir vacía",
+
+									  showConfirmButton: true,
+									  confirmButtonText: "Cerrar",
+									  closeOnConfirm: false
+									  }).then((result) => {
+										if (result.value) {
+
+										window.location = "usuarios";
+
+										}
+									})
+
+						  	</script>';
+
+
+										}
+
+				$datos = array(//"Usuario" => $_POST["editarNombre"],
+							   "Usuario" => $_POST["editarUsuario"],
+							   "Contrasena" => $encriptar,
+							  // "Id_Rol" => $_POST["editarPerfil"]
+							);
+							   //"foto" => $ruta)
+*/
+
+
+				$respuesta = Modeloalumnos::mdlEditaralumno($tabla, $datos);
 
 				if($respuesta == "ok"){
 
@@ -139,7 +165,7 @@ class ControladorAlumnos{
 
 					swal({
 						  type: "success",
-						  title: "El Alumno ha sido editado correctamente",
+						  title: "El alumno ha sido editado correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar",
 						  closeOnConfirm: false
@@ -188,11 +214,13 @@ class ControladorAlumnos{
 
 	static public function ctrBorrarAlumno(){
 
-		if(isset($_GET["idAlumno"])){
+		if(isset($_GET["id_Alumno"])){
 
 
-			$tabla = "tbl_alumnos";
-			$datos = $_GET["idAlumno"];
+			$tabla ="tbl_alumnos";
+			$datos = $_GET["id_Alumno"];
+
+
 
 			$respuesta = ModeloAlumnos::mdlBorrarAlumno($tabla, $datos);
 
@@ -227,29 +255,14 @@ class ControladorAlumnos{
 	MOSTRAR GENERO
 	=============================================*/
 
-	static public function ctrCargarSelectGenero(){
+	static public function ctrCargarSelectGenero($item, $valor){
 
 		$tabla = "tbl_genero";
 
-		$respuesta = ModeloAlumnos::mdlCargarSelect($tabla);
+		$respuesta = ModeloUsuarios::mdlCargarSelect($tabla, $item, $valor);
 
 		return $respuesta;
 
 	}
-
-	/*=============================================
-	MOSTRAR ESTADO CIVIL
-	=============================================*/
-
-	static public function ctrCargarSelectEstCivil(){
-
-		$tabla = "tbl_estadocivil";
-
-		$respuesta = ModeloAlumnos::mdlCargarSelect($tabla);
-
-		return $respuesta;
-
-	}
-
 
 }

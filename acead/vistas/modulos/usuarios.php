@@ -22,7 +22,6 @@
 
     <div class="box">
 
-<!-- BOTON AGREGAE UISUARIO -->
       <div class="box-header with-border">
 
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
@@ -32,7 +31,6 @@
         </button>
 
       </div>
-
 
       <div class="box-body">
 
@@ -78,6 +76,18 @@
                   <td>'.$value["Usuario"].'</td>
                   <td>'.$value["CorreoElectronico"].'</td>   ';
 
+              /*
+<td>'.$value["nombre"].'</td>
+              if($value["foto"] != ""){
+
+                    echo '<td><img src="'.$value["foto"].'" class="img-thumbnail" width="40px"></td>';
+
+                  }else{
+
+                    echo '<td><img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail" width="40px"></td>';
+
+                  }*/
+
 
                   switch ($value["Id_Rol"]) {
                     case '1':
@@ -117,14 +127,13 @@
 
                   echo '<td>'.$value["FechaUltimaConex"].'</td>
 
-
                   <td>
 
                     <div class="btn-group">
 
                       <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["Id_usuario"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
 
-                    
+                      <button class="btn btn-danger btnEliminarUsuario" idUsuario="'.$value["Id_usuario"].'" usuario="'.$value["Usuario"].'"><i class="fa fa-times"></i></button>
 
                     </div>
 
@@ -135,7 +144,6 @@
 
 
         ?>
-
 
         </tbody>
 
@@ -502,17 +510,17 @@ MODAL EDITAR USUARIO
 
              <div class="form-group">
 
-                <div class="input-group">
+              <div class="input-group">
 
-                  <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
-
-
-                  <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" readonly value="">
+                <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
 
 
-                </div>
+                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" readonly value="">
+
 
               </div>
+
+            </div>
 
             <!-- ENTRADA PARA EL PRIMER NOMBRE -->
 
@@ -528,19 +536,22 @@ MODAL EDITAR USUARIO
 
             </div>
 
-            <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
 
-            <div class="form-group">
+          <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
 
-              <div class="input-group">
+          <div class="form-group">
 
-                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <div class="input-group">
 
-                  <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                </div>
+                <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
+
+          </div>
+
+
 
             <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
@@ -598,7 +609,7 @@ MODAL EDITAR USUARIO
 
             </div>
 
-            <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
+        <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
 
             <div class="form-group">
 
@@ -612,19 +623,19 @@ MODAL EDITAR USUARIO
 
             </div>
 
-              <!-- ENTRADA PARA LA CONTRASEÑA -->
+            <!-- ENTRADA PARA LA CONTRASEÑA -->
 
              <div class="form-group">
 
-                <div class="input-group">
+              <div class="input-group">
 
-                  <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
-                  <input type="password" class="form-control input-lg" name="editarPassword" id="nuevoPassword" placeholder="Escriba la Nueva Contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}$" required>
-
-                </div>
+                <input type="password" class="form-control input-lg" name="editarPassword" id="nuevoPassword" placeholder="Escriba la Nueva Contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}$" required>
 
               </div>
+
+            </div>
 
             <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
 
@@ -722,7 +733,7 @@ MODAL EDITAR USUARIO
                   foreach ($role as $key => $value) {
                     echo "<option value='".$value['Id_Rol']."'>".$value['Rol']."</option>";
                   }
-
+                  	echo $_POST['nuevoRol'];
                   ?>
 
                 </select>
@@ -730,6 +741,24 @@ MODAL EDITAR USUARIO
               </div>
 
             </div>
+
+
+            <!-- ENTRADA PARA SUBIR FOTO
+
+             <div class="form-group">
+
+              <div class="panel">SUBIR FOTO</div>
+
+              <input type="file" class="nuevaFoto" name="editarFoto">
+
+              <p class="help-block">Peso máximo de la foto 2MB</p>
+
+              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+
+              <input type="hidden" name="fotoActual" id="fotoActual">
+
+
+            </div> -->
 
 
           </div>
@@ -748,7 +777,7 @@ MODAL EDITAR USUARIO
 
         </div>
 
-        <?php
+     <?php
 
           $editarUsuario = new ControladorUsuarios();
           $editarUsuario -> ctrEditarUsuario();

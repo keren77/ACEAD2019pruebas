@@ -2,8 +2,6 @@
 
 require_once "../controladores/usuarios.controlador.php";
 require_once "../modelos/usuarios.modelo.php";
-require_once "../controladores/matricula.controlador.php";
-require_once "../modelos/matricula.modelo.php";
 
 class AjaxUsuarios{
 

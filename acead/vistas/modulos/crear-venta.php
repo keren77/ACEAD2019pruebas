@@ -1,19 +1,19 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-
+    
     <h1>
-
-      Matricula
-
+      
+      Crear venta
+    
     </h1>
 
     <ol class="breadcrumb">
-
+      
       <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-
-      <li class="active">Matricula</li>
-
+      
+      <li class="active">Crear venta</li>
+    
     </ol>
 
   </section>
@@ -34,36 +34,9 @@
             <i class="fa fa-times"></i></button>
         </div>
       </div>
-
       <div class="box-body">
         Start creating your amazing application!
-        </div>
-
-        <!-- ENTRADA PARA SELECCIONAR EL ALUMNO -->
-
-        <div class="form-group">
-
-          <div class="input-group">
-
-            <span class="input-group-addon"><i class="fa fa-users"></i></span>
-
-            <select class="form-control input-lg" name="nuevoDpto">
-
-              <option value="">Seleccionar Alumno</option>
-
-              <?php
-
-              $alum = ControladorMatricula::ctrCargarSelectAlumnos();
-              foreach ($alum as $key => $value) {
-                echo "<option value='".$value['Id_Alumno']."'>".$value['PrimerNombre']."</option>";
-              }
-              ?>
-
-            </select>
-
-          </div>
-
-        </div>
+      </div>
       <!-- /.box-body -->
       <div class="box-footer">
         Footer
