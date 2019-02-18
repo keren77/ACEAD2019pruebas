@@ -22,15 +22,17 @@
 
     <div class="box">
 
+<!-- BOTON AGREGAR ALUMNOS -->
       <div class="box-header with-border">
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarAlumno">
 
-          Agregar Alumnos
+          Agregar Alumno
 
         </button>
 
       </div>
+
 
       <div class="box-body">
 
@@ -66,24 +68,29 @@
 
        foreach ($alumnos as $key => $value){
 
-          echo ' <tr>
-                  <td>'.($key+1).'</td>
-                  <td>'.$value["Id_Alumno"].'</td>
-                  <td>'.$value["PrimerNombre"].'</td>
-                  <td>'.$value["SegundoNombre"].'</td>
-                  <td>'.$value["PrimerApellido"].'</td>
-                  <td>'.$value["SegundoApellido"].'</td>
-                  <td>'.$value["Telefono"].'</td>
-                  <td>'.$value["FechaNacimiento"].'</td>
-                  <td>'.$value["Cedula"].'</td> ';
+         echo ' <tr>
+                 <td>'.($key+1).'</td>
+                 <td>'.$value["Id_Alumno"].'</td>
+                 <td>'.$value["PrimerNombre"].'</td>
+                 <td>'.$value["SegundoNombre"].'</td>
+                 <td>'.$value["PrimerApellido"].'</td>
+                 <td>'.$value["SegundoApellido"].'</td>
+                 <td>'.$value["Telefono"].'</td>
+                 <td>'.$value["FechaNacimiento"].'</td>
+                 <td>'.$value["Cedula"].'</td>     ';
 
-            echo '    <td>
+
+                 echo '  <td>
 
                     <div class="btn-group">
 
-                      <button class="btn btn-warning btnEditarAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalEditarAlumno"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-success btnMatriculaAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalMatriculaAlumno"><i class="fa fa-building"></i></button>
 
-                      <button class="btn btn-danger btnEliminarAlumno" idAlumno="'.$value["Id_Alumno"].'" alumno="'.$value["PrimerNombre"].'"><i class="fa fa-times"></i></button>
+                    <button class="btn btn-warning btnEditarAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalEditarAlumno"><i class="fa fa-pencil"></i></button>
+
+                    <button class="btn btn-danger btnEliminarAlumno" idAlumno="'.$value["Id_Alumno"].'" alumno="'.$value["PrimerNombre"].'"><i class="fa fa-times"></i></button>
+
+
 
                     </div>
 
@@ -94,6 +101,7 @@
 
 
         ?>
+
 
         </tbody>
 
@@ -108,7 +116,7 @@
 </div>
 
 <!--=====================================
-MODAL AGREGAR ALUMNOS
+MODAL AGREGAR ALUMNO
 ======================================-->
 
 <div id="modalAgregarAlumno" class="modal fade" role="dialog">
@@ -153,22 +161,19 @@ MODAL AGREGAR ALUMNOS
 
             </div>
 
+            <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
 
-          <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
+            <div class="form-group">
 
-          <div class="form-group">
+              <div class="input-group">
 
-            <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <span class="input-group-addon"><i class="fa fa-user"></i></span>
-
-                <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                  <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
-          </div>
-
-
+            </div>
 
             <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
@@ -220,13 +225,27 @@ MODAL AGREGAR ALUMNOS
 
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" maxlength="13" pattern="[0-9]{13}">
+                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" minlength="8" maxlength="13" pattern="[0-9]{13}">
 
                   </div>
 
             </div>
 
-        <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
+            <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
+
+            <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+
+                    <input type="text" class="form-control input-lg" name="nuevoFechaNac" placeholder="Fecha de Nacimiento" minlength="8" maxlength="10" pattern="[0-9]{10}">
+
+                  </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
 
             <div class="form-group">
 
@@ -240,59 +259,6 @@ MODAL AGREGAR ALUMNOS
 
             </div>
 
-            <!-- ENTRADA PARA EL USUARIO -->
-
-          <!--   <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
-
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" style="text-transform: uppercase" required>
-
-              </div>
-
-            </div> -->
-
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
-
-          <!--      <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-
-                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}${30}" required>
-
-              </div>
-
-            </div> -->
-
-            <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
-
-          <!--    <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-
-                <select class="form-control input-lg" name="nuevoDpto">
-
-                  <option value="">Seleccionar Departmento</option>
-
-
-
-              /*    $dpto = ControladorUsuarios::ctrCargarSelectDepartamento();
-                  foreach ($dpto as $key => $value) {
-                    echo "<option value='".$value['Id_Departamentos']."'>".$value['DescripDepart']."</option>";
-                  }*/
-
-
-                </select>
-
-              </div>
-
-            </div>   -->
 
             <!-- ENTRADA PARA SELECCIONAR SU ESTADO CIVIL -->
 
@@ -308,7 +274,7 @@ MODAL AGREGAR ALUMNOS
 
                   <?php
 
-                  $civil = Controladoralumnos::ctrCargarSelectEstCivil();
+                  $civil = ControladorUsuarios::ctrCargarSelectEstCivil();
                   foreach ($civil as $key => $value) {
                     echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
                   }
@@ -334,9 +300,9 @@ MODAL AGREGAR ALUMNOS
 
                   <?php
 
-                  $genero = ControladorAlumnos::ctrCargarSelectGenero();
+                  $genero = ControladorUsuarios::ctrCargarSelectGenero();
                   foreach ($genero as $key => $value) {
-                    echo "<option value='".$value['id_genero']."'>".$value['Descripcion']."</option>";
+                    echo "<option value='".$value['Id_Genero']."'>".$value['Descripcion']."</option>";
                   }
                   ?>
 
@@ -345,51 +311,6 @@ MODAL AGREGAR ALUMNOS
               </div>
 
             </div>
-
-            <!-- ENTRADA PARA SELECCIONAR SU ROL -->
-
-            <!--  <div class="form-group">
-
-              <div class="input-group">
-
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-
-                <select class="form-control input-lg" name="nuevoRol">
-
-                  <option value="">Seleccionar Rol de Usuario</option>
-
-
-
-                /*  $role = ControladorUsuarios::ctrCargarSelectRol();
-                  foreach ($role as $key => $value) {
-                    echo "<option value='".$value['Id_Rol']."'>".$value['Rol']."</option>";
-                  }
-                  	echo $_POST['nuevoRol'];*/
-
-
-                </select>
-
-              </div>
-
-            </div> -->
-
-
-
-            <!-- ENTRADA PARA SUBIR FOTO
-
-
-             <div class="form-group">
-
-              <div class="panel">SUBIR FOTO</div>
-
-              <input type="file" class="nuevaFoto" name="nuevaFoto">
-
-              <p class="help-block">Peso máximo de la foto 2MB</p>
-
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-            </div>   -->
-
 
           </div>
 
@@ -423,6 +344,9 @@ MODAL AGREGAR ALUMNOS
 
 </div>
 
+
+
+
 <!--=====================================
 MODAL EDITAR ALUMNO
 ======================================-->
@@ -439,7 +363,7 @@ MODAL EDITAR ALUMNO
         CABEZA DEL MODAL
         ======================================-->
 
-        <div class="modal-header" style="background:#3c8dbc; color:white">
+        <div class="modal-header" style="background:#f39c12; color:white">
 
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -455,7 +379,8 @@ MODAL EDITAR ALUMNO
 
           <div class="box-body">
 
-            <!-- ENTRADA PARA EL NOMBRE -->
+
+            <!-- ENTRADA PARA EL PRIMER NOMBRE -->
 
             <div class="form-group">
 
@@ -463,90 +388,155 @@ MODAL EDITAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" id="editarNombre" name="editarNombre" value="" required>
+                <input type="text" class="form-control input-lg" name="editarNombre1" id="editarNombre1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA EL USUARIO -->
+            <!-- ENTRADA PARA EL SEGUNDO NOMBRE -->
 
-            <!--   <div class="form-group">
+            <div class="form-group">
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                  <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-
-                <input type="text" class="form-control input-lg" id="editarUsuario" name="editarUsuario" value="">
-
+                  <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
-            </div> -->
+            </div>
 
-            <!-- ENTRADA PARA LA CONTRASEÑA -->
+            <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
-              <!-- <div class="form-group">
+            <div class="form-group">
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="password" class="form-control input-lg" name="editarPassword" placeholder="Escriba la nueva contraseña">
-
-                <input type="hidden" id="passwordActual" name="passwordActual">
+                <input type="text" class="form-control input-lg" name="editarApellido1" id="editarApellido1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
 
               </div>
 
-            </div> -->
+            </div>
 
-            <!-- ENTRADA PARA SELECCIONAR SU PERFIL -->
+            <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
-            <!--  <div class="form-group">
+            <div class="form-group">
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <select class="form-control input-lg" name="editarPerfil">
+                <input type="text" class="form-control input-lg" name="editarApellido2" id="editarApellido2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
-                  <option value="" id="editarPerfil"></option>
+              </div>
 
-                  <option value="Administrador">Administrador</option>
+            </div>
 
-                  <option value="Especial">Especial</option>
+            <!-- ENTRADA PARA EL TELEFONO -->
 
-                  <option value="Vendedor">Vendedor</option>
+            <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+
+                    <input type="text" class="form-control input-lg" name="editarTelefono" id="editarTelefono" value="" minlength="8" maxlength="15" pattern="[0-9]{8}">
+
+                  </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL NUMERO DE IDENTIDAD -->
+
+            <div class="form-group">
+
+                  <div class="input-group">
+
+                    <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+
+                    <input type="text" class="form-control input-lg" name="editarCedula" id="editarCedula" value="" maxlength="13" pattern="[0-9]{13}">
+
+                  </div>
+
+            </div>
+
+            <!-- ENTRADA PARA EL CORREO ELECTRONICO -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-at"></i></span>
+
+                <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" value="" required>
+
+              </div>
+
+            </div>
+
+
+            <!-- ENTRADA PARA SELECCIONAR SU ESTADO CIVIL -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                <select class="form-control input-lg" id="editarEstCivil" name="editarEstCivil">
+
+                  <option value="">Seleccionar Estado Civil</option>
+
+                  <?php
+
+                  $civil = ControladorUsuarios::ctrCargarSelectEstCivil();
+                  foreach ($civil as $key => $value) {
+                    echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
 
                 </select>
 
               </div>
 
-            </div> -->
+            </div>
 
+            <!-- ENTRADA PARA SELECCIONAR SU GENERO -->
 
-            <!-- ENTRADA PARA SUBIR FOTO
+            <div class="form-group">
 
-             <div class="form-group">
+              <div class="input-group">
 
-              <div class="panel">SUBIR FOTO</div>
+                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
 
-              <input type="file" class="nuevaFoto" name="editarFoto">
+                <select class="form-control input-lg" name="nuevoGenero">
 
-              <p class="help-block">Peso máximo de la foto 2MB</p>
+                  <option value="">Seleccionar Genero</option>
 
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
+                  <?php
 
-              <input type="hidden" name="fotoActual" id="fotoActual">
+                  $genero = ControladorUsuarios::ctrCargarSelectGenero();
+                  foreach ($genero as $key => $value) {
+                    echo "<option value='".$value['Id_Genero']."'>".$value['Descripcion']."</option>";
+                  }
+                  ?>
 
+                </select>
 
-            </div> -->
+              </div>
+
+            </div>
+
 
 
           </div>
 
         </div>
+
 
         <!--=====================================
         PIE DEL MODAL
@@ -560,12 +550,12 @@ MODAL EDITAR ALUMNO
 
         </div>
 
-          <?php
+        <?php
 
-            $editarAlumno = new ControladorAlumnos();
-            $editarAlumno -> ctrEditaralumno();
+          $editarAlumno = new ControladorAlumnos();
+          $editarAlumno -> ctrEditarAlumno();
 
-          ?>
+        ?>
 
       </form>
 
@@ -574,6 +564,164 @@ MODAL EDITAR ALUMNO
   </div>
 
 </div>
+
+
+<!--=====================================
+MODAL MATRICULA ALUMNO
+======================================-->
+
+<div id="modalMatriculaAlumno" class="modal fade" role="dialog">
+
+  <div class="modal-dialog" style="width:1300px;">
+
+    <div class="modal-content">
+
+      <form role="form" method="post" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#D81B60; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Matricula Alumno</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <div class="container">
+
+              <!-- ENTRADA PARA EL ALUMNO -->
+
+               <div class="form-group">
+
+                <div class="input-group">
+
+                  <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+
+                  <input type="text" class="form-control input-lg" id="matriculaAlumno" name="matriculaAlumno" readonly value="">
+
+
+                </div>
+
+               </div>
+
+
+
+
+              <!-- ENTRADA PARA SELECCIONAR LA MODALIDAD -->
+
+              <div class="form-group">
+
+                <div class="input-group">
+
+                  <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+
+                  <select class="form-control input-lg" id="matriculaModalidad" name="matriculaModalidad">
+
+                    <option value="">Seleccionar Modalidad</option>
+
+                    <?php
+
+                    $mod = ControladorMatricula::ctrCargarSelectModalidades();
+                    foreach ($mod as $key => $value) {
+                      echo "<option value='".$value['Id_Modalidad']."'>".$value['DescripModalidad']."</option>";
+                    }
+                    ?>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+
+
+
+              <!-- MATRICULA DE CLASES -->
+
+                <div id="row">
+                  <div class="card-deck mb-3 text-center">
+
+                    <div class="card mb-4 box-shadow">
+
+                      <div class="card-header">
+                        <h4 class="my-0-font-weight-normal">Matricula</h4>
+                      </div>
+
+                      <div class="card-body">
+
+                        <div class="row">
+                          <div class="col-xl-4 col-sm-6 mb-3">
+                            <select class="form-control" id="adicionar1" size="9"></select>
+                          </div>
+
+                          <div class="col-xl-4 col-sm-6 mb-3">
+                            <select class="form-control" id="adicionar2" size="9"></select>
+                          </div>
+
+                          <div class="col-xl-4 col-sm-6 mb-3">
+                            <select class="form-control" id="adicionar3" size="9"></select>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Matricular Alumno</button>
+
+        </div>
+
+        <?php
+
+          $editarUsuario = new ControladorAlumnos();
+          $editarUsuario -> ctrEditarAlumno();
+
+        ?>
+
+
+
+      </form>
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
 
 <?php
 
