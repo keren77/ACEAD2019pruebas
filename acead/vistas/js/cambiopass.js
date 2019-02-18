@@ -78,3 +78,4 @@ $("#btnenviar").click(function(){
        
 });
 
+//esta version ya a sido probada sin errores 17/02/2019
