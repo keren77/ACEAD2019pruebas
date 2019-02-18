@@ -272,14 +272,15 @@ static public function mdlObtenerIntentos(){
 
     static public function obtenerPrimerIngreso($uid){
 
-        $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT Id_usuario, PrimerIngreso FROM tbl_usuarios WHERE Id_usuario = ".$uid);
+        $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT Id_usuario, PrimerIngreso, Id_estado FROM tbl_usuarios WHERE Id_usuario = ".$uid);
         $stmt->execute();
 
         //$stmt->bind_result($idu, $pingreso);
         $arregloU = $stmt->fetch(PDO::FETCH_BOTH);
         $pingreso = $arregloU['PrimerIngreso'];
+        $estadoUsuario = $arregloU['Id_estado'];
         //echo '<script>alert("'.$pingreso.'");</script>';
-        if($pingreso !== 1 && $pingreso !== '1'){
+        if($estadoUsuario !== 1 && $pingreso !== '1'){
             return true;
         }else{
             return false;
