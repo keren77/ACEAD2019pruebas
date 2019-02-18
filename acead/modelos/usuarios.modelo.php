@@ -53,7 +53,7 @@ static public function mdlObtenerIntentos(){
 	=============================================*/
 
 	static public function mdlIngresarUsuario($tabla, $datos){
-    echo "<script type='text/javascript'>alert('sql script')</script>";
+    //echo "<script type='text/javascript'>alert('sql script')</script>";
 
 		$stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, CorreoElectronico, Telefono, Cedula, Usuario, Contrasena, Id_Departamento, Id_Estado, Id_EstadoCivil, Id_Genero, Id_Rol, PrimerIngreso)
 																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :email, :telefono, :cedula, :usuario, :password, :departmento, :estado, :estcivil, :genero, :rol, :primeringreso)");
