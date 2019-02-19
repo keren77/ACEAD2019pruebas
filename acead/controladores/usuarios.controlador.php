@@ -351,106 +351,10 @@ class ControladorUsuarios{
 
 	static public function ctrEditarUsuario(){
 
+		
 		if(isset($_POST["editarUsuario"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
-
-				/*=============================================
-				VALIDAR IMAGEN
-				=============================================*/
-
-
-	/*			$ruta = $_POST["fotoActual"];
-
-
-				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
-
-					list($ancho, $alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
-
-					$nuevoAncho = 500;
-
-					$nuevoAlto = 500;     */
-
-
-					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
-
-			/*		$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];   */
-
-
-					/*=============================================
-					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
-					=============================================*/
-
-
-			/*		if(!empty($_POST["fotoActual"])){
-
-
-						unlink($_POST["fotoActual"]);
-
-					}else{
-
-						mkdir($directorio, 0755);
-
-					}
-
-*/
-
-					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
-
-
-/*					if($_FILES["editarFoto"]["type"] == "image/jpeg"){    */
-
-
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-
-
-	/*					$aleatorio = mt_rand(100,999);
-
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".jpg";
-
-						$origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
-
-					}
-
-					if($_FILES["editarFoto"]["type"] == "image/png"){    */
-
-
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-
-
-/*						$aleatorio = mt_rand(100,999);
-
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
-
-						$origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino, $ruta);
-
-					}
-
-				}
-
-*/
 
 				$tabla = "tbl_usuarios";
 

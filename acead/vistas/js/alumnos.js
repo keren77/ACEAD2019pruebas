@@ -3,7 +3,7 @@
 EDITAR ALUMNOS
 =============================================*/
 
-$(".btnEditarAlumno").click(function(){
+$(".tablas").on("click", ".btnEditarAlumno", function(){
 
 	var idAlumno = $(this).attr("idAlumno");
 
@@ -21,12 +21,13 @@ $(".btnEditarAlumno").click(function(){
 		dataType: "json",
 		success: function(respuesta){
 
+
 			$("#editarAlumno").val(respuesta["Id_Alumno"]);
 			$("#editarNombre1").val(respuesta["PrimerNombre"]);
 			$("#editarNombre2").val(respuesta["SegundoNombre"]);
 			$("#editarApellido1").val(respuesta["PrimerApellido"]);
 			$("#editarApellido2").val(respuesta["SegundoApellido"]);
-			$("#editarFechaNac").val(respuesta["FechaNacimiento"]);
+
 			$("#editarTelefono").val(respuesta["Telefono"]);
 			$("#editarCedula").val(respuesta["Cedula"]);
 			$("#editarEmail").val(respuesta["CorreoElectronico"]);
@@ -83,7 +84,7 @@ ELIMINAR ALUMNO
 $(".tablas").on("click", ".btnEliminarAlumno", function(){
 
   var idAlumno = $(this).attr("idAlumno");
-  var alumno = $(this).attr("alumno");
+
 
   swal({
     title: '¿Está seguro de borrar el alumno?',
@@ -99,11 +100,45 @@ $(".tablas").on("click", ".btnEliminarAlumno", function(){
     if(result.value){
 
 
-      window.location = "index.php?ruta=alumnos&idAlumno="+idAlumno+"&alumno="+alumno;
+      window.location = "index.php?ruta=alumnos&idAlumno="+idAlumno;
 
 
     }
 
   })
+
+})
+
+
+/*=============================================
+MATRICULA ALUMNO
+=============================================*/
+
+$(".tablas").on("click", ".btnMatriculaAlumno", function(){
+
+
+	var idAlumno = $(this).attr("idAlumno");
+
+	var datos = new FormData();
+	datos.append("idAlumno", idAlumno);
+
+	$.ajax({
+
+		url:"ajax/matricula.ajax.php",
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		dataType: "json",
+		success: function(respuesta){
+
+			$("#IdAlumno").val(respuesta["Id_Alumno"]);
+
+
+
+			}
+
+	});
 
 })

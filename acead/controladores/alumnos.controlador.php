@@ -27,7 +27,7 @@ class ControladorAlumnos{
 										 "Id_EstadoCivil" => $_POST["nuevoEstCivil"],
 										 "Id_Genero" => $_POST["nuevoGenero"]);
 
-										
+
 				$respuesta = ModeloAlumnos::mdlIngresarAlumno($tabla, $datos);
 
 				if($respuesta == "ok"){
@@ -111,20 +111,22 @@ class ControladorAlumnos{
 
 	static public function ctrEditarAlumno(){
 
+
 		if(isset($_POST["editarAlumno"])){
+echo "<script type='text/javascript'>alert('funcion')</script>";
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
-
-
 
 				$tabla = "tbl_alumnos";
 
 
-				$datos = array("PrimerNombre" => $_POST["editarNombre1"],
+
+				$datos = array("Id_Alumno" => $_POST["editarAlumno"],
+										 "PrimerNombre" => $_POST["editarNombre1"],
 										 "PrimerApellido"	=> $_POST["editarApellido1"],
 										 "SegundoNombre"	=> $_POST["editarNombre2"],
 										 "SegundoApellido"	=> $_POST["editarApellido2"],
-										 "FechaNacimiento" => $_POST["editarFechaNac"],
+
 										 "CorreoElectronico" => $_POST["editarEmail"],
 										 "Telefono" => $_POST["editarTelefono"],
 										 "Cedula" => $_POST["editarCedula"],
@@ -155,32 +157,33 @@ class ControladorAlumnos{
 
 				}
 
-
 			}else{
 
 				echo'<script>
 
 					swal({
-						  type: "error",
-						  title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
-						  showConfirmButton: true,
-						  confirmButtonText: "Cerrar",
-						  closeOnConfirm: false
-						  }).then((result) => {
+							type: "error",
+							title: "¡El nombre no puede ir vacío o llevar caracteres especiales!",
+							showConfirmButton: true,
+							confirmButtonText: "Cerrar",
+							closeOnConfirm: false
+							}).then((result) => {
 							if (result.value) {
 
-							window.location = "alumnos";
+							window.location = "usuarios";
 
 							}
 						})
 
-			  	</script>';
+					</script>';
 
 			}
 
 		}
 
+
 	}
+
 
 	/*=============================================
 	BORRAR ALUMNO

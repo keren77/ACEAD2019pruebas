@@ -81,21 +81,22 @@ class ModeloAlumnos{
 	=============================================*/
 
 	static public function mdlEditarUsuario($tabla, $datos){
+		echo "<script type='text/javascript'>alert('sql script')</script>";
 
 
 		$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET PrimerNombre = :nombre1,
                                                                    SegundoNombre = :nombre2,
                                                                    PrimerApellido = :apellido1,
                                                                    SegundoApellido = :apellido2,
-																																	 FechaNacimiento = :FechaNac
-                                                                   CorreoElectronico = :email,
+																																	 CorreoElectronico = :email,
                                                                    Telefono = :telefono,
                                                                    Cedula = :cedula,
                                                                    Id_EstadoCivil = :estcivil,
                                                                    Id_Genero = :genero,
-                                                                WHERE Id_Alumno = :Id");
+                                                                WHERE Id_Alumno = :id");
 
-	  $stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
+		$stmt->bindParam(":id", $datos["Id_Alumno"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombre1", $datos["PrimerNombre"], PDO::PARAM_STR);
     $stmt->bindParam(":nombre2", $datos["SegundoNombre"], PDO::PARAM_STR);
 		$stmt->bindParam(":apellido1", $datos["PrimerApellido"], PDO::PARAM_STR);
     $stmt->bindParam(":apellido2", $datos["SegundoApellido"], PDO::PARAM_STR);
@@ -158,7 +159,6 @@ class ModeloAlumnos{
 
 	static public function mdlBorrarAlumno($tabla, $datos){
 
-
     $stmt = ConexionBD::Abrir_Conexion()->prepare("DELETE FROM tbl_alumnos WHERE Id_Alumno = :id");
 
     $stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
@@ -173,7 +173,7 @@ class ModeloAlumnos{
 		}else{
 
 			return "error";
-       
+
 		}
 
 		$stmt -> close();

@@ -88,7 +88,7 @@
 
                     <button class="btn btn-warning btnEditarAlumno" idAlumno="'.$value["Id_Alumno"].'" data-toggle="modal" data-target="#modalEditarAlumno"><i class="fa fa-pencil"></i></button>
 
-                    <button class="btn btn-danger btnEliminarAlumno" idAlumno="'.$value["Id_Alumno"].'" alumno="'.$value["PrimerNombre"].'"><i class="fa fa-times"></i></button>
+                    <button class="btn btn-danger btnEliminarAlumno" idAlumno="'.$value["Id_Alumno"].'"><i class="fa fa-times"></i></button>
 
 
 
@@ -346,6 +346,12 @@ MODAL AGREGAR ALUMNO
 
 
 
+<?php
+
+include 'matricula1.php';
+
+ ?>
+
 
 <!--=====================================
 MODAL EDITAR ALUMNO
@@ -379,6 +385,20 @@ MODAL EDITAR ALUMNO
 
           <div class="box-body">
 
+            <!-- ENTRADA PARA EL ID ALUMNO -->
+
+            <div class="form-group">
+
+               <div class="input-group">
+
+                 <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+
+                   <input type="text" class="form-control input-lg" id="editarAlumno" name="editarAlumno" readonly value="">
+
+
+               </div>
+
+             </div>
 
             <!-- ENTRADA PARA EL PRIMER NOMBRE -->
 
@@ -493,7 +513,7 @@ MODAL EDITAR ALUMNO
 
                   <?php
 
-                  $civil = ControladorUsuarios::ctrCargarSelectEstCivil();
+                  $civil = ControladorAlumnos::ctrCargarSelectEstCivil();
                   foreach ($civil as $key => $value) {
                     echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
                   }
@@ -513,13 +533,13 @@ MODAL EDITAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
 
-                <select class="form-control input-lg" name="nuevoGenero">
+                <select class="form-control input-lg" id="editarGenero" name="editarGenero">
 
                   <option value="">Seleccionar Genero</option>
 
                   <?php
 
-                  $genero = ControladorUsuarios::ctrCargarSelectGenero();
+                  $genero = ControladorAlumnos::ctrCargarSelectGenero();
                   foreach ($genero as $key => $value) {
                     echo "<option value='".$value['Id_Genero']."'>".$value['Descripcion']."</option>";
                   }
@@ -566,9 +586,11 @@ MODAL EDITAR ALUMNO
 </div>
 
 
+
+
 <!--=====================================
 MODAL MATRICULA ALUMNO
-======================================-->
+======================================
 
 <div id="modalMatriculaAlumno" class="modal fade" role="dialog">
 
@@ -580,7 +602,7 @@ MODAL MATRICULA ALUMNO
 
         <!--=====================================
         CABEZA DEL MODAL
-        ======================================-->
+        ======================================
 
         <div class="modal-header" style="background:#D81B60; color:white">
 
@@ -592,7 +614,7 @@ MODAL MATRICULA ALUMNO
 
         <!--=====================================
         CUERPO DEL MODAL
-        ======================================-->
+        ======================================
 
         <div class="modal-body">
 
@@ -600,7 +622,7 @@ MODAL MATRICULA ALUMNO
 
             <div class="container">
 
-              <!-- ENTRADA PARA EL ALUMNO -->
+              <!-- ENTRADA PARA EL ALUMNO
 
                <div class="form-group">
 
@@ -618,7 +640,7 @@ MODAL MATRICULA ALUMNO
 
 
 
-              <!-- ENTRADA PARA SELECCIONAR LA MODALIDAD -->
+              <!-- ENTRADA PARA SELECCIONAR LA MODALIDAD
 
               <div class="form-group">
 
@@ -631,7 +653,7 @@ MODAL MATRICULA ALUMNO
                     <option value="">Seleccionar Modalidad</option>
 
                     <?php
-
+/*
                     $mod = ControladorMatricula::ctrCargarSelectModalidades();
                     foreach ($mod as $key => $value) {
                       echo "<option value='".$value['Id_Modalidad']."'>".$value['DescripModalidad']."</option>";
@@ -646,13 +668,12 @@ MODAL MATRICULA ALUMNO
 
 
 
-
-              <!-- MATRICULA DE CLASES -->
+              <!-- MATRICULA DE CLASES
 
                 <div id="row">
                   <div class="card-deck mb-3 text-center">
 
-                    <div class="card mb-4 box-shadow">
+                    <div class="card mb-3 box-shadow">
 
                       <div class="card-header">
                         <h4 class="my-0-font-weight-normal">Matricula</h4>
@@ -661,15 +682,15 @@ MODAL MATRICULA ALUMNO
                       <div class="card-body">
 
                         <div class="row">
-                          <div class="col-xl-4 col-sm-6 mb-3">
+                          <div class="col-lg-4 col-sm-4 mb-4">
                             <select class="form-control" id="adicionar1" size="9"></select>
                           </div>
 
-                          <div class="col-xl-4 col-sm-6 mb-3">
+                          <div class="col-xl-4 col-sm-4 mb-4">
                             <select class="form-control" id="adicionar2" size="9"></select>
                           </div>
 
-                          <div class="col-xl-4 col-sm-6 mb-3">
+                          <div class="col-xl-4 col-sm-4 mb-4">
                             <select class="form-control" id="adicionar3" size="9"></select>
                           </div>
                         </div>
@@ -692,7 +713,7 @@ MODAL MATRICULA ALUMNO
 
         <!--=====================================
         PIE DEL MODAL
-        ======================================-->
+        ======================================
 
         <div class="modal-footer">
 
@@ -706,7 +727,7 @@ MODAL MATRICULA ALUMNO
 
           $editarUsuario = new ControladorAlumnos();
           $editarUsuario -> ctrEditarAlumno();
-
+*/
         ?>
 
 
@@ -719,7 +740,7 @@ MODAL MATRICULA ALUMNO
 
   </div>
 
-</div>
+</div> -->
 
 
 
