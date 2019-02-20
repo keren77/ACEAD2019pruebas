@@ -106,12 +106,12 @@ CUERPO DOCUMENTO
       if($_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "usuarios" ||
          $_GET["ruta"] == "alumnos" ||
-         $_GET["ruta"] == "productos" ||
+         $_GET["ruta"] == "gestionacademica" ||
          $_GET["ruta"] == "clientes" ||
          $_GET["ruta"] == "ventas" ||
          $_GET["ruta"] == "crear-venta" ||
          $_GET["ruta"] == "reportes" ||
-          $_GET["ruta"] == "preguntas" ||
+         $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "cambiopass" ||
          $_GET["ruta"] == "msjnuevoacceso" ||
          $_GET["ruta"] == "salir"){

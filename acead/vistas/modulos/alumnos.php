@@ -235,13 +235,15 @@ MODAL AGREGAR ALUMNO
 
             <div class="form-group">
 
-                  <div class="input-group">
+              <div class="input-group">
 
-                    <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                <div class="input-group-addon"><i class="fa fa-calendar"></i>
 
-                    <input type="text" class="form-control input-lg" name="nuevoFechaNac" placeholder="Fecha de Nacimiento" minlength="8" maxlength="10" pattern="[0-9]{10}">
+                </div>
 
-                  </div>
+                <input type="text" class="form-control" name="nuevoFechaNac" placeholder="yyyy/mm/dd" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask>
+
+              </div>
 
             </div>
 
@@ -292,7 +294,7 @@ MODAL AGREGAR ALUMNO
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                <span class="input-group-addon"><i class="fa fa-male"></i></span>
 
                 <select class="form-control input-lg" name="nuevoGenero">
 

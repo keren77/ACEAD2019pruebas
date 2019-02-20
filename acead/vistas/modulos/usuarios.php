@@ -61,7 +61,7 @@
         <tbody>
 
         <?php
-	
+
 	//Keren was here!
 
         $item = null;
@@ -126,7 +126,7 @@
 
                       <button class="btn btn-warning btnEditarUsuario" idUsuario="'.$value["Id_usuario"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
 
-                    
+
 
                     </div>
 
@@ -370,7 +370,7 @@ MODAL AGREGAR USUARIO
 
               <div class="input-group">
 
-                <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                <span class="input-group-addon"><i class="fa fa-male"></i></span>
 
                 <select class="form-control input-lg" name="nuevoGenero">
 

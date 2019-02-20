@@ -39,10 +39,10 @@
 
 			<li>
 
-				<a href="productos">
+				<a href="gestionacademica">
 
-					<i class="fa fa-product-hunt"></i>
-					<span>Productos</span>
+					<i class="fa fa-university"></i>
+					<span>Gestión Académica</span>
 
 				</a>
 
