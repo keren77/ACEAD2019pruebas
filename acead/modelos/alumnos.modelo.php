@@ -61,7 +61,7 @@ class ModeloAlumnos{
     $stmt->bindParam(":genero", $datos["Id_Genero"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
-
+			
 			return "ok";
 
 		}else{

@@ -39,11 +39,26 @@
 
 			<li>
 
+				<a href="productos">
+				<a href="modalidades">
+
+					<i class="fa fa-product-hunt"></i>
+					<span>Productos</span>
+					<i class="fa fa-asterisk"></i>
+					<span>Modalidades</span>
+
+				</a>
+
+			</li>
+
+
+			<li>
+
 				<a href="gestionacademica">
+				<a href="modalidades">
 
 					<i class="fa fa-university"></i>
-					<span>Gestión Académica</span>
-
+					<i class="fa fa-asterisk"></i>
 				</a>
 
 			</li>
