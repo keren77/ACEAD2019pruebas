@@ -39,11 +39,8 @@
 
 			<li>
 
-				<a href="productos">
 				<a href="modalidades">
 
-					<i class="fa fa-product-hunt"></i>
-					<span>Productos</span>
 					<i class="fa fa-asterisk"></i>
 					<span>Modalidades</span>
 
@@ -55,10 +52,8 @@
 			<li>
 
 				<a href="gestionacademica">
-				<a href="modalidades">
 
 					<i class="fa fa-university"></i>
-					<i class="fa fa-asterisk"></i>
 				</a>
 
 			</li>
