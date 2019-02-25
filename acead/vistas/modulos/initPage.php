@@ -1,5 +1,6 @@
 <?php 
-	require_once "../../modelos/config.php";
+	//require_once "../../modelos/config.php";
+	require_once "modelos/config.php";
 ?>
 
 <!DOCTYPE html>

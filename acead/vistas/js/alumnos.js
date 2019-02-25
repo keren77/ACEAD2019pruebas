@@ -4,12 +4,13 @@ EDITAR ALUMNOS
 =============================================*/
 
 $(".tablas").on("click", ".btnEditarAlumno", function(){
-
+        
 	var idAlumno = $(this).attr("idAlumno");
 
 	var datos = new FormData();
+        
 	datos.append("idAlumno", idAlumno);
-
+        
 	$.ajax({
 
 		url:"ajax/alumnos.ajax.php",
@@ -21,7 +22,7 @@ $(".tablas").on("click", ".btnEditarAlumno", function(){
 		dataType: "json",
 		success: function(respuesta){
 
-
+                        alert(respuesta);
 			$("#editarAlumno").val(respuesta["Id_Alumno"]);
 			$("#editarNombre1").val(respuesta["PrimerNombre"]);
 			$("#editarNombre2").val(respuesta["SegundoNombre"]);
@@ -35,7 +36,10 @@ $(".tablas").on("click", ".btnEditarAlumno", function(){
 			$("#editarGenero").val(respuesta["Id_Genero"]);
 
 
-		}
+		},
+                error: function(xhr, status){
+                    alert("ERROR: " + xhr + " >> " + status);
+                }
 
 	});
 

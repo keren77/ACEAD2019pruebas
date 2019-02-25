@@ -1,20 +1,23 @@
 
 var Resp, idus, idpreg, contVeces;
 contVeces = 1;
-$("#alerta1").hide();
+//$("#alerta1").hide();
+$('.main-sidebar').css('display', 'none');
+
+$('.logo').removeAttr('href');
 
 //Este ajax se ejecuta siempre que se cargue la pagina preguntas ya que esta libre
 $.ajax({
     url: "../acead/modelos/usuarios.modelo.php?caso=evaluaresp",
     type:"POST", 
     dataType:"json",
-    success:function(data ){
+    success:function(data){
         $.each(data.data,function(i,item){
             if (item.cantidad>=3){
                 $("#cboPreguntas").attr("disabled", "true");
                 $('#btnAgregar').attr('disabled', "true")
                 $('#btnGuardar').removeAttr('disabled');
-                $('#alerta1').show();
+                //$('#alerta1').show();
             }
         });
     },

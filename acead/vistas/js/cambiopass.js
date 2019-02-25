@@ -1,5 +1,9 @@
 var pass, nuevopass,confpass;
 
+$('.main-sidebar').css('display', 'none');
+
+$('.logo').removeAttr('href');
+
 $("#btnojito1").mousedown(function(){
     $("#passactual").removeAttr("type");
     $("#passactual").attr("type","text");
@@ -63,7 +67,7 @@ $("#btnenviar").click(function(){
                  success:function(data){
                      if(data === 1 || data === '1'){
                          alert('Password agregado exitosamente!!');
-                         window.location.href = "inicio";
+                         window.location.href = "salir";
                      }else{
                          $("#pie1").append(' <div class="alert alert-warning alert-dismissable" id="alerta2"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button><h4><i class="icon fa fa-warning"></i>alerta</h4>El password actual es Incorrecto!</div>');       
                      }
@@ -78,4 +82,3 @@ $("#btnenviar").click(function(){
        
 });
 
-//esta version ya a sido probada sin errores 17/02/2019

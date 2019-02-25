@@ -106,6 +106,7 @@ CUERPO DOCUMENTO
       if($_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "usuarios" ||
          $_GET["ruta"] == "alumnos" ||
+         $_GET["ruta"] == "autoregistro" ||
          $_GET["ruta"] == "gestionacademica" ||
          $_GET["ruta"] == "modalidades" ||
          $_GET["ruta"] == "clientes" ||
@@ -114,6 +115,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "reportes" ||
           $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "cambiopass" ||
+         $_GET["ruta"] == "recupera" ||
          $_GET["ruta"] == "salir"){
 
         include "modulos/".$_GET["ruta"].".php";
@@ -142,7 +144,29 @@ CUERPO DOCUMENTO
 
   }else{
 
-    include "modulos/login.php";
+    //include "modulos/login.php";
+      if(isset($_GET['ruta'])){
+          if($_GET["ruta"] == "inicio" ||
+                $_GET["ruta"] == "usuarios" ||
+                $_GET["ruta"] == "alumnos" ||
+                $_GET["ruta"] == "autoregistro" ||
+                $_GET["ruta"] == "gestionacademica" ||
+                $_GET["ruta"] == "modalidades" ||
+                $_GET["ruta"] == "clientes" ||
+                $_GET["ruta"] == "ventas" ||
+                $_GET["ruta"] == "crear-venta" ||
+                $_GET["ruta"] == "reportes" ||
+                 $_GET["ruta"] == "preguntas" ||
+                $_GET["ruta"] == "cambiopass" ||
+                $_GET["ruta"] == "recupera" ||
+                $_GET["ruta"] == "salir"){
+
+               include "modulos/".$_GET["ruta"].".php";
+
+             }else{
+                 include "modulos/login.php";
+             }
+      }
 
   }
 

@@ -71,13 +71,14 @@ $idu = $_SESSION['id'];
             <div class="box-footer">
                 <button class="btn btn-success" id="btnAgregar">Agregar</button>
                 <button  class="btn btn-primary" id="btnGuardar" disabled="true">Guardar y Avanzar</button> <BR><BR>
+                <!--
                 <div class="alert alert-warning alert-dismissable" id="alerta1" >
                     
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     <h4><i class="icon fa fa-warning"></i>alerta</h4>
                     ya se han contestado las 3 preguntas de seguridad para este usuario!!
                     
-                </div>
+                </div> -->
                 
             </div>
             <!-- /.box-footer-->

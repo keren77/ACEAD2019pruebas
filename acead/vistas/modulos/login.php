@@ -82,8 +82,8 @@
 
   <!-- Recuperar contraseña y auto refistro -->
 
-  <button class="btn btn-link" type="button"><a href="php/recupera.php">¿Olvidaste tu usuario y/o contraseña?</a></button>
-  <button class="btn btn-link" type="button"><a href="php/autoregistro.php">Registrate en el sistema</a></button>
+  <button class="btn btn-link" type="button"><a href="recupera">¿Olvidaste tu usuario y/o contraseña?</a></button>
+  <button class="btn btn-link" type="button"><a href="autoregistro">Registrate en el sistema</a></button>
 
 
       <?php
