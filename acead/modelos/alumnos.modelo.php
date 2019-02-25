@@ -61,7 +61,7 @@ class ModeloAlumnos{
     $stmt->bindParam(":genero", $datos["Id_Genero"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
-			
+
 			return "ok";
 
 		}else{
@@ -81,7 +81,7 @@ class ModeloAlumnos{
 	=============================================*/
 
 	static public function mdlEditarUsuario($tabla, $datos){
-		echo "<script type='text/javascript'>alert('sql script')</script>";
+		//echo "<script type='text/javascript'>alert('sql script')</script>";
 
 
 		$stmt = ConexionBD::Abrir_Conexion()->prepare("UPDATE $tabla SET PrimerNombre = :nombre1,

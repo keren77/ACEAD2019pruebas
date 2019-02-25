@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -80,29 +78,20 @@ CUERPO DOCUMENTO
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
 
   <?php
-
   if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
-
    echo '<div class="wrapper">';
-
     /*=============================================
     CABEZOTE
     =============================================*/
-
     include "modulos/cabezote.php";
-
     /*=============================================
     MENU
     =============================================*/
-
     include "modulos/menu.php";
-
     /*=============================================
     CONTENIDO
     =============================================*/
-
     if(isset($_GET["ruta"])){
-
       if($_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "usuarios" ||
          $_GET["ruta"] == "alumnos" ||
@@ -115,42 +104,29 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "reportes" ||
           $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "cambiopass" ||
+         $_GET["ruta"] == "cambiocontrasena" ||
          $_GET["ruta"] == "recupera" ||
          $_GET["ruta"] == "salir"){
-
         include "modulos/".$_GET["ruta"].".php";
-
       }else{
-
         include "modulos/404.php";
-
       }
-
     }else{
-
       include "modulos/inicio.php";
-
-
-
     }
-
     /*=============================================
     FOOTER
     =============================================*/
-
     include "modulos/footer.php";
-
     echo '</div>';
-
   }else{
-
     //include "modulos/login.php";
       if(isset($_GET['ruta'])){
           if($_GET["ruta"] == "inicio" ||
                 $_GET["ruta"] == "usuarios" ||
                 $_GET["ruta"] == "alumnos" ||
                 $_GET["ruta"] == "autoregistro" ||
-                $_GET["ruta"] == "gestionacademica" ||
+                $_GET["ruta"] == "cambiocontrasena" ||
                 $_GET["ruta"] == "modalidades" ||
                 $_GET["ruta"] == "clientes" ||
                 $_GET["ruta"] == "ventas" ||
@@ -160,16 +136,12 @@ CUERPO DOCUMENTO
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "recupera" ||
                 $_GET["ruta"] == "salir"){
-
                include "modulos/".$_GET["ruta"].".php";
-
              }else{
                  include "modulos/login.php";
              }
       }
-
   }
-
   ?>
 
 

@@ -1,26 +1,20 @@
 <?php
-
   $row= ModeloUsuarios::mdlObtenerIntentos();
-
   $intento=1;
   $intento=$row['valor'];
-
   if(!isset($_GET['error'])){
       $error=0;
   }else{
     $error=$_GET['error'];
   }
-
   //Verificar que la variable exista y este iniciada
   if(!isset($_SESSION['intentos'])){
   $_SESSION['intentos'] = 1;
   }
-
   $r=false;
   if(isset($_SESSION['intentos'])&&$_SESSION['intentos']==$intento){
     $r=true;
   }
-
 ?>
 
 <div id="back"></div>
@@ -65,10 +59,8 @@
       </div>
 
       <?php if($r){
-
         $res = new ControladorUsuarios();
         $res -> ctrBloquearUsuario();
-
         ?>
 
       <br><div class="alert alert-danger">Usuario Bloqueado, ha sobrepasado los intentos permitidos. Contacte a su administrador.</div>
@@ -82,17 +74,13 @@
 
   <!-- Recuperar contraseña y auto refistro -->
 
-  <button class="btn btn-link" type="button"><a href="recupera">¿Olvidaste tu usuario y/o contraseña?</a></button>
+  <button class="btn btn-link" type="button"><a href="cambiocontrasena">¿Olvidaste tu usuario y/o contraseña?</a></button>
   <button class="btn btn-link" type="button"><a href="autoregistro">Registrate en el sistema</a></button>
 
 
       <?php
-
-
         $login = new ControladorUsuarios();
         $login -> ctrIngresoUsuario();
-
-
       ?>
 
     </form>
