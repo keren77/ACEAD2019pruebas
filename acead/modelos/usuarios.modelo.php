@@ -318,6 +318,13 @@ switch ($funcion){
     case 'cambiopass':
         cambiopass();
         break;
+    case 'metcorreo':
+        metodo_porcorreo();
+        break;
+    case 'metpreguntas':
+        metodo_porpreguntas();
+        break;
+       
 }
       
 
@@ -412,3 +419,14 @@ function Agregarespuesta() {
         //echo $result[0]['Contrasena'];
     }
     
+    function metodo_porcorreo(){
+         $usuario = filter_input(INPUT_POST, 'usuario');
+         $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+         $stmt->execute();
+    }
+    
+    function metodo_porpreguntas(){
+        $usuario = filter_input(INPUT_POST, 'usuario');
+        $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+        $stmt->execute();
+    }
