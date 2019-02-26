@@ -140,8 +140,10 @@ CUERPO DOCUMENTO
              }else{
                  include "modulos/login.php";
              }
-      }
-  }
+      } else{
+           include "modulos/login.php";
+      }  
+  } 
   ?>
 
 

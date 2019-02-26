@@ -1,5 +1,5 @@
 <?php
-include '../PHPMailer/PHPMailerAutoload.php';
+include 'PHPMailer/PHPMailerAutoload.php';
 
 class ControladorPass{
 
