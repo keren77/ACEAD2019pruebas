@@ -98,6 +98,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "autoregistro" ||
          $_GET["ruta"] == "gestionacademica" ||
          $_GET["ruta"] == "modalidades" ||
+         $_GET["ruta"] == "seccion" ||
          $_GET["ruta"] == "clientes" ||
          $_GET["ruta"] == "ventas" ||
          $_GET["ruta"] == "crear-venta" ||

@@ -48,6 +48,16 @@
 
 			</li>
 
+			<li>
+
+				<a href="seccion">
+
+					<i class="fa fa-tasks"></i>
+					<span>Secciones</span>
+
+				</a>
+
+			</li>
 
 			<li>
 

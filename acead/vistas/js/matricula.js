@@ -25,7 +25,7 @@ $(".tablas").on("click", ".btnMatriculaAlumno", function(){
 
 			}
 
-		}
+		
 
 	});
 
