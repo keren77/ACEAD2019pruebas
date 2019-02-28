@@ -75,7 +75,7 @@ class ControladorPass{
     	$email_subject = "Recuperacion de contrasena: ";
 
     	$email_body= "<p>Hola <b>".$valor."</b> Su Link de recuperacion de contraseña es el siguiente:</p>
-    							  </p> http://http://localhost/acead/index.php?ruta=cambiocontrasena-correo&user=".$valor."</p>";
+    							  </p> http://localhost/acead/index.php?ruta=cambiocontrasena-correo&user=".$valor."</p>";
 
 
     $mail=new PHPMailer();
