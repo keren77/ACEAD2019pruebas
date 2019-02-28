@@ -103,7 +103,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "ventas" ||
          $_GET["ruta"] == "crear-venta" ||
          $_GET["ruta"] == "reportes" ||
-          $_GET["ruta"] == "preguntas" ||
+         $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "cambiopass" ||
          $_GET["ruta"] == "cambiocontrasena" ||
          $_GET["ruta"] == "recupera" ||
@@ -128,16 +128,14 @@ CUERPO DOCUMENTO
                 $_GET["ruta"] == "alumnos" ||
                 $_GET["ruta"] == "autoregistro" ||
                 $_GET["ruta"] == "cambiocontrasena" ||
-                $_GET["ruta"] == "modalidades" ||
-                $_GET["ruta"] == "clientes" ||
+                $_GET["ruta"] == "cambiopass" ||
+                $_GET["ruta"] == "cambiocontrasena-correo" ||
                 $_GET["ruta"] == "ventas" ||
                 $_GET["ruta"] == "crear-venta" ||
                 $_GET["ruta"] == "reportes" ||
                  $_GET["ruta"] == "preguntas" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "recupera" ||
-                $_GET["ruta"] == "metodorecup" ||
-                $_GET["ruta"] == "contestapreg" ||
                 $_GET["ruta"] == "salir"){
                include "modulos/".$_GET["ruta"].".php";
              }else{
@@ -145,8 +143,8 @@ CUERPO DOCUMENTO
              }
       } else{
            include "modulos/login.php";
-      }  
-  } 
+      }
+  }
   ?>
 
 

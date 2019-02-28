@@ -113,7 +113,7 @@ class ControladorAlumnos{
 
 
 		if(isset($_POST["editarAlumno"])){
-echo "<script type='text/javascript'>alert('funcion')</script>";
+//echo "<script type='text/javascript'>alert('funcion')</script>";
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
 

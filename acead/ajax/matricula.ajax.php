@@ -1,44 +1,43 @@
 <?php
 
-require_once "../controladores/alumnos.controlador.php";
-require_once "../modelos/alumnos.modelo.php";
+require_once "../controladores/matricula.controlador.php";
+require_once "../modelos/matricula.modelo.php";
 
-class ajaxMatriculaAlumno{
 
-	/*=============================================
-	EDITAR USUARIO
-	=============================================*/
 
-	public $idAlumno;
+if (isset($_GET["id"])) {
 
-	public function ajaxMatriculaAlumno(){
+    $editar = new AjaxMatricula();
+    $editar->id = $_GET["id"];
+    $editar->ajaxOrientaciones();
+}
 
-		$item = "Id_Alumno";
-		$valor = $this->idAlumno;
 
-		$respuesta = ControladorAlumnos::ctrMostrarAlumnos($item, $valor);
+class AjaxMatricula{
 
-		echo json_encode($respuesta);
+ public $id;
 
-	}
+ public function ajaxOrientaciones(){
 
+	 $tabla = "tbl_orientacion";
+	 $valor = $this->id;
+
+	 $respuesta = ModeloMatricula::mdlCargarOrientacion($tabla, $valor);
+
+		$con = array();
+ 		$n=0;
+
+ 	while($row = $respuesta->fetch_row()){
+ 		$con[$n]['Id_Orientacion']= $row[0];
+ 		$con[$n]['Orientacion']=$row[1];
+ 		$n++;
+
+ 	}
+
+ 	echo json_encode($con, JSON_UNESCAPED_UNICODE);
+
+ }
 
 
 
 }
-
-
-
-
-/*=============================================
-EDITAR USUARIO
-=============================================*/
-if(isset($_POST["idAlumno"])){
-
-	$editar = new ajaxMatriculaAlumno();
-	$editar -> idAlumno = $_POST["idAlumno"];
-	$editar -> ajaxMatriculaAlumno();
-
-}
-
-/

@@ -81,6 +81,21 @@ class ModeloMatricula{
 
     }
 
+	/*=============================================
+	 CARGAR ORIENTACIONES
+	 =============================================*/
+
+	 static public function mdlCargarOrientacion($tabla, $valor){
+
+		 $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT * FROM $tabla WHERE Id_modalidad = $valor");
+		 $stmt -> execute();
+
+		 return $stmt -> fetchall();
+
+		 }
+
+
+
 
 
 }

@@ -47,6 +47,21 @@ MODAL MATRICULA ALUMNO
 
                </div>
 
+               <!-- ENTRADA PARA EL NOMBRE -->
+
+                <div class="form-group">
+
+                 <div class="input-group">
+
+                   <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
+
+                   <input type="text" class="form-control input-lg" id="nombreAlumno" name="nombreAlumno" readonly value="">
+
+
+                 </div>
+
+                </div>
+
 
 
 
@@ -95,6 +110,11 @@ MODAL MATRICULA ALUMNO
                         <div class="row">
                           <div class="col-lg-4 col-sm-4 mb-4">
                             <select class="form-control" id="adicionar1" size="9"></select>
+
+
+
+
+                            
                           </div>
 
                           <div class="col-xl-4 col-sm-4 mb-4">
@@ -136,6 +156,8 @@ MODAL MATRICULA ALUMNO
 
         <?php
 
+        $editarAlumno = new ControladorAlumnos();
+        $editarAlumno -> ctrEditarAlumno();
 
 
         ?>

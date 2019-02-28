@@ -74,7 +74,7 @@
 
   <!-- Recuperar contraseña y auto refistro -->
 
-  <button class="btn btn-link" type="button"><a href="metodorecup">¿Olvidaste tu usuario y/o contraseña?</a></button>
+  <button class="btn btn-link" type="button"><a href="cambiocontrasena">¿Olvidaste tu usuario y/o contraseña?</a></button>
   <button class="btn btn-link" type="button"><a href="autoregistro">Registrate en el sistema</a></button>
 
 

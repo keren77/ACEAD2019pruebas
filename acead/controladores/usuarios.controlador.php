@@ -55,84 +55,80 @@ class ControladorUsuarios{
 						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 
 						if($ultimoLogin == "ok"){
-                                                            //aaQUI VA EL CODIGO PARA IR A LAS PREGUNTAS DE PRIMER ACCESO                                                    
-                                                    //$valor3 = "PrimerIngreso";
-                                                    //$revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
-                                                    
+                                                            //aaQUI VA EL CODIGO PARA IR A LAS PREGUNTAS DE PRIMER ACCESO
+                                                    $valor3 = "PrimerIngreso";
+                                                    $revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
+
                                                     /* Aquí hace el llamado de la funcion que inserta datos a la Bitacora
                                                      * Este llamado debe hacerse asi, siempre que se necesite guardar X acción en la bitacora
                                                      * Solo se debe ubicar en los lugares donde se realiza X acción que debe ser registrada en X objeto del sistema
                                                      * Como en formularios, pantallas, tablas, etc.
                                                      */
-                                                    
+
                                                     ConexionBD::Inserta_bitacora($fechaActual, 'Ingreso al sistema', 'Accediendo por el Login del sistema', $_SESSION['id'], 1);
-                                                    
-                                                    echo '<script>
 
-                                                                window.location = "inicio";
 
-                                                        </script>';
-                                                }
+                                                    if($revisaPacceso == true){
+                                                        echo '<script> window.location = "preguntas"; </script>';
+                                                    }else{
+                                                        echo '<script>
+
+								window.location = "inicio";
+
+							</script>';
+                                                    }
+
+
+						}
 
 						break;
 
 
 						case '2':
-                                                    echo '<br><div class="alert alert-danger">El usuario no está activo, contacte a su administrador.</div>';
+						echo '<br><div class="alert alert-danger">El usuario no está activo, contacte a su administrador.</div>';
 
-                                                    break;
+						break;
 
 
 						case '1':
 
-                                                    $_SESSION["iniciarSesion"] = "ok";
-                                                    $_SESSION["id"] = $respuesta["Id_usuario"];
-                                                    $_SESSION["usuario"] = $respuesta["Id_usuario"];
-                                                    $_SESSION["nombre"] = $respuesta["PrimerNombre"];
-                                                    $_SESSION["perfil"] = $respuesta["Id_Rol"];
+						$_SESSION["iniciarSesion"] = "ok";
+						$_SESSION["id"] = $respuesta["Id_usuario"];
+						$_SESSION["usuario"] = $respuesta["Id_usuario"];
+						$_SESSION["nombre"] = $respuesta["PrimerNombre"];
+						$_SESSION["perfil"] = $respuesta["Id_Rol"];
 
 
-                                                    /*=============================================
-                                                    REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
-                                                    =============================================*/
+						/*=============================================
+						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
+						=============================================*/
 
-                                                    date_default_timezone_set('America/Tegucigalpa');
+						date_default_timezone_set('America/Tegucigalpa');
 
-                                                    $fecha = date('Y-m-d');
-                                                    $hora = date('H:i:s');
+						$fecha = date('Y-m-d');
+						$hora = date('H:i:s');
 
-                                                    $fechaActual = $fecha.' '.$hora;
+						$fechaActual = $fecha.' '.$hora;
 
-                                                    $item1 = "FechaUltimaConex";
-                                                    $valor1 = $fechaActual;
+						$item1 = "FechaUltimaConex";
+						$valor1 = $fechaActual;
 
-                                                    $item2 = "Id_usuario";
-                                                    $valor2 = $respuesta["Id_usuario"];
+						$item2 = "Id_usuario";
+						$valor2 = $respuesta["Id_usuario"];
 
-                                                    $ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 
-                                                    if($ultimoLogin == "ok"){
-                                                        
-                                                        //$valor3 = "PrimerIngreso";
-                                                        $revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
-                                                        
-                                                        ConexionBD::Inserta_bitacora($fechaActual, 'Ingreso al sistema', 'Contestando las preguntas de seguridad para primer acceso!', $_SESSION['id'], 2);
+						if($ultimoLogin == "ok"){
 
-                                                        if($revisaPacceso === true){
-                                                            echo '<script> window.location = "preguntas"; </script>';
-                                                        }else{
-                                                            //session_destroy();
-                                                            echo '<script>
+							echo '<script>
 
-                                                                    window.location = "inicio";
+								window.location = "categorias";
 
-                                                            </script>'; 
-                                                          
-                                                        }
+							</script>';
 
-                                                    }
+						}
 
-                                                    break;
+						break;
 
 					}
 
@@ -141,7 +137,7 @@ class ControladorUsuarios{
 
 					$_SESSION['intentos']+=1;
 
-					echo '<br><div class="alert alert-danger">Error al ingresar, Usuario y/o Contraseña Invalidos = '.$_SESSION['intentos'].'</div>';
+					echo '<br><div class="alert alert-danger">Error al ingresar, Usuario y/o Contraseña Invalidos</div>';
 
 
 				}
@@ -183,75 +179,10 @@ class ControladorUsuarios{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevoNombre1"])){
 
-			   	/*=============================================
-				VALIDAR IMAGEN
-				=============================================*/
-/*
-				$ruta = "";
 
-				if(isset($_FILES["nuevaFoto"]["tmp_name"])){
-
-					list($ancho, $alto) = getimagesize($_FILES["nuevaFoto"]["tmp_name"]);
-
-					$nuevoAncho = 500;
-					$nuevoAlto = 500;
-*/
-					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
-/*
-					$directorio = "vistas/img/usuarios/".$_POST["nuevoUsuario"];
-
-					mkdir($directorio, 0755);
-*/
-					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
-/*
-					if($_FILES["nuevaFoto"]["type"] == "image/jpeg"){
-*/
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-/*
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".jpg";
-
-						$origen = imagecreatefromjpeg($_FILES["nuevaFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
-
-					}
-
-					if($_FILES["nuevaFoto"]["type"] == "image/png"){
-*/
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-/*
-						$aleatorio = mt_rand(100,999);
-
-						$ruta = "vistas/img/usuarios/".$_POST["nuevoUsuario"]."/".$aleatorio.".png";
-
-						$origen = imagecreatefrompng($_FILES["nuevaFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino, $ruta);
-
-					}
-
-				}
-*/
 				$tabla = "tbl_usuarios";
-				$nuevo = 1;
+				$nuevo = 3;
+				$primeringreso = 0;
 				$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);
 
 				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
@@ -267,7 +198,8 @@ class ControladorUsuarios{
 										 "Id_EstadoCivil" => $_POST["nuevoEstCivil"],
 										 "Id_Genero" => $_POST["nuevoGenero"],
 										 "Id_Rol" => $_POST["nuevoRol"],
-									 	 "Id_Estado" => $nuevo);
+										 "Id_Estado" => $nuevo,
+									   "PrimerIngreso" => $primeringreso);
 
 
 				$respuesta = ModeloUsuarios::mdlIngresarUsuario($tabla, $datos);
@@ -353,106 +285,10 @@ class ControladorUsuarios{
 
 	static public function ctrEditarUsuario(){
 
+
 		if(isset($_POST["editarUsuario"])){
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
-
-				/*=============================================
-				VALIDAR IMAGEN
-				=============================================*/
-
-
-	/*			$ruta = $_POST["fotoActual"];
-
-
-				if(isset($_FILES["editarFoto"]["tmp_name"]) && !empty($_FILES["editarFoto"]["tmp_name"])){
-
-					list($ancho, $alto) = getimagesize($_FILES["editarFoto"]["tmp_name"]);
-
-					$nuevoAncho = 500;
-
-					$nuevoAlto = 500;     */
-
-
-					/*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-					=============================================*/
-
-			/*		$directorio = "vistas/img/usuarios/".$_POST["editarUsuario"];   */
-
-
-					/*=============================================
-					PRIMERO PREGUNTAMOS SI EXISTE OTRA IMAGEN EN LA BD
-					=============================================*/
-
-
-			/*		if(!empty($_POST["fotoActual"])){
-
-
-						unlink($_POST["fotoActual"]);
-
-					}else{
-
-						mkdir($directorio, 0755);
-
-					}
-
-*/
-
-					/*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
-
-
-/*					if($_FILES["editarFoto"]["type"] == "image/jpeg"){    */
-
-
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-
-
-	/*					$aleatorio = mt_rand(100,999);
-
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".jpg";
-
-						$origen = imagecreatefromjpeg($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagejpeg($destino, $ruta);
-
-					}
-
-					if($_FILES["editarFoto"]["type"] == "image/png"){    */
-
-
-						/*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
-
-
-/*						$aleatorio = mt_rand(100,999);
-
-
-						$ruta = "vistas/img/usuarios/".$_POST["editarUsuario"]."/".$aleatorio.".png";
-
-						$origen = imagecreatefrompng($_FILES["editarFoto"]["tmp_name"]);
-
-						$destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-
-						imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-
-						imagepng($destino, $ruta);
-
-					}
-
-				}
-
-*/
 
 				$tabla = "tbl_usuarios";
 

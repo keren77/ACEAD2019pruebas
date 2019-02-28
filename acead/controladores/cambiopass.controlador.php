@@ -1,5 +1,6 @@
 <?php
 include 'PHPMailer/PHPMailerAutoload.php';
+//include '../PHPMailer/PHPMailerAutoload.php';
 
 class ControladorPass{
 
@@ -45,10 +46,7 @@ class ControladorPass{
 
   static public function ctrEMAIL(){
 
-
-      //require_once "../PHPMailer/PHPMailerAutoload.php";
-
-      if(isset($_POST["cambioUsuario"])){
+    if(isset($_POST["cambioUsuario"])){
 
         if(preg_match('/^[A-Za-z0-9]+$/', $_POST["cambioUsuario"])){
 
@@ -63,9 +61,10 @@ class ControladorPass{
 
           $respuesta = ModeloPass::mdlObtenerCorreo($tabla, $item, $bus, $valor);
 
-
-    	 	$code = $respuesta["code"];
+        //$code = $respuesta["code"];
     		$correo = $respuesta["CorreoElectronico"];
+
+        //echo $correo;
 
 
 
@@ -75,8 +74,8 @@ class ControladorPass{
 
     	$email_subject = "Recuperacion de contrasena: ";
 
-    	$email_body= "<p>Hola <b>".$valor."</b> Su Link de recuperacion de contrasena es el siguiente:</p>
-    							</p> http://localhost/acead/nuevacontrsena.php?user=".$valor."&code=".$code."</p>";
+    	$email_body= "<p>Hola <b>".$valor."</b> Su Link de recuperacion de contraseña es el siguiente:</p>
+    							  </p> http://http://localhost/acead/index.php?ruta=cambiocontrasena-correo&user=".$valor."</p>";
 
 
     $mail=new PHPMailer();
@@ -107,26 +106,72 @@ class ControladorPass{
     $mail->MsgHTML($email_body);
 
 
-    if (!$mail->send()) {
-        echo "Mailer Error: " . $mail->ErrorInfo;
+    if ($mail->send()) {
+        //echo "Mailer Error: " . $mail->ErrorInfo;
+        echo '<br><div class="alert alert-warning">Correo Enviado.</div>';
     } else {
-        header("Location: ../index.php");
-    		$_SESSION["recuperar"]=1;
-    		$_SESSION["ERRORRECUPERAR"]=2;
+        //header("Location: ../index.php");
+
+        //echo "<script type='text/javascript'>alert('AQUI')</script>";
+    		/*$_SESSION["recuperar"]=1;
+    		$_SESSION["ERRORRECUPERAR"]=2;*/
     }
 
     		////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     	}
     	else{
+        //echo "<script type='text/javascript'>alert('POSAQUI')</script>";
+        /*
     		header("Location: ../index.php?ruta=Recuperar");
-    		$_SESSION["ERRORRECUPERAR"]=1;
+    		$_SESSION["ERRORRECUPERAR"]=1;  */
     	}
 
 
     }
   }
 
+
+  /*=============================================
+  CAMBIAR CONTRASEÑA
+  =============================================*/
+
+  static public function ctrCambioContraseña(){
+
+    if(isset($_GET['user'])){
+
+      if(isset($_POST["cambiopassword"])){
+
+          if($_POST["cambiopassword"] == $_POST["confirmapass"]){
+            $usuario = $_GET['user'];
+
+            $encriptar = password_hash($_POST["cambiopassword"], PASSWORD_DEFAULT);
+
+            $tabla = "tbl_usuarios";
+
+
+            $datos = array("Usuario" => $usuario,
+                          "Contrasena" => $encriptar);
+
+            $respuesta = ModeloPass::mdlCambioContrasena($tabla, $datos);
+
+            if($respuesta == "ok"){
+
+              echo '<br><div class="alert alert-success">Contraseña Modificada.</div>';
+
+            }
+
+          }else{
+
+          	echo '<br><div class="alert alert-danger">Las Contraseñas no coinciden.</div>';
+
+          }
+
+    }
+
+  }
+
+  }
 
 
 

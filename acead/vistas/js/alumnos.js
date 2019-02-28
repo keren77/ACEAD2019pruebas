@@ -4,13 +4,13 @@ EDITAR ALUMNOS
 =============================================*/
 
 $(".tablas").on("click", ".btnEditarAlumno", function(){
-        
+
 	var idAlumno = $(this).attr("idAlumno");
 
 	var datos = new FormData();
-        
+
 	datos.append("idAlumno", idAlumno);
-        
+
 	$.ajax({
 
 		url:"ajax/alumnos.ajax.php",
@@ -22,7 +22,7 @@ $(".tablas").on("click", ".btnEditarAlumno", function(){
 		dataType: "json",
 		success: function(respuesta){
 
-                        alert(respuesta);
+                        //alert(respuesta);
 			$("#editarAlumno").val(respuesta["Id_Alumno"]);
 			$("#editarNombre1").val(respuesta["PrimerNombre"]);
 			$("#editarNombre2").val(respuesta["SegundoNombre"]);
@@ -121,28 +121,32 @@ MATRICULA ALUMNO
 $(".tablas").on("click", ".btnMatriculaAlumno", function(){
 
 
-	var idAlumno = $(this).attr("idAlumno");
+ var idAlumno = $(this).attr("idAlumno");
 
-	var datos = new FormData();
-	datos.append("idAlumno", idAlumno);
+ var datos = new FormData();
 
-	$.ajax({
+  datos.append("idAlumno", idAlumno);
 
-		url:"ajax/matricula.ajax.php",
-		method: "POST",
-		data: datos,
-		cache: false,
-		contentType: false,
-		processData: false,
-		dataType: "json",
-		success: function(respuesta){
+  $.ajax({
 
-			$("#IdAlumno").val(respuesta["Id_Alumno"]);
+    url:"ajax/alumnos.ajax.php",
+    method: "POST",
+    data: datos,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success: function(respuesta){
+
+                        //alert(respuesta);
+      $("#IdAlumno").val(respuesta["Id_Alumno"]);
+      $("#nombreAlumno").val(respuesta["PrimerNombre"]);
 
 
+  },
+                error: function(xhr, status){
+                    alert("ERROR: " + xhr + " >> " + status);
+              }
 
-			}
-
-	});
+  });
 
 })
