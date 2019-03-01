@@ -311,6 +311,24 @@ switch ($funcion){
     case 'cambiopass':
         cambiopass();
         break;
+    case 'metcorreo':
+        metodo_porcorreo();
+        break;
+    case 'metpreguntas':
+        metodo_porpreguntas();
+        break;
+    case 'verifuser':
+        metodo_verifuser();
+        break;
+    case 'cargapreguntas':
+        metodo_cargapreguntas();
+        break;
+    case 'metcorreo':
+        metodo_porcorreo();
+        break;
+    case 'metpreguntas':
+        metodo_porpreguntas();
+        break;
 }
 
 
@@ -402,3 +420,66 @@ function Agregarespuesta() {
 
         //echo $result[0]['Contrasena'];
     }
+    
+    function metodo_porcorreo(){
+         $usuario = filter_input(INPUT_POST, 'usuario');
+         $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+         $stmt->execute();
+    }
+    
+    function metodo_porpreguntas(){
+        $usuario = filter_input(INPUT_POST, 'usuario');
+        $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+        $stmt->execute();
+    }
+    
+    function metodo_verifuser(){
+        $usuario = filter_input(INPUT_POST, 'usuario');
+        
+        $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+        $stmt->execute();
+        
+        $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+        
+        if(isset($result)){
+            echo json_encode($result);
+        }else{
+            echo '0';
+        }
+    }
+    
+    function metodo_cargapreguntas(){
+        $uname = filter_input(INPUT_GET, 'un');
+        
+        $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT TU.Id_usuario, TU.Usuario, TU.correoElectronico, TU.contrasena FROM tbl_Usuarios TU WHERE Usuario = '".$uname."';");
+        $stmt->execute();
+        
+        $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+        
+        //Este es el ID del usuario del que se intenta cambiar el password
+        //echo json_encode($result[0]['Id_usuario']);
+        $idU = $result[0]['Id_usuario'];
+        
+        $stmt2 = ConexionBD::Abrir_Conexion()->prepare("select tpu.id_pregunta, tp.pregunta, tpu.respuesta, tpu.id_usuario from tbl_preguntasusuario tpu inner join tbl_preguntas tp on tpu.id_pregunta = tp.id_pregunta where tpu.id_usuario =".$idU.";");
+        $stmt2->execute();
+        $result2 = $stmt2->fetchAll(PDO::FETCH_BOTH);
+        
+        echo json_encode($result2);
+        /*
+        foreach($result as $fila){
+            echo '<option value="'.$fila["Id_Pregunta"].'">'.$fila["Pregunta"].'</option>';
+        }*/
+    }
+    /*
+    function metodo_porcorreo(){
+         $usuario = filter_input(INPUT_POST, 'usuario');
+         $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+         $stmt->execute();
+    }
+    
+    function metodo_porpreguntas(){
+        $usuario = filter_input(INPUT_POST, 'usuario');
+        $stmt= ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='".$usuario."';");
+        $stmt->execute();
+    }*/
+

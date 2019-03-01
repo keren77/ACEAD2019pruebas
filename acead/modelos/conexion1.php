@@ -20,6 +20,8 @@
       private $usuario = bd_u;
       private $password = bd_p;
       private $conexion;
+      
+      private $uname;
 
       //Metodo para abrir la conexion
       public function Abrir_Conexion(){
@@ -49,6 +51,15 @@
           $f = $hoy['year']."-".$hoy['mon']."-".$hoy['mday'].' '.$hoy['hours'].':'.$hoy['minutes'].':'.$hoy['seconds'];
           $cons = "CALL sp_addbitacora('".$f."','".$a."','".$d."',".$iu.",".$io.");";
           $resp = $this->getCONEXION()->query($cons);
+      }
+      
+      //SET-GET para el usuario que trata de recuperar su contraseña
+      public function set_usertemp($un){
+          $this->uname = $un;
+      }
+      
+      public function get_usertemp(){
+          return $this->uname;
       }
 
   }
