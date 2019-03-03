@@ -2,10 +2,10 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 27-02-2019 a las 22:48:06
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 5.6.38
+-- Host: 127.0.0.1
+-- Generation Time: Mar 03, 2019 at 09:05 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,12 +19,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `academiacead`
+-- Database: `academiacead`
 --
 
 DELIMITER $$
 --
--- Procedimientos
+-- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_addbitacora` (IN `fecha_accion` DATETIME, IN `accn` VARCHAR(20), IN `descrip` VARCHAR(100), IN `id_usr` INT, IN `id_obj` INT)  begin
   insert into tbl_Bitacora(Fecha,Accion, Descripcion, Id_usuario, Id_Objeto)
@@ -51,14 +51,14 @@ DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para posibles er
    SET vcTempMensajeError := 'Al insertar el usuario';
 
 INSERT INTO tbl_usuarios (Usuario, Contrasena, PrimerNombre, SegundoNombre,
- PrimerApellido, SegundoApellido, Telefono, Cedula,
+ PrimerApellido, SegundoApellido, Telefono, Cedula,PrimerIngreso,
  CorreoElectronico, Id_Departamento, Id_EstadoCivil, Id_Genero,
- Id_Estado, FechaCreacion) 
+ Id_Estado, Id_Rol, FechaCreacion) 
  
  VALUES (pcUsuario, pcContrasena, pcPrimerNombre, pcSegundoNombre,
- pcPrimerApellido, pcSegundoApellido, pcTelefono, pcCedula,
+ pcPrimerApellido, pcSegundoApellido, pcTelefono, pcCedula,0,
  pcCorreoElectronico, pcId_Departamento, pcId_EstadoCivil, pcId_Genero,
- 1, NOW());
+ 1, 5, NOW());
 
 END$$
 
@@ -133,7 +133,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_alumnos`
+-- Table structure for table `tbl_alumnos`
 --
 
 CREATE TABLE `tbl_alumnos` (
@@ -150,24 +150,10 @@ CREATE TABLE `tbl_alumnos` (
   `Id_estadocivil` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_alumnos`
---
-
-INSERT INTO `tbl_alumnos` (`Id_Alumno`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `FechaNacimiento`, `Cedula`, `Telefono`, `FechaIngreso`, `Id_genero`, `Id_estadocivil`) VALUES
-(1, 'ANA', 'MARIA', 'CRUZ', 'PAZ', '1976-10-10', '1008196704567', '22789044', '2018-10-10', 1, 1),
-(2, 'Juan', 'PABLO', 'PINEDA', 'PONCE', '1978-12-31', '107197809360', '22780041', '2018-10-10', 2, 2),
-(3, 'ROSA', 'RITA', 'MEDRANO', 'REINA', '2010-04-03', '801201008754', '22345678', '2018-10-17', 1, 1),
-(4, 'LIA', 'ISA', 'RIVERA', ' ', '2007-03-03', '807201708653', '22345632', '2018-10-17', 1, 1),
-(5, 'LUNA', 'BELLA', 'CHECK', 'PAZ', '1996-03-03', '807199608653', '22348902', '2018-10-17', 1, 2),
-(6, 'NICOLE', '', 'VARELA', '', '0000-00-00', '801000000000', '11111111', '0000-00-00', 2, 1),
-(7, 'NICOLE', '', 'VARELA', '', '0000-00-00', '801000000000', '11111111', '0000-00-00', 2, 1),
-(8, 'LUIS', 'FERNANDO', 'ORTIZ', 'LOPEZ', '0000-00-00', '801199547856', '22213369', '0000-00-00', 2, 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_asistencia`
+-- Table structure for table `tbl_asistencia`
 --
 
 CREATE TABLE `tbl_asistencia` (
@@ -178,17 +164,10 @@ CREATE TABLE `tbl_asistencia` (
   `Id_Empleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_asistencia`
---
-
-INSERT INTO `tbl_asistencia` (`Id_asistencia`, `Asistencia`, `Fecha`, `Id_Clase`, `Id_Empleado`) VALUES
-(1, '1', '2018-10-17', 1, 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_bitacora`
+-- Table structure for table `tbl_bitacora`
 --
 
 CREATE TABLE `tbl_bitacora` (
@@ -200,34 +179,10 @@ CREATE TABLE `tbl_bitacora` (
   `Id_Objeto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_bitacora`
---
-
-INSERT INTO `tbl_bitacora` (`Id_Bitacora`, `Fecha`, `Accion`, `Descripcion`, `Id_usuario`, `Id_Objeto`) VALUES
-(2, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 19, 1),
-(3, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 19, 1),
-(4, '2018-12-01', 'Salida', 'Cerrando la sesion en el sistema', 1, 7),
-(5, '2018-12-01', 'insercion', 'se a insertado un nuevo usuario', 1, 4),
-(6, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema por primera vez', 21, 1),
-(7, '2018-12-01', 'Salida', 'Cerrando la sesion en el sistema', 1, 7),
-(8, '2018-12-01', 'insercion', 'se a insertado un nuevo usuario', 1, 4),
-(9, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 22, 1),
-(10, '2018-12-01', 'Salida', 'Cerrando la sesion en el sistema', 1, 7),
-(11, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 22, 1),
-(12, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 22, 1),
-(13, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 22, 1),
-(14, '2018-12-01', 'insercion', 'se a insertado un nuevo usuario', 1, 4),
-(15, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema por primera vez', 23, 1),
-(16, '2018-12-01', 'Acceso al sistema', 'Accediendo al sistema', 1, 1),
-(17, '2019-02-27', 'Ingreso al sistema', 'Accediendo por el Login del sistema', 1, 1),
-(18, '2019-02-27', 'Ingreso al sistema', 'Accediendo por el Login del sistema', 1, 1),
-(19, '2019-02-27', 'Ingreso al sistema', 'Accediendo por el Login del sistema', 1, 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_calificaciones`
+-- Table structure for table `tbl_calificaciones`
 --
 
 CREATE TABLE `tbl_calificaciones` (
@@ -242,7 +197,7 @@ CREATE TABLE `tbl_calificaciones` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_clases`
+-- Table structure for table `tbl_clases`
 --
 
 CREATE TABLE `tbl_clases` (
@@ -253,7 +208,7 @@ CREATE TABLE `tbl_clases` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_clases`
+-- Dumping data for table `tbl_clases`
 --
 
 INSERT INTO `tbl_clases` (`Id_Clase`, `DescripClase`, `Duracion`, `Id_orientacion`) VALUES
@@ -553,7 +508,7 @@ INSERT INTO `tbl_clases` (`Id_Clase`, `DescripClase`, `Duracion`, `Id_orientacio
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_cobromatricula`
+-- Table structure for table `tbl_cobromatricula`
 --
 
 CREATE TABLE `tbl_cobromatricula` (
@@ -564,7 +519,7 @@ CREATE TABLE `tbl_cobromatricula` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_contrespon`
+-- Table structure for table `tbl_contrespon`
 --
 
 CREATE TABLE `tbl_contrespon` (
@@ -579,7 +534,7 @@ CREATE TABLE `tbl_contrespon` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_cuentacorriente`
+-- Table structure for table `tbl_cuentacorriente`
 --
 
 CREATE TABLE `tbl_cuentacorriente` (
@@ -597,7 +552,7 @@ CREATE TABLE `tbl_cuentacorriente` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_departamentos`
+-- Table structure for table `tbl_departamentos`
 --
 
 CREATE TABLE `tbl_departamentos` (
@@ -606,7 +561,7 @@ CREATE TABLE `tbl_departamentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_departamentos`
+-- Dumping data for table `tbl_departamentos`
 --
 
 INSERT INTO `tbl_departamentos` (`Id_Departamentos`, `DescripDepart`) VALUES
@@ -616,7 +571,7 @@ INSERT INTO `tbl_departamentos` (`Id_Departamentos`, `DescripDepart`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_descuento`
+-- Table structure for table `tbl_descuento`
 --
 
 CREATE TABLE `tbl_descuento` (
@@ -627,7 +582,7 @@ CREATE TABLE `tbl_descuento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_descuento`
+-- Dumping data for table `tbl_descuento`
 --
 
 INSERT INTO `tbl_descuento` (`Id_Descuento`, `Descuento`, `DescripDesc`, `ValorDesc`) VALUES
@@ -637,7 +592,7 @@ INSERT INTO `tbl_descuento` (`Id_Descuento`, `Descuento`, `DescripDesc`, `ValorD
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_direcciones`
+-- Table structure for table `tbl_direcciones`
 --
 
 CREATE TABLE `tbl_direcciones` (
@@ -647,18 +602,10 @@ CREATE TABLE `tbl_direcciones` (
   `Id_Empleado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_direcciones`
---
-
-INSERT INTO `tbl_direcciones` (`Id_Direcciones`, `Direccion`, `Id_Alumno`, `Id_Empleado`) VALUES
-(1, 'Res.Palmira', 5, 1),
-(2, 'Col.Travesia', 1, 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_estado`
+-- Table structure for table `tbl_estado`
 --
 
 CREATE TABLE `tbl_estado` (
@@ -667,18 +614,19 @@ CREATE TABLE `tbl_estado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_estado`
+-- Dumping data for table `tbl_estado`
 --
 
 INSERT INTO `tbl_estado` (`Id_Estado`, `DescripEstatus`) VALUES
 (1, 'NUEVO'),
 (2, 'INACTIVO'),
-(3, 'ACTIVO');
+(3, 'ACTIVO'),
+(4, 'BLOQUEADO');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_estadocivil`
+-- Table structure for table `tbl_estadocivil`
 --
 
 CREATE TABLE `tbl_estadocivil` (
@@ -687,7 +635,7 @@ CREATE TABLE `tbl_estadocivil` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_estadocivil`
+-- Dumping data for table `tbl_estadocivil`
 --
 
 INSERT INTO `tbl_estadocivil` (`Id_EstadoCivil`, `Descripcion`) VALUES
@@ -697,7 +645,7 @@ INSERT INTO `tbl_estadocivil` (`Id_EstadoCivil`, `Descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_estadopago`
+-- Table structure for table `tbl_estadopago`
 --
 
 CREATE TABLE `tbl_estadopago` (
@@ -707,7 +655,7 @@ CREATE TABLE `tbl_estadopago` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_estadopago`
+-- Dumping data for table `tbl_estadopago`
 --
 
 INSERT INTO `tbl_estadopago` (`Id_Estado`, `EstadoPago`, `Descripcion`) VALUES
@@ -717,7 +665,7 @@ INSERT INTO `tbl_estadopago` (`Id_Estado`, `EstadoPago`, `Descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_genero`
+-- Table structure for table `tbl_genero`
 --
 
 CREATE TABLE `tbl_genero` (
@@ -726,7 +674,7 @@ CREATE TABLE `tbl_genero` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_genero`
+-- Dumping data for table `tbl_genero`
 --
 
 INSERT INTO `tbl_genero` (`Id_Genero`, `Descripcion`) VALUES
@@ -736,7 +684,7 @@ INSERT INTO `tbl_genero` (`Id_Genero`, `Descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_hist_contrasena`
+-- Table structure for table `tbl_hist_contrasena`
 --
 
 CREATE TABLE `tbl_hist_contrasena` (
@@ -750,7 +698,7 @@ CREATE TABLE `tbl_hist_contrasena` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_hist_contrasena`
+-- Dumping data for table `tbl_hist_contrasena`
 --
 
 INSERT INTO `tbl_hist_contrasena` (`Id_Hist`, `Contrasena`, `Id_usuario`, `FechaModificacion`, `FechaCreacion`, `CreadoPor`, `ModificadoPor`) VALUES
@@ -759,7 +707,7 @@ INSERT INTO `tbl_hist_contrasena` (`Id_Hist`, `Contrasena`, `Id_usuario`, `Fecha
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_matricula`
+-- Table structure for table `tbl_matricula`
 --
 
 CREATE TABLE `tbl_matricula` (
@@ -769,22 +717,10 @@ CREATE TABLE `tbl_matricula` (
   `Id_PeriodoAcm` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_matricula`
---
-
-INSERT INTO `tbl_matricula` (`Id_Matricula`, `Id_Alumno`, `Id_Seccion`, `Id_PeriodoAcm`) VALUES
-(1, 1, 1, 2),
-(2, 2, 9, 2),
-(3, 7, 1, 2),
-(4, 1, 3, 2),
-(5, 1, 3, 2),
-(6, 2, 2, 2);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_modalidades`
+-- Table structure for table `tbl_modalidades`
 --
 
 CREATE TABLE `tbl_modalidades` (
@@ -793,7 +729,7 @@ CREATE TABLE `tbl_modalidades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_modalidades`
+-- Dumping data for table `tbl_modalidades`
 --
 
 INSERT INTO `tbl_modalidades` (`Id_Modalidad`, `DescripModalidad`) VALUES
@@ -804,7 +740,7 @@ INSERT INTO `tbl_modalidades` (`Id_Modalidad`, `DescripModalidad`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_modseccion`
+-- Table structure for table `tbl_modseccion`
 --
 
 CREATE TABLE `tbl_modseccion` (
@@ -812,17 +748,10 @@ CREATE TABLE `tbl_modseccion` (
   `Id_Seccion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_modseccion`
---
-
-INSERT INTO `tbl_modseccion` (`Id_Clase`, `Id_Seccion`) VALUES
-(1, 1);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_objetos`
+-- Table structure for table `tbl_objetos`
 --
 
 CREATE TABLE `tbl_objetos` (
@@ -837,7 +766,7 @@ CREATE TABLE `tbl_objetos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_objetos`
+-- Dumping data for table `tbl_objetos`
 --
 
 INSERT INTO `tbl_objetos` (`Id_Objeto`, `Objeto`, `Descripcion`, `TipoObjeto`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`) VALUES
@@ -852,7 +781,7 @@ INSERT INTO `tbl_objetos` (`Id_Objeto`, `Objeto`, `Descripcion`, `TipoObjeto`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_obsnotas`
+-- Table structure for table `tbl_obsnotas`
 --
 
 CREATE TABLE `tbl_obsnotas` (
@@ -862,7 +791,7 @@ CREATE TABLE `tbl_obsnotas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_obsnotas`
+-- Dumping data for table `tbl_obsnotas`
 --
 
 INSERT INTO `tbl_obsnotas` (`Cod_Obs`, `Observacion`, `DescripObs`) VALUES
@@ -872,7 +801,7 @@ INSERT INTO `tbl_obsnotas` (`Cod_Obs`, `Observacion`, `DescripObs`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_orientacion`
+-- Table structure for table `tbl_orientacion`
 --
 
 CREATE TABLE `tbl_orientacion` (
@@ -882,7 +811,7 @@ CREATE TABLE `tbl_orientacion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_orientacion`
+-- Dumping data for table `tbl_orientacion`
 --
 
 INSERT INTO `tbl_orientacion` (`Id_orientacion`, `Nombre`, `Id_modalidad`) VALUES
@@ -914,7 +843,7 @@ INSERT INTO `tbl_orientacion` (`Id_orientacion`, `Nombre`, `Id_modalidad`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_pagoclases`
+-- Table structure for table `tbl_pagoclases`
 --
 
 CREATE TABLE `tbl_pagoclases` (
@@ -928,7 +857,7 @@ CREATE TABLE `tbl_pagoclases` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_parametros`
+-- Table structure for table `tbl_parametros`
 --
 
 CREATE TABLE `tbl_parametros` (
@@ -941,7 +870,7 @@ CREATE TABLE `tbl_parametros` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_parametros`
+-- Dumping data for table `tbl_parametros`
 --
 
 INSERT INTO `tbl_parametros` (`Id_Parametro`, `Parametro`, `Valor`, `FechaCreacion`, `FechaModificacion`, `Id_usuario`) VALUES
@@ -951,7 +880,7 @@ INSERT INTO `tbl_parametros` (`Id_Parametro`, `Parametro`, `Valor`, `FechaCreaci
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_periodoacademico`
+-- Table structure for table `tbl_periodoacademico`
 --
 
 CREATE TABLE `tbl_periodoacademico` (
@@ -961,7 +890,7 @@ CREATE TABLE `tbl_periodoacademico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_periodoacademico`
+-- Dumping data for table `tbl_periodoacademico`
 --
 
 INSERT INTO `tbl_periodoacademico` (`Id_PeriodoAcm`, `DescripPeriodo`, `Activo`) VALUES
@@ -971,7 +900,7 @@ INSERT INTO `tbl_periodoacademico` (`Id_PeriodoAcm`, `DescripPeriodo`, `Activo`)
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_permisos`
+-- Table structure for table `tbl_permisos`
 --
 
 CREATE TABLE `tbl_permisos` (
@@ -990,7 +919,7 @@ CREATE TABLE `tbl_permisos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_personal`
+-- Table structure for table `tbl_personal`
 --
 
 CREATE TABLE `tbl_personal` (
@@ -1012,7 +941,7 @@ CREATE TABLE `tbl_personal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_personal`
+-- Dumping data for table `tbl_personal`
 --
 
 INSERT INTO `tbl_personal` (`Id_Empleado`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Telefono`, `Email`, `Cedula`, `CreadoPor`, `ModificadoPor`, `FechaCreacion`, `FechaModificacion`, `Id_Departamentos`, `Id_estadocivil`, `Id_genero`) VALUES
@@ -1048,7 +977,7 @@ INSERT INTO `tbl_personal` (`Id_Empleado`, `PrimerNombre`, `SegundoNombre`, `Pri
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_planilla`
+-- Table structure for table `tbl_planilla`
 --
 
 CREATE TABLE `tbl_planilla` (
@@ -1061,7 +990,7 @@ CREATE TABLE `tbl_planilla` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_planillapago`
+-- Table structure for table `tbl_planillapago`
 --
 
 CREATE TABLE `tbl_planillapago` (
@@ -1078,7 +1007,7 @@ CREATE TABLE `tbl_planillapago` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_precio`
+-- Table structure for table `tbl_precio`
 --
 
 CREATE TABLE `tbl_precio` (
@@ -1090,7 +1019,7 @@ CREATE TABLE `tbl_precio` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_preguntas`
+-- Table structure for table `tbl_preguntas`
 --
 
 CREATE TABLE `tbl_preguntas` (
@@ -1103,7 +1032,7 @@ CREATE TABLE `tbl_preguntas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_preguntas`
+-- Dumping data for table `tbl_preguntas`
 --
 
 INSERT INTO `tbl_preguntas` (`Id_Pregunta`, `Pregunta`, `CreadoPor`, `ModificadoPor`, `FechaCreacion`, `FechaModificacion`) VALUES
@@ -1116,7 +1045,7 @@ INSERT INTO `tbl_preguntas` (`Id_Pregunta`, `Pregunta`, `CreadoPor`, `Modificado
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_preguntasusuario`
+-- Table structure for table `tbl_preguntasusuario`
 --
 
 CREATE TABLE `tbl_preguntasusuario` (
@@ -1129,34 +1058,10 @@ CREATE TABLE `tbl_preguntasusuario` (
   `ModificadoPor` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `tbl_preguntasusuario`
---
-
-INSERT INTO `tbl_preguntasusuario` (`Respuesta`, `Id_usuario`, `Id_Pregunta`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`) VALUES
-('Coco', 12, 1, '2018-11-16', '2018-11-16', 'Autoregistro', 'Autoregistro'),
-('Tegucigalpa', 12, 2, '2018-11-16', '2018-11-16', 'Autoregistro', 'Autoregistro'),
-('Rocky', 16, 1, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('Comayagua', 16, 2, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('Rommel', 16, 4, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('Nena', 16, 3, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('Silvita', 15, 3, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('Rosa', 15, 5, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('Siguatepeque', 15, 2, '2018-11-19', '2018-11-19', 'Autoregistro', 'Autoregistro'),
-('vox', 17, 3, '2018-11-21', '2018-11-21', 'Autoregistro', 'Autoregistro'),
-('azul', 17, 5, '2018-11-21', '2018-11-21', 'Autoregistro', 'Autoregistro'),
-('tegus', 18, 2, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro'),
-('coki', 19, 1, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro'),
-('Chungo', 19, 3, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro'),
-('coki', 21, 1, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro'),
-('pulga', 22, 1, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro'),
-('popi', 23, 1, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro'),
-('colocha', 23, 3, '2018-12-01', '2018-12-01', 'Autoregistro', 'Autoregistro');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_roles`
+-- Table structure for table `tbl_roles`
 --
 
 CREATE TABLE `tbl_roles` (
@@ -1170,19 +1075,19 @@ CREATE TABLE `tbl_roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_roles`
+-- Dumping data for table `tbl_roles`
 --
 
 INSERT INTO `tbl_roles` (`Id_Rol`, `Rol`, `DescripRol`, `CreadoPor`, `ModifcadoPor`, `FechaCreacion`, `FechaModificacion`) VALUES
 (1, 'ADMINISTRADOR', 'EDITAR', 'PRUEBA', 'PRUEBA', '2018-10-17', '2018-10-17'),
 (2, 'DIRECTOR', 'Director', 'PRUEBA', 'PRUEBA', '2018-10-10', '2018-10-10'),
 (3, 'DOCENTE', 'Docente', 'PRUEBA', 'PRUEBA', '2018-10-10', '2018-10-10'),
-(4, 'AUTENTICADO', 'Usuario registrado.', 'SELF', 'SELF', '2018-11-16', '2018-11-16');
+(5, 'PENDIENTE', 'PENDIENTE', 'PRUEBA', 'PRUEBA', '2019-03-02', '2019-03-02');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_secciones`
+-- Table structure for table `tbl_secciones`
 --
 
 CREATE TABLE `tbl_secciones` (
@@ -1196,7 +1101,7 @@ CREATE TABLE `tbl_secciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_secciones`
+-- Dumping data for table `tbl_secciones`
 --
 
 INSERT INTO `tbl_secciones` (`Id_Seccion`, `DescripSeccion`, `HraClase`, `AulaClase`, `Id_Clase`, `Id_Empleado`, `Id_PeriodoAcm`) VALUES
@@ -1222,7 +1127,7 @@ INSERT INTO `tbl_secciones` (`Id_Seccion`, `DescripSeccion`, `HraClase`, `AulaCl
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_tipocontacto`
+-- Table structure for table `tbl_tipocontacto`
 --
 
 CREATE TABLE `tbl_tipocontacto` (
@@ -1234,7 +1139,7 @@ CREATE TABLE `tbl_tipocontacto` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_usuarios`
+-- Table structure for table `tbl_usuarios`
 --
 
 CREATE TABLE `tbl_usuarios` (
@@ -1265,40 +1170,18 @@ CREATE TABLE `tbl_usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `tbl_usuarios`
+-- Dumping data for table `tbl_usuarios`
 --
 
 INSERT INTO `tbl_usuarios` (`Id_usuario`, `Usuario`, `Contrasena`, `FechaUltimaConex`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Telefono`, `Cedula`, `PreguntasContestadas`, `PrimerIngreso`, `FechaVencimiento`, `CorreoElectronico`, `Id_Departamento`, `Id_EstadoCivil`, `Id_Genero`, `Id_Estado`, `Id_Rol`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`, `code`) VALUES
-(1, 'ADMIN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-27 21:39:03', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 3, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
-(2, 'PRUEBA', '$2y$10$b71y0mcZPI1ZXOH96IHNXugJdXsRI1egVdginLzegXAeDCW1x8d4e', '2019-02-08 06:59:48', 'Pruebaa', 'Testa', 'Shikena', 'Examena', 99999999, 2147483647, 3, NULL, '2018-11-30', 'prueba1@prueba.com', 2, 2, 2, 2, 3, '2018-11-07', NULL, '1', NULL, NULL),
-(6, 'florinda', '$2y$10$jStFsll4d2Zqgftn0ZbjXOOvRAiSYwY9oiABB.Nha3bjlTBZZGg0K', '2018-11-09 04:16:53', '', NULL, '', NULL, 0, 0, 3, NULL, '2018-11-30', 'flor@venenosa.com', 0, 0, 0, 1, 3, '2018-11-09', '2018-11-09', 'Admin', NULL, NULL),
-(7, 'rocko', 'Adm@1212', '2019-02-06 05:58:17', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-16', 'leonardo@yahoo.com', 0, 0, 0, 3, 4, '2018-11-16', '2018-11-16', 'Autoregistro', NULL, NULL),
-(8, 'pamela23', 'Adm@1212', '2018-11-16 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-16', 'yency@yahoo.com', 0, 0, 0, 1, 4, '2018-11-16', '2018-11-16', 'Autoregistro', NULL, NULL),
-(10, 'juanp23', 'Adm@1212', '2018-11-16 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-16', 'juanp@yahoo.es', 0, 0, 0, 1, 4, '2018-11-16', '2018-11-16', 'Autoregistro', NULL, NULL),
-(11, 'girafales', 'Adm@1212', '2018-11-16 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-16', 'benru@yahoo.com', 0, 0, 0, 1, 4, '2018-11-16', '2018-11-16', 'Autoregistro', NULL, NULL),
-(12, 'zimbo', 'Adm@1212', '2018-11-17 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-17', 'ringo@hotmail.com', 0, 0, 0, 1, 4, '2018-11-17', '2018-11-17', 'Autoregistro', NULL, NULL),
-(13, 'adelaida12', 'Adm@1212', '2018-11-18 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-18', 'adelaida@gmail.com', 0, 0, 0, 1, 4, '2018-11-18', '2018-11-18', 'Autoregistro', NULL, NULL),
-(14, 'carlospavon', '$2y$10$fRsRQ/E4tEdCjZdgBZbkDuWcjnJFa3vX28Kp8gJLlwZ5hhGSCuYYW', '2018-11-18 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-18', 'carlos@gmail.com', 0, 0, 0, 1, 4, '2018-11-18', '2018-11-18', 'Autoregistro', NULL, NULL),
-(15, 'silvita2', '$2y$10$dXIDV2cPlF0.5TlArmxLx.LI4yXNJK0T0f7aETBhmsj7lNykJmo2G', '2018-11-19 18:34:09', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-18', 'silvia@gmail.com', 0, 0, 0, 3, 4, '2018-11-18', '2018-11-18', 'Autoregistro', NULL, NULL),
-(16, 'mayra45', '$2y$10$UyFHS9Fenyuy4BwqDvbTuO3ZaqgAtN9z04jCrej4reiyF4yFZMeou', '2018-11-19 18:28:10', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-19', 'mayra@gmail.com', 0, 0, 0, 3, 4, '2018-11-19', '2018-11-19', 'Autoregistro', NULL, NULL),
-(17, 'rocko2', '$2y$10$GPWkl2Up3lCtxUXHSMfH6edYhJJFyDdz6btZpvtb6l2WqzQMUpH4m', '2018-11-21 20:48:14', '', NULL, '', NULL, 0, 0, 0, NULL, '2018-12-21', 'carlos_metalmaniac@hotmail.com', 0, 0, 0, 3, 4, '2018-11-21', '2018-11-21', 'Autoregistro', NULL, NULL),
-(18, 'nicki', '$2y$10$Ff2cRpHTJyMwc4ug5FwNheHhc3n/.Fd1hfnps3Yx2c/hf2Jux95Wu', '2018-12-01 07:22:25', '', NULL, '', NULL, 0, 0, 0, NULL, '0000-00-00', 'ni-colle@hotmail.com', 0, 0, 0, 3, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, 'XwoNTxLT5'),
-(19, 'cesar1', '$2y$10$0OAhhmro9QWzin.DrBsvM.ogviFr8QIR92YO1hy0.XjeQhZ80gxPq', '2018-12-01 07:28:30', '', NULL, '', NULL, 0, 0, 0, NULL, '2019-02-02', 'mariovarela018@gmail.com', 0, 0, 0, 3, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, 'oxo9M5pQN'),
-(20, 'gaby', '$2y$10$yxcSsQa0m9pUbqTw34nxiONN8qgaeWnTJYwHMyimfYqulv7HbXQK6', '2018-12-01 06:00:00', '', NULL, '', NULL, 0, 0, 0, NULL, '0000-00-00', 'gabriela@hotmail.com', 0, 0, 0, 1, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, NULL),
-(21, 'magda', '$2y$10$81q2Lyhpik0Bg2FQoND2RufOjr2N0dkMmv4NZbxpmaU6zqHo2dv0m', '2018-12-01 07:39:31', '', NULL, '', NULL, 0, 0, 0, NULL, '2019-02-02', 'magda@gmail.com', 0, 0, 0, 3, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, NULL),
-(22, 'axel1', '$2y$10$O0R0V3Vf2Uo4u.HVpd0XF.E5o9Jr9BxGlPUiN/57RitQd/.4qWPJS', '2018-12-01 07:45:46', '', NULL, '', NULL, 0, 0, 0, NULL, '2019-02-02', 'juanc.romeroruiz@hotmail.com', 0, 0, 0, 3, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, 'fncipbBJR'),
-(23, 'irma1', '$2y$10$gcXEHMYNETkyJ6zkNkbfse2qsKoabGm7cY6GlbAd9Gq2gKNQNledO', '2019-02-06 04:49:10', '', NULL, '', NULL, 0, 0, 0, NULL, '2019-02-02', 'irma.alonzo1@hotmail.com', 0, 0, 0, 2, 4, '2018-12-01', '2018-12-01', 'Autoregistro', NULL, NULL),
-(30, 'KEREN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-06 05:05:29', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 2, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
-(31, 'USO', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-02-06 06:00:29', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 2, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL),
-(62, 'luna', 'Luna@123', '2019-02-27 21:20:20', 'adasdaasdas', 'whfndiASNDLASLD', 'EWNFMKFKMSAD', 'asdfasdasd', 22222222, 2147483647, NULL, NULL, NULL, 'asdasdasd', 2, 1, 1, 1, NULL, '2019-02-27', NULL, NULL, NULL, NULL),
-(63, 'solai', 'Luna123@', '2019-02-27 21:27:38', 'prueba3', 'prueba4', 'alonzo', 'cruz', 22344480, 2147483647, NULL, NULL, NULL, 'prueba@gmial.com', 1, 2, 2, 1, NULL, '2019-02-27', NULL, NULL, NULL, NULL);
+(1, 'ADMIN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-03-03 07:27:13', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 3, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `tbl_alumnos`
+-- Indexes for table `tbl_alumnos`
 --
 ALTER TABLE `tbl_alumnos`
   ADD PRIMARY KEY (`Id_Alumno`),
@@ -1306,7 +1189,7 @@ ALTER TABLE `tbl_alumnos`
   ADD KEY `fkIdx_estcivil_alum` (`Id_estadocivil`);
 
 --
--- Indices de la tabla `tbl_asistencia`
+-- Indexes for table `tbl_asistencia`
 --
 ALTER TABLE `tbl_asistencia`
   ADD PRIMARY KEY (`Id_asistencia`),
@@ -1314,7 +1197,7 @@ ALTER TABLE `tbl_asistencia`
   ADD KEY `fkIdx_Pers_Asis` (`Id_Empleado`);
 
 --
--- Indices de la tabla `tbl_bitacora`
+-- Indexes for table `tbl_bitacora`
 --
 ALTER TABLE `tbl_bitacora`
   ADD PRIMARY KEY (`Id_Bitacora`),
@@ -1322,7 +1205,7 @@ ALTER TABLE `tbl_bitacora`
   ADD KEY `fkIdx_Obj_Bit` (`Id_Objeto`);
 
 --
--- Indices de la tabla `tbl_calificaciones`
+-- Indexes for table `tbl_calificaciones`
 --
 ALTER TABLE `tbl_calificaciones`
   ADD PRIMARY KEY (`Id_Calificaciones`),
@@ -1332,20 +1215,20 @@ ALTER TABLE `tbl_calificaciones`
   ADD KEY `fkIdx_Clases_Cal` (`Id_Clase`);
 
 --
--- Indices de la tabla `tbl_clases`
+-- Indexes for table `tbl_clases`
 --
 ALTER TABLE `tbl_clases`
   ADD PRIMARY KEY (`Id_Clase`),
   ADD KEY `fkIdx_oreintacion_Clase` (`Id_orientacion`);
 
 --
--- Indices de la tabla `tbl_cobromatricula`
+-- Indexes for table `tbl_cobromatricula`
 --
 ALTER TABLE `tbl_cobromatricula`
   ADD PRIMARY KEY (`Id_cobro`);
 
 --
--- Indices de la tabla `tbl_contrespon`
+-- Indexes for table `tbl_contrespon`
 --
 ALTER TABLE `tbl_contrespon`
   ADD PRIMARY KEY (`Id_ContResp`),
@@ -1353,7 +1236,7 @@ ALTER TABLE `tbl_contrespon`
   ADD KEY `fkIdx_Alumno_ContResp` (`Id_Alumno`);
 
 --
--- Indices de la tabla `tbl_cuentacorriente`
+-- Indexes for table `tbl_cuentacorriente`
 --
 ALTER TABLE `tbl_cuentacorriente`
   ADD PRIMARY KEY (`Id_Cuenta`),
@@ -1365,19 +1248,19 @@ ALTER TABLE `tbl_cuentacorriente`
   ADD KEY `fkIdx_Desc_CCorriente` (`Id_Descuento`);
 
 --
--- Indices de la tabla `tbl_departamentos`
+-- Indexes for table `tbl_departamentos`
 --
 ALTER TABLE `tbl_departamentos`
   ADD PRIMARY KEY (`Id_Departamentos`);
 
 --
--- Indices de la tabla `tbl_descuento`
+-- Indexes for table `tbl_descuento`
 --
 ALTER TABLE `tbl_descuento`
   ADD PRIMARY KEY (`Id_Descuento`);
 
 --
--- Indices de la tabla `tbl_direcciones`
+-- Indexes for table `tbl_direcciones`
 --
 ALTER TABLE `tbl_direcciones`
   ADD PRIMARY KEY (`Id_Direcciones`),
@@ -1385,38 +1268,38 @@ ALTER TABLE `tbl_direcciones`
   ADD KEY `fkIdx_Pers_Dir` (`Id_Empleado`);
 
 --
--- Indices de la tabla `tbl_estado`
+-- Indexes for table `tbl_estado`
 --
 ALTER TABLE `tbl_estado`
   ADD PRIMARY KEY (`Id_Estado`);
 
 --
--- Indices de la tabla `tbl_estadocivil`
+-- Indexes for table `tbl_estadocivil`
 --
 ALTER TABLE `tbl_estadocivil`
   ADD PRIMARY KEY (`Id_EstadoCivil`);
 
 --
--- Indices de la tabla `tbl_estadopago`
+-- Indexes for table `tbl_estadopago`
 --
 ALTER TABLE `tbl_estadopago`
   ADD PRIMARY KEY (`Id_Estado`);
 
 --
--- Indices de la tabla `tbl_genero`
+-- Indexes for table `tbl_genero`
 --
 ALTER TABLE `tbl_genero`
   ADD PRIMARY KEY (`Id_Genero`);
 
 --
--- Indices de la tabla `tbl_hist_contrasena`
+-- Indexes for table `tbl_hist_contrasena`
 --
 ALTER TABLE `tbl_hist_contrasena`
   ADD PRIMARY KEY (`Id_Hist`),
   ADD KEY `fkIdx_Usuario_HistC` (`Id_usuario`);
 
 --
--- Indices de la tabla `tbl_matricula`
+-- Indexes for table `tbl_matricula`
 --
 ALTER TABLE `tbl_matricula`
   ADD PRIMARY KEY (`Id_Matricula`),
@@ -1425,66 +1308,66 @@ ALTER TABLE `tbl_matricula`
   ADD KEY `fkIdx_Periodo_Matri` (`Id_PeriodoAcm`);
 
 --
--- Indices de la tabla `tbl_modalidades`
+-- Indexes for table `tbl_modalidades`
 --
 ALTER TABLE `tbl_modalidades`
   ADD PRIMARY KEY (`Id_Modalidad`);
 
 --
--- Indices de la tabla `tbl_modseccion`
+-- Indexes for table `tbl_modseccion`
 --
 ALTER TABLE `tbl_modseccion`
   ADD KEY `fkIdx_Clases_ModSec` (`Id_Clase`),
   ADD KEY `fkIdx_Sec_ModSec` (`Id_Seccion`);
 
 --
--- Indices de la tabla `tbl_objetos`
+-- Indexes for table `tbl_objetos`
 --
 ALTER TABLE `tbl_objetos`
   ADD PRIMARY KEY (`Id_Objeto`);
 
 --
--- Indices de la tabla `tbl_obsnotas`
+-- Indexes for table `tbl_obsnotas`
 --
 ALTER TABLE `tbl_obsnotas`
   ADD PRIMARY KEY (`Cod_Obs`);
 
 --
--- Indices de la tabla `tbl_orientacion`
+-- Indexes for table `tbl_orientacion`
 --
 ALTER TABLE `tbl_orientacion`
   ADD PRIMARY KEY (`Id_orientacion`),
   ADD KEY `fkIdx_Mod_orientacion` (`Id_modalidad`);
 
 --
--- Indices de la tabla `tbl_pagoclases`
+-- Indexes for table `tbl_pagoclases`
 --
 ALTER TABLE `tbl_pagoclases`
   ADD PRIMARY KEY (`Id_Pago`),
   ADD KEY `fkIdx_Clases_PagoC` (`Id_Clase`);
 
 --
--- Indices de la tabla `tbl_parametros`
+-- Indexes for table `tbl_parametros`
 --
 ALTER TABLE `tbl_parametros`
   ADD PRIMARY KEY (`Id_Parametro`),
   ADD KEY `fkIdx_Usuario_Par` (`Id_usuario`);
 
 --
--- Indices de la tabla `tbl_periodoacademico`
+-- Indexes for table `tbl_periodoacademico`
 --
 ALTER TABLE `tbl_periodoacademico`
   ADD PRIMARY KEY (`Id_PeriodoAcm`);
 
 --
--- Indices de la tabla `tbl_permisos`
+-- Indexes for table `tbl_permisos`
 --
 ALTER TABLE `tbl_permisos`
   ADD KEY `fkIdx_Rol_Permisos` (`Id_Rol`),
   ADD KEY `fkIdx_Obj_Permisos` (`Id_Objeto`);
 
 --
--- Indices de la tabla `tbl_personal`
+-- Indexes for table `tbl_personal`
 --
 ALTER TABLE `tbl_personal`
   ADD PRIMARY KEY (`Id_Empleado`),
@@ -1493,13 +1376,13 @@ ALTER TABLE `tbl_personal`
   ADD KEY `fkIdx_gen_pers` (`Id_genero`);
 
 --
--- Indices de la tabla `tbl_planilla`
+-- Indexes for table `tbl_planilla`
 --
 ALTER TABLE `tbl_planilla`
   ADD PRIMARY KEY (`Id_Planilla`);
 
 --
--- Indices de la tabla `tbl_planillapago`
+-- Indexes for table `tbl_planillapago`
 --
 ALTER TABLE `tbl_planillapago`
   ADD KEY `fkIdx_Pers_PPago` (`Id_Empleado`),
@@ -1508,32 +1391,32 @@ ALTER TABLE `tbl_planillapago`
   ADD KEY `fkIdx_PClases_PPago` (`Id_Pago`);
 
 --
--- Indices de la tabla `tbl_precio`
+-- Indexes for table `tbl_precio`
 --
 ALTER TABLE `tbl_precio`
   ADD PRIMARY KEY (`Id_precio`);
 
 --
--- Indices de la tabla `tbl_preguntas`
+-- Indexes for table `tbl_preguntas`
 --
 ALTER TABLE `tbl_preguntas`
   ADD PRIMARY KEY (`Id_Pregunta`);
 
 --
--- Indices de la tabla `tbl_preguntasusuario`
+-- Indexes for table `tbl_preguntasusuario`
 --
 ALTER TABLE `tbl_preguntasusuario`
   ADD KEY `fkIdx_Usuario_PUsuario` (`Id_usuario`),
   ADD KEY `fkIdx_Preguntas_PUsuario` (`Id_Pregunta`);
 
 --
--- Indices de la tabla `tbl_roles`
+-- Indexes for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
   ADD PRIMARY KEY (`Id_Rol`);
 
 --
--- Indices de la tabla `tbl_secciones`
+-- Indexes for table `tbl_secciones`
 --
 ALTER TABLE `tbl_secciones`
   ADD PRIMARY KEY (`Id_Seccion`),
@@ -1543,13 +1426,13 @@ ALTER TABLE `tbl_secciones`
   ADD KEY `FK_Clase_Seccion` (`Id_Clase`);
 
 --
--- Indices de la tabla `tbl_tipocontacto`
+-- Indexes for table `tbl_tipocontacto`
 --
 ALTER TABLE `tbl_tipocontacto`
   ADD PRIMARY KEY (`Id_Tipo`);
 
 --
--- Indices de la tabla `tbl_usuarios`
+-- Indexes for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
   ADD PRIMARY KEY (`Id_usuario`),
@@ -1561,234 +1444,234 @@ ALTER TABLE `tbl_usuarios`
   ADD KEY `fkidx_Dept_Personal` (`Id_Departamento`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `tbl_alumnos`
+-- AUTO_INCREMENT for table `tbl_alumnos`
 --
 ALTER TABLE `tbl_alumnos`
   MODIFY `Id_Alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_asistencia`
+-- AUTO_INCREMENT for table `tbl_asistencia`
 --
 ALTER TABLE `tbl_asistencia`
   MODIFY `Id_asistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_bitacora`
+-- AUTO_INCREMENT for table `tbl_bitacora`
 --
 ALTER TABLE `tbl_bitacora`
-  MODIFY `Id_Bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `Id_Bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_calificaciones`
+-- AUTO_INCREMENT for table `tbl_calificaciones`
 --
 ALTER TABLE `tbl_calificaciones`
   MODIFY `Id_Calificaciones` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_clases`
+-- AUTO_INCREMENT for table `tbl_clases`
 --
 ALTER TABLE `tbl_clases`
   MODIFY `Id_Clase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=293;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_cobromatricula`
+-- AUTO_INCREMENT for table `tbl_cobromatricula`
 --
 ALTER TABLE `tbl_cobromatricula`
   MODIFY `Id_cobro` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_contrespon`
+-- AUTO_INCREMENT for table `tbl_contrespon`
 --
 ALTER TABLE `tbl_contrespon`
   MODIFY `Id_ContResp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_cuentacorriente`
+-- AUTO_INCREMENT for table `tbl_cuentacorriente`
 --
 ALTER TABLE `tbl_cuentacorriente`
   MODIFY `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_departamentos`
+-- AUTO_INCREMENT for table `tbl_departamentos`
 --
 ALTER TABLE `tbl_departamentos`
   MODIFY `Id_Departamentos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_descuento`
+-- AUTO_INCREMENT for table `tbl_descuento`
 --
 ALTER TABLE `tbl_descuento`
   MODIFY `Id_Descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_direcciones`
+-- AUTO_INCREMENT for table `tbl_direcciones`
 --
 ALTER TABLE `tbl_direcciones`
   MODIFY `Id_Direcciones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_estado`
+-- AUTO_INCREMENT for table `tbl_estado`
 --
 ALTER TABLE `tbl_estado`
-  MODIFY `Id_Estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id_Estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_estadocivil`
+-- AUTO_INCREMENT for table `tbl_estadocivil`
 --
 ALTER TABLE `tbl_estadocivil`
   MODIFY `Id_EstadoCivil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_estadopago`
+-- AUTO_INCREMENT for table `tbl_estadopago`
 --
 ALTER TABLE `tbl_estadopago`
   MODIFY `Id_Estado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_genero`
+-- AUTO_INCREMENT for table `tbl_genero`
 --
 ALTER TABLE `tbl_genero`
   MODIFY `Id_Genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_hist_contrasena`
+-- AUTO_INCREMENT for table `tbl_hist_contrasena`
 --
 ALTER TABLE `tbl_hist_contrasena`
   MODIFY `Id_Hist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_matricula`
+-- AUTO_INCREMENT for table `tbl_matricula`
 --
 ALTER TABLE `tbl_matricula`
   MODIFY `Id_Matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_modalidades`
+-- AUTO_INCREMENT for table `tbl_modalidades`
 --
 ALTER TABLE `tbl_modalidades`
   MODIFY `Id_Modalidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_modseccion`
+-- AUTO_INCREMENT for table `tbl_modseccion`
 --
 ALTER TABLE `tbl_modseccion`
   MODIFY `Id_Clase` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_objetos`
+-- AUTO_INCREMENT for table `tbl_objetos`
 --
 ALTER TABLE `tbl_objetos`
   MODIFY `Id_Objeto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_obsnotas`
+-- AUTO_INCREMENT for table `tbl_obsnotas`
 --
 ALTER TABLE `tbl_obsnotas`
   MODIFY `Cod_Obs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_orientacion`
+-- AUTO_INCREMENT for table `tbl_orientacion`
 --
 ALTER TABLE `tbl_orientacion`
   MODIFY `Id_orientacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_pagoclases`
+-- AUTO_INCREMENT for table `tbl_pagoclases`
 --
 ALTER TABLE `tbl_pagoclases`
   MODIFY `Id_Pago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_parametros`
+-- AUTO_INCREMENT for table `tbl_parametros`
 --
 ALTER TABLE `tbl_parametros`
   MODIFY `Id_Parametro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_periodoacademico`
+-- AUTO_INCREMENT for table `tbl_periodoacademico`
 --
 ALTER TABLE `tbl_periodoacademico`
   MODIFY `Id_PeriodoAcm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_personal`
+-- AUTO_INCREMENT for table `tbl_personal`
 --
 ALTER TABLE `tbl_personal`
   MODIFY `Id_Empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_planilla`
+-- AUTO_INCREMENT for table `tbl_planilla`
 --
 ALTER TABLE `tbl_planilla`
   MODIFY `Id_Planilla` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_precio`
+-- AUTO_INCREMENT for table `tbl_precio`
 --
 ALTER TABLE `tbl_precio`
   MODIFY `Id_precio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_preguntas`
+-- AUTO_INCREMENT for table `tbl_preguntas`
 --
 ALTER TABLE `tbl_preguntas`
   MODIFY `Id_Pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_roles`
+-- AUTO_INCREMENT for table `tbl_roles`
 --
 ALTER TABLE `tbl_roles`
-  MODIFY `Id_Rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_Rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_secciones`
+-- AUTO_INCREMENT for table `tbl_secciones`
 --
 ALTER TABLE `tbl_secciones`
   MODIFY `Id_Seccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_tipocontacto`
+-- AUTO_INCREMENT for table `tbl_tipocontacto`
 --
 ALTER TABLE `tbl_tipocontacto`
   MODIFY `Id_Tipo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_usuarios`
+-- AUTO_INCREMENT for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `tbl_alumnos`
+-- Constraints for table `tbl_alumnos`
 --
 ALTER TABLE `tbl_alumnos`
   ADD CONSTRAINT `FK_estcivil_alum` FOREIGN KEY (`Id_estadocivil`) REFERENCES `tbl_estadocivil` (`Id_EstadoCivil`),
   ADD CONSTRAINT `FK_gen_alum` FOREIGN KEY (`Id_genero`) REFERENCES `tbl_genero` (`Id_Genero`);
 
 --
--- Filtros para la tabla `tbl_asistencia`
+-- Constraints for table `tbl_asistencia`
 --
 ALTER TABLE `tbl_asistencia`
   ADD CONSTRAINT `FK_Clas_Asis` FOREIGN KEY (`Id_Clase`) REFERENCES `tbl_clases` (`Id_Clase`),
   ADD CONSTRAINT `FK_Pers_Asis` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`);
 
 --
--- Filtros para la tabla `tbl_bitacora`
+-- Constraints for table `tbl_bitacora`
 --
 ALTER TABLE `tbl_bitacora`
   ADD CONSTRAINT `FK_Obj_Bit` FOREIGN KEY (`Id_Objeto`) REFERENCES `tbl_objetos` (`Id_Objeto`),
   ADD CONSTRAINT `FK_Usuario_Bit` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
--- Filtros para la tabla `tbl_calificaciones`
+-- Constraints for table `tbl_calificaciones`
 --
 ALTER TABLE `tbl_calificaciones`
   ADD CONSTRAINT `FK_Alumno_Cal` FOREIGN KEY (`Id_Alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`),
@@ -1797,20 +1680,20 @@ ALTER TABLE `tbl_calificaciones`
   ADD CONSTRAINT `FK_Seccion_Cal` FOREIGN KEY (`Id_Seccion`) REFERENCES `tbl_secciones` (`Id_Seccion`);
 
 --
--- Filtros para la tabla `tbl_clases`
+-- Constraints for table `tbl_clases`
 --
 ALTER TABLE `tbl_clases`
   ADD CONSTRAINT `FK_orientacion_Clase` FOREIGN KEY (`Id_orientacion`) REFERENCES `tbl_orientacion` (`Id_orientacion`);
 
 --
--- Filtros para la tabla `tbl_contrespon`
+-- Constraints for table `tbl_contrespon`
 --
 ALTER TABLE `tbl_contrespon`
   ADD CONSTRAINT `FK_Alumno_ContResp` FOREIGN KEY (`Id_Alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`),
   ADD CONSTRAINT `FK_TCont_ContResp` FOREIGN KEY (`Id_Tipo`) REFERENCES `tbl_tipocontacto` (`Id_Tipo`);
 
 --
--- Filtros para la tabla `tbl_cuentacorriente`
+-- Constraints for table `tbl_cuentacorriente`
 --
 ALTER TABLE `tbl_cuentacorriente`
   ADD CONSTRAINT `FK_Alumno_CCorriente` FOREIGN KEY (`Id_Alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`),
@@ -1821,20 +1704,20 @@ ALTER TABLE `tbl_cuentacorriente`
   ADD CONSTRAINT `FK_Precio_CCorriente` FOREIGN KEY (`Id_precio`) REFERENCES `tbl_precio` (`Id_precio`);
 
 --
--- Filtros para la tabla `tbl_direcciones`
+-- Constraints for table `tbl_direcciones`
 --
 ALTER TABLE `tbl_direcciones`
   ADD CONSTRAINT `FK_Alumno_Dir` FOREIGN KEY (`Id_Alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`),
   ADD CONSTRAINT `FK_Pers_Dir` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`);
 
 --
--- Filtros para la tabla `tbl_hist_contrasena`
+-- Constraints for table `tbl_hist_contrasena`
 --
 ALTER TABLE `tbl_hist_contrasena`
   ADD CONSTRAINT `FK_Usuario_HistC` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
--- Filtros para la tabla `tbl_matricula`
+-- Constraints for table `tbl_matricula`
 --
 ALTER TABLE `tbl_matricula`
   ADD CONSTRAINT `FK_Alumno_Matricula` FOREIGN KEY (`Id_Alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`),
@@ -1842,39 +1725,39 @@ ALTER TABLE `tbl_matricula`
   ADD CONSTRAINT `FK_Seccion_Matr` FOREIGN KEY (`Id_Seccion`) REFERENCES `tbl_secciones` (`Id_Seccion`);
 
 --
--- Filtros para la tabla `tbl_modseccion`
+-- Constraints for table `tbl_modseccion`
 --
 ALTER TABLE `tbl_modseccion`
   ADD CONSTRAINT `FK_Clases_ModSec` FOREIGN KEY (`Id_Clase`) REFERENCES `tbl_clases` (`Id_Clase`),
   ADD CONSTRAINT `FK_Sec_ModSec` FOREIGN KEY (`Id_Seccion`) REFERENCES `tbl_secciones` (`Id_Seccion`);
 
 --
--- Filtros para la tabla `tbl_orientacion`
+-- Constraints for table `tbl_orientacion`
 --
 ALTER TABLE `tbl_orientacion`
   ADD CONSTRAINT `FK_Mod_orientacion` FOREIGN KEY (`Id_modalidad`) REFERENCES `tbl_modalidades` (`Id_Modalidad`);
 
 --
--- Filtros para la tabla `tbl_pagoclases`
+-- Constraints for table `tbl_pagoclases`
 --
 ALTER TABLE `tbl_pagoclases`
   ADD CONSTRAINT `FK_Clases_PagoC` FOREIGN KEY (`Id_Clase`) REFERENCES `tbl_clases` (`Id_Clase`);
 
 --
--- Filtros para la tabla `tbl_parametros`
+-- Constraints for table `tbl_parametros`
 --
 ALTER TABLE `tbl_parametros`
   ADD CONSTRAINT `FK_Usuario_Par` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
--- Filtros para la tabla `tbl_permisos`
+-- Constraints for table `tbl_permisos`
 --
 ALTER TABLE `tbl_permisos`
   ADD CONSTRAINT `FK_Obj_Permisos` FOREIGN KEY (`Id_Objeto`) REFERENCES `tbl_objetos` (`Id_Objeto`),
   ADD CONSTRAINT `FK_Rol_Permisos` FOREIGN KEY (`Id_Rol`) REFERENCES `tbl_roles` (`Id_Rol`);
 
 --
--- Filtros para la tabla `tbl_personal`
+-- Constraints for table `tbl_personal`
 --
 ALTER TABLE `tbl_personal`
   ADD CONSTRAINT `FK_Dept_Pers` FOREIGN KEY (`Id_Departamentos`) REFERENCES `tbl_departamentos` (`Id_Departamentos`),
@@ -1882,7 +1765,7 @@ ALTER TABLE `tbl_personal`
   ADD CONSTRAINT `FK_gen_pers` FOREIGN KEY (`Id_genero`) REFERENCES `tbl_genero` (`Id_Genero`);
 
 --
--- Filtros para la tabla `tbl_planillapago`
+-- Constraints for table `tbl_planillapago`
 --
 ALTER TABLE `tbl_planillapago`
   ADD CONSTRAINT `FK_Asist_PPago` FOREIGN KEY (`Id_asistencia`) REFERENCES `tbl_asistencia` (`Id_asistencia`),
@@ -1891,14 +1774,14 @@ ALTER TABLE `tbl_planillapago`
   ADD CONSTRAINT `FK_Planilla_PPago` FOREIGN KEY (`Id_Planilla`) REFERENCES `tbl_planilla` (`Id_Planilla`);
 
 --
--- Filtros para la tabla `tbl_preguntasusuario`
+-- Constraints for table `tbl_preguntasusuario`
 --
 ALTER TABLE `tbl_preguntasusuario`
   ADD CONSTRAINT `FK_Preguntas_PUsuario` FOREIGN KEY (`Id_Pregunta`) REFERENCES `tbl_preguntas` (`Id_Pregunta`),
   ADD CONSTRAINT `FK_Usuario_PUsuario` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
--- Filtros para la tabla `tbl_secciones`
+-- Constraints for table `tbl_secciones`
 --
 ALTER TABLE `tbl_secciones`
   ADD CONSTRAINT `FK_Clase_Seccion` FOREIGN KEY (`Id_Clase`) REFERENCES `tbl_clases` (`Id_Clase`),
@@ -1906,7 +1789,7 @@ ALTER TABLE `tbl_secciones`
   ADD CONSTRAINT `FK_Pers_Seccion` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`);
 
 --
--- Filtros para la tabla `tbl_usuarios`
+-- Constraints for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
   ADD CONSTRAINT `FK_Est_Usuario` FOREIGN KEY (`Id_Estado`) REFERENCES `tbl_estado` (`Id_Estado`);
