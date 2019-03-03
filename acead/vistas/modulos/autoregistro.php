@@ -51,31 +51,31 @@
                   <div class="form-group row">
                     <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="pNombre">Primer Nombre</label>
-                      <input type="text" id="pNombre" class="form-control" placeholder="Primer Nombre" required > 
+                      <input type="text" id="pNombre" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" placeholder="Primer Nombre" required > 
                      </div>
                      <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="sNombre">Segundo Nombre</label>
-                        <input type="text" id="sNombre" class="form-control" placeholder="Segundo Nombre" required >
+                        <input type="text" id="sNombre" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" placeholder="Segundo Nombre" required >
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="pApellido">Primer Apellido</label>
-                      <input type="text" id="pApellido" class="form-control" placeholder="Primer Apellido" required >
+                      <input type="text" id="pApellido" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" placeholder="Primer Apellido" required >
                     </div>  
                   </div>
 
                   <div class="form-group row">
                     <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="sApellido">Segundo Apellido</label>
-                      <input type="text" id="sApellido" class="form-control" placeholder="Segundo Apellido" >
+                      <input type="text" id="sApellido" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" placeholder="Segundo Apellido" >
                     </div>
 
                     <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="pn">Cedula</label>
-                      <input type="number" id="cedula" class="form-control" placeholder="9999888800111" required >
+                      <input type="number" id="cedula" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" placeholder="9999888800111" required >
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="telefono">Telefono</label>                  
-                      <input type="number" id="telefono" class="form-control" aria-describedby="emailHelp" placeholder="99999999" required >
+                      <input type="number" id="telefono" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" aria-describedby="emailHelp" placeholder="99999999" required >
                     </div> 
                   </div>                    
                   
@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4">
                       <label for="usuario">Usuario</label>
-                      <input type="text" id="usuario" class="form-control" placeholder="Nombre de Usuario"  required > 
+                      <input type="text" id="usuario" onKeyUp="this.value=this.value.toUpperCase();" class="form-control" placeholder="Nombre de Usuario"  required > 
                     </div> 
                   </div>                                        
 
@@ -122,15 +122,6 @@
                       <input type="password" id="confirmarContrasena" class="form-control" aria-describedby="emailHelp" placeholder="Contraseña" required >
                     </div>
                   </div>
-
-                 <!-- <div class="form-group text-right">                         
-                    <a class="btn btn-success" href="aceads" role="button">
-                      <span class="glyphicon glyphicon-user"></span>Login
-                    </a>
-                    <button type="button " class="btn btn-info " id="guardar">
-                      <span class="glyphicon glyphicon-save"></span> Guardar
-                    </button>
-                  </div> -->      
               </form>                        
           </div>           
           <div class="panel-footer text-right">

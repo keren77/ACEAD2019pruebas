@@ -32,42 +32,49 @@ $('#guardar').click(function()
 					{
 						if (ValidarTelefono(telefono)) 
 						{
-							datos =
-					        {
-								pcUsuario : usuario,
-								pcContrasena : contrasena,
-								pcPrimerNombre : pNombre,
-								pcSegundoNombre : sNombre,
-								pcPrimerApellido : pApellido,
-								pcSegundoApellido : sApellido,
-								pcTelefono : telefono,
-								pcCedula : cedula,
-								pcCorreoElectronico : correo,
-								pcId_Departamento : departamento,
-								pcId_EstadoCivil : estadoCivil,
-								pcId_Genero : genero,						
-								accion : 4
-					        };			        
+							if (ValidarUsuario(usuario)) 
+							{
+								datos =
+						        {
+									pcUsuario : usuario,
+									pcContrasena : contrasena,
+									pcPrimerNombre : pNombre,
+									pcSegundoNombre : sNombre,
+									pcPrimerApellido : pApellido,
+									pcSegundoApellido : sApellido,
+									pcTelefono : telefono,
+									pcCedula : cedula,
+									pcCorreoElectronico : correo,
+									pcId_Departamento : departamento,
+									pcId_EstadoCivil : estadoCivil,
+									pcId_Genero : genero,						
+									accion : 4
+						        };			        
 
-						    $.ajax({
-						        type: "POST",
-						        url: "ajax/ajaxAutoRegistro.php",
-						        data: datos,
-						        success: function(response)
-						        {  						        	
-						        	var da = JSON.parse(response);
-						        							        					      
-						        	if (da.error == null)
-						        	{
-						        		alert("¡Usuario registrado éxitosamente!");
-						        		limpiarControles();
-						        	}
-						        	else
-						        	{
-						        		alert('¡Error al registrar el usuario!');
-						        	}						        	
-						        }
-						    });
+							    $.ajax({
+							        type: "POST",
+							        url: "ajax/ajaxAutoRegistro.php",
+							        data: datos,
+							        success: function(response)
+							        {  						        	
+							        	var da = JSON.parse(response);
+							        							        					      
+							        	if (da.error == null)
+							        	{
+							        		alert("¡Usuario registrado éxitosamente!");
+							        		limpiarControles();
+							        	}
+							        	else
+							        	{
+							        		alert('¡Error al registrar el usuario!');
+							        	}						        	
+							        }
+							    });
+							}
+							else
+							{
+								alert("El nombre del usuario debe ser mayor a 5 caracteres");
+							}							
 						}
 						else
 						{
@@ -121,6 +128,18 @@ function ValidarContrasena(contrasena, confirmarContrasena)
 {
 	var valida = false;
 	if (contrasena == confirmarContrasena)
+	{
+		valida = true;
+	}
+
+	return valida;
+}
+
+function ValidarUsuario(usuario)
+{
+	var valida = false;
+
+	if (usuario.length > 5)
 	{
 		valida = true;
 	}
@@ -251,3 +270,10 @@ function getDepartamento()
         }
     });
 }
+
+$( "input" ).keydown(function() {
+    if (event.keyCode == 32 ) 
+	{
+		event.preventDefault();
+	  }
+});

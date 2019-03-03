@@ -98,6 +98,10 @@
                             echo '<td><idUsuario="'.$value["Id_usuario"].'" perfil="4">Autenticado</td>';
                             break;
 
+                             case '5':
+                            echo '<td><idUsuario="'.$value["Id_usuario"].'" perfil="5">Pendiente</td>';
+                            break;
+
                   }
 
 

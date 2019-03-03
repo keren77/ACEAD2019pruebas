@@ -1,5 +1,7 @@
 <?php
+
 require_once("../modelos/conexion.php");
+require_once("../libraries/password_compatibility_library.php");
 
 if(isset($_POST["accion"]))
 {
@@ -145,7 +147,9 @@ if(isset($_POST["accion"]))
                 $pcCorreoElectronico = $_POST["pcCorreoElectronico"];
                 $pcId_Departamento = $_POST["pcId_Departamento"];
                 $pcId_EstadoCivil = $_POST["pcId_EstadoCivil"];
-                $pcId_Genero = $_POST["pcId_Genero"];                
+                $pcId_Genero = $_POST["pcId_Genero"];
+
+                $encriptar = password_hash($pcContrasena, PASSWORD_DEFAULT);
 
                 $query = 'CALL SP_INSERTAR_USUARIO(:pcUsuario, :pcContrasena, :pcPrimerNombre, :pcSegundoNombre, '
                                             .':pcPrimerApellido, :pcSegundoApellido, :pcTelefono, :pcCedula, '
@@ -157,7 +161,7 @@ if(isset($_POST["accion"]))
                 $parametros =array
                 (
                     "pcUsuario" => $pcUsuario,
-                    "pcContrasena" => $pcContrasena,
+                    "pcContrasena" => $encriptar,
                     "pcPrimerNombre" => $pcPrimerNombre,
                     "pcSegundoNombre" => $pcSegundoNombre,
                     "pcPrimerApellido" => $pcPrimerApellido,
