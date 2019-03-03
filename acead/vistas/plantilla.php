@@ -130,8 +130,8 @@ CUERPO DOCUMENTO
                 $_GET["ruta"] == "cambiocontrasena" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "cambiocontrasena-correo" ||
-                $_GET["ruta"] == "ventas" ||
-                $_GET["ruta"] == "crear-venta" ||
+                $_GET["ruta"] == "metodorecup" ||
+                $_GET["ruta"] == "contestapreg" ||
                 $_GET["ruta"] == "reportes" ||
                  $_GET["ruta"] == "preguntas" ||
                 $_GET["ruta"] == "cambiopass" ||

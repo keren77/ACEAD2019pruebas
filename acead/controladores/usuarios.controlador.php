@@ -55,23 +55,24 @@ class ControladorUsuarios{
 						$ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
 
 						if($ultimoLogin == "ok"){
-                                                            //aaQUI VA EL CODIGO PARA IR A LAS PREGUNTAS DE PRIMER ACCESO
-                                                    $valor3 = "PrimerIngreso";
-                                                    $revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
 
-                                                    /* Aquí hace el llamado de la funcion que inserta datos a la Bitacora
-                                                     * Este llamado debe hacerse asi, siempre que se necesite guardar X acción en la bitacora
-                                                     * Solo se debe ubicar en los lugares donde se realiza X acción que debe ser registrada en X objeto del sistema
-                                                     * Como en formularios, pantallas, tablas, etc.
-                                                     */
+                    //AQUI VA EL CODIGO PARA IR A LAS PREGUNTAS DE PRIMER ACCESO
+                  $valor3 = "PrimerIngreso";
+                  $revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
 
-                                                    ConexionBD::Inserta_bitacora($fechaActual, 'Ingreso al sistema', 'Accediendo por el Login del sistema', $_SESSION['id'], 1);
+                  /* Aquí hace el llamado de la funcion que inserta datos a la Bitacora
+                   * Este llamado debe hacerse asi, siempre que se necesite guardar X acción en la bitacora
+                   * Solo se debe ubicar en los lugares donde se realiza X acción que debe ser registrada en X objeto del sistema
+                   * Como en formularios, pantallas, tablas, etc.
+                   */
+
+                  ConexionBD::Inserta_bitacora($fechaActual, 'Ingreso al sistema', 'Accediendo por el Login del sistema', $_SESSION['id'], 1);
 
 
-                                                    if($revisaPacceso == true){
-                                                        echo '<script> window.location = "preguntas"; </script>';
-                                                    }else{
-                                                        echo '<script>
+                  if($revisaPacceso == true){
+                      echo '<script> window.location = "preguntas"; </script>';
+                  }else{
+                      echo '<script>
 
 								window.location = "inicio";
 
@@ -181,14 +182,14 @@ class ControladorUsuarios{
 
 
 				$tabla = "tbl_usuarios";
-				$nuevo = 3;
+				$nuevo = 1;
 				$primeringreso = 0;
 				$encriptar = password_hash($_POST["nuevoPassword"], PASSWORD_DEFAULT);
 
-				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
-										 "PrimerApellido"	=> $_POST["nuevoApellido1"],
-										 "SegundoNombre"	=> $_POST["nuevoNombre2"],
-										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
+				$datos = array("PrimerNombre" => strtoupper($_POST["nuevoNombre1"]),
+										 "PrimerApellido"	=> strtoupper($_POST["nuevoApellido1"]),
+										 "SegundoNombre"	=> strtoupper($_POST["nuevoNombre2"]),
+										 "SegundoApellido"	=> strtoupper($_POST["nuevoApellido2"]),
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
 										 "Cedula" => $_POST["nuevoCedula"],

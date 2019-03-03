@@ -25,7 +25,7 @@
 <!-- BOTON AGREGAE USUARIO -->
       <div class="box-header with-border">
 
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario"><i class="fa fa-plus"></i>
 
           Agregar usuario
 
@@ -191,7 +191,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre1" id="nuevoNombre1" placeholder="Primer Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoNombre1" id="nuevoNombre1" placeholder="Primer Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" style="text-transform: uppercase" maxlength="15" required>
 
               </div>
 
@@ -206,7 +206,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" style="text-transform: uppercase" maxlength="15">
 
               </div>
 
@@ -222,7 +222,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoApellido1" placeholder="Primer Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoApellido1" id="nuevoApellido1" placeholder="Primer Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required style="text-transform: uppercase" maxlength="15">
 
               </div>
 
@@ -236,7 +236,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoApellido2" placeholder="Segundo Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                <input type="text" class="form-control input-lg" name="nuevoApellido2" placeholder="Segundo Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" style="text-transform: uppercase" maxlength="15">
 
               </div>
 
@@ -250,7 +250,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Telefono" minlength="8" maxlength="15" pattern="[0-9]{8}">
+                    <input type="text" class="form-control input-lg" name="nuevoTelefono" id="nuevoTelefono" placeholder="Telefono" minlength="8" maxlength="15" pattern="[0-9]{8}">
 
                   </div>
 
@@ -264,7 +264,7 @@ MODAL AGREGAR USUARIO
 
                     <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
 
-                    <input type="text" class="form-control input-lg" name="nuevoCedula" placeholder="Numero de Identidad" minlength="8" maxlength="13" pattern="[0-9]{13}">
+                    <input type="text" class="form-control input-lg" name="nuevoCedula" id="nuevoCedula" placeholder="Numero de Identidad" minlength="8" maxlength="13" pattern="[0-9]{13}">
 
                   </div>
 
@@ -278,7 +278,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-at"></i></span>
 
-                <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Correo Electronico" required>
+                <input type="email" class="form-control input-lg" name="nuevoEmail" id="nuevoEmail" placeholder="Correo Electronico" required>
 
               </div>
 
@@ -292,7 +292,7 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-id-badge"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoUsuario" minlength="5" placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" style="text-transform: uppercase" required>
+                <input type="text" class="form-control input-lg" name="nuevoUsuario" id="nuevoUsuario" minlength="5" maxlength="15"placeholder="Ingresar usuario" id="nuevoUsuario" pattern="|^[a-zA-Z]*$|" style="text-transform: uppercase" required>
 
               </div>
 
@@ -306,10 +306,12 @@ MODAL AGREGAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
-                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}${30}" required>
+                <input type="password" class="form-control input-lg" name="nuevoPassword" id="nuevoPassword" placeholder="Ingresar contraseña" maxlength="30" minlength="5" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^*-]).{5,8}$" required>
 
               </div>
 
+              <p>La contraseña debera contener: una mayuscula, una minuscula, un numero y un caracter especial.</p>
+              
             </div>
 
             <!-- ENTRADA PARA SELECCIONAR SU DEPARTAMENTO -->
@@ -418,23 +420,6 @@ MODAL AGREGAR USUARIO
             </div>
 
 
-
-            <!-- ENTRADA PARA SUBIR FOTO
-
-
-             <div class="form-group">
-
-              <div class="panel">SUBIR FOTO</div>
-
-              <input type="file" class="nuevaFoto" name="nuevaFoto">
-
-              <p class="help-block">Peso máximo de la foto 2MB</p>
-
-              <img src="vistas/img/usuarios/default/anonymous.png" class="img-thumbnail previsualizar" width="100px">
-
-            </div>   -->
-
-
           </div>
 
         </div>
@@ -524,7 +509,7 @@ MODAL EDITAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarNombre1" id="editarNombre1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="editarNombre1" id="editarNombre1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" maxlength="15" required>
 
               </div>
 
@@ -538,7 +523,7 @@ MODAL EDITAR USUARIO
 
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                  <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" maxlength="15">
 
                 </div>
 
@@ -552,7 +537,7 @@ MODAL EDITAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarApellido1" id="editarApellido1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="editarApellido1" id="editarApellido1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" maxlength="15" required>
 
               </div>
 
@@ -566,7 +551,7 @@ MODAL EDITAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarApellido2" id="editarApellido2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                <input type="text" class="form-control input-lg" name="editarApellido2" id="editarApellido2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" maxlength="15">
 
               </div>
 
@@ -608,7 +593,7 @@ MODAL EDITAR USUARIO
 
                 <span class="input-group-addon"><i class="fa fa-at"></i></span>
 
-                <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" value="" required>
+                <input type="email" class="form-control input-lg" name="editarEmail" id="editarEmail" value="" maxlength="50" required>
 
               </div>
 
@@ -622,9 +607,10 @@ MODAL EDITAR USUARIO
 
                   <span class="input-group-addon"><i class="fa fa-lock"></i></span>
 
-                  <input type="password" class="form-control input-lg" name="editarPassword" id="nuevoPassword" placeholder="Escriba la Nueva Contraseña" maxlength="30" minlength="5" pattern="^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,8}$" required>
+                  <input type="password" class="form-control input-lg" name="editarPassword" id="editarPassword" placeholder="Escriba la Nueva Contraseña" maxlength="30" minlength="5" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^*-]).{5,8}$" required>
 
                 </div>
+                <p>La contraseña debera contener: una mayuscula, una minuscula, un numero y un caracter especial.</p>
 
               </div>
 
