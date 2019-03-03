@@ -25,12 +25,12 @@ class ConexionBD{
 
 
 
-    //Irma Lastenia Alonzo: se crearon funciones con el fin de manejor toda gestión por medio del objeto que ha sea instanciado 
+    //Irma Lastenia Alonzo: se crearon funciones con el fin de manejor toda gestión por medio del objeto que ha sea instanciado
 
- 	//creamos una conexión 
+ 	//creamos una conexión
 	public function establecerConexion()
 	{
-	$this->conn = new PDO("mysql:host=localhost;dbname=academiacead","root", "");        
+	$this->conn = new PDO("mysql:host=localhost;dbname=academiacead","root", "");
 	}
 
 	//Generamos un prepare en base al query de la variable $statement
@@ -41,7 +41,7 @@ class ConexionBD{
 
    /*Ejecuta el prepare statement generado en la función prepareStatement($statement)
     * Recibe los parametros a manera de arreglo de la siguiente manera
-    * array 
+    * array
     *  (
     *    "nombreParametro1" : valorParametro1,
     *    "nombreParametro2" : valorParametro2
@@ -70,7 +70,7 @@ class ConexionBD{
 	{
 		$this->statement->closeCursor();
 	}
-   
+
    //Obtenemos los parametros de salida
    public function getParametrosOUT($parametros)
    {
@@ -89,7 +89,7 @@ class ConexionBD{
    {
        $this->conn->commit();
    }
-   
+
    //deshace una transacción
    public function rollback()
    {

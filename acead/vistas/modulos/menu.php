@@ -59,7 +59,7 @@
 
 			</li>
 
-			<li>
+			<li class= "treeview" >
 
 				<a href="gestionacademica">
 
@@ -68,24 +68,13 @@
 
 			</li>
 
-			<li>
-
-				<a href="clientes">
-
-					<i class="fa fa-users"></i>
-					<span>Clientes</span>
-
-				</a>
-
-			</li>
-
 			<li class="treeview">
 
-				<a href="#">
+				<a href="gestionacademica">
 
-					<i class="fa fa-list-ul"></i>
+					<i class="fa fa-university"></i>
 
-					<span>Ventas</span>
+					<span>Gestión Académica</span>
 
 					<span class="pull-right-container">
 
@@ -99,10 +88,10 @@
 
 					<li>
 
-						<a href="ventas">
+						<a href="gestionacademica">
 
 							<i class="fa fa-circle-o"></i>
-							<span>Administrar ventas</span>
+							<span>Matrícula Actual</span>
 
 						</a>
 
@@ -110,10 +99,10 @@
 
 					<li>
 
-						<a href="crear-venta">
+						<a href="modalidades">
 
 							<i class="fa fa-circle-o"></i>
-							<span>Crear venta</span>
+							<span>Modalidades y Clases</span>
 
 						</a>
 
@@ -121,10 +110,10 @@
 
 					<li>
 
-						<a href="reportes">
+						<a href="seccion">
 
 							<i class="fa fa-circle-o"></i>
-							<span>Reporte de ventas</span>
+							<span>Secciones</span>
 
 						</a>
 
