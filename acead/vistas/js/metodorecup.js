@@ -17,11 +17,11 @@ $("#recupcorreo").click(function () {
             url: "../acead/modelos/usuarios.modelo.php?caso=metcorreo",
             data: params,
             type: "post",
-          
+
             success: function (data) {
                 if(data=='exito'){
                   window.location.href='cambiocontrasena';
-                  
+
                 }else{
                     alert("lo siento");
                 }
@@ -38,7 +38,7 @@ $("#recupreguntas").click(function () {
             "uname": usuario
         }
     localStorage.setItem("obj2", JSON.stringify(data2));
-    
+
     if (usuario == '' || usuario == null || usuario == 'undefined') {
         alert("Debe ingresar un usuario valido!!");
     } else {
@@ -113,4 +113,3 @@ $.ajax({
         //$('#preguntas').html(response).fadeIn();
     }
 });
-

@@ -6,7 +6,7 @@ require_once "conexion.php";
 
 class ModeloUsuarios {
     /* OBTENER VALOR DE BD PARA LOS INTENTOS */
-    
+
     static public function mdlObtenerIntentos() {
 
         $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT valor FROM TBL_Parametros WHERE Parametro='ADMIN_INTENTOS_INVALIDOS'");
@@ -50,7 +50,7 @@ class ModeloUsuarios {
       ============================================= */
 
     static public function mdlIngresarUsuario($tabla, $datos) {
-        echo "<script type='text/javascript'>alert('sql script')</script>";
+        //echo "<script type='text/javascript'>alert('sql script')</script>";
 
         $stmt = ConexionBD::Abrir_Conexion()->prepare("INSERT INTO $tabla(PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, CorreoElectronico, Telefono, Cedula, Usuario, Contrasena, Id_Departamento, Id_Estado, Id_EstadoCivil, Id_Genero, Id_Rol, PrimerIngreso)
 																									VALUES (:nombre1, :nombre2, :apellido1, :apellido2, :email, :telefono, :cedula, :usuario, :password, :departmento, :estado, :estcivil, :genero, :rol, :primeringreso)");
@@ -299,10 +299,10 @@ switch ($funcion) {
         metodo_porpreguntas();
         break;
     case 'cambiauserpass':
-        metodo_cambiauserpass();        
+        metodo_cambiauserpass();
         break;
     case 'actpass':
-        metodo_actpass();        
+        metodo_actpass();
         break;
 }
 
@@ -466,19 +466,19 @@ function metodo_cambiauserpass() {
     $idu = $resultado[0]['id_usuario'];
 //    echo json_encode($idu);
     if (strtolower($resultado[0]['respuesta']) == strtolower($resp)) {
-        
+
 //        $stmtA = ConexionBD::Abrir_Conexion()->prepare("update tbl_usuarios set contrasena = '".(string)$confcontrasena."' where id_usuario = ".$idu.";");
 //        if($stmtA->execute()){
 //            echo json_encode('exito');
-//        } 
+//        }
         $conexion = mysqli_connect('localhost', 'root', '', 'academiacead');
         mysqli_query($conexion, "update tbl_usuarios set contrasena = '".$contrasena."' where id_usuario = ".$idu.";");
-        mysqli_close($conexion);        
+        mysqli_close($conexion);
         echo json_encode('exito');
     } else {
         echo json_encode('fracaso');
     }
-    
+
     //actualiza_pass($idu, $contrasena);
 
 
@@ -499,24 +499,24 @@ function metodo_actpass(){
     $stmt = ConexionBD::Abrir_Conexion()->prepare("select tpu.respuesta, tpu.id_usuario from tbl_preguntasusuario tpu inner join tbl_usuarios tu on tpu.id_usuario=tu.id_usuario where tu.usuario='" . $uname . "' AND tpu.id_pregunta=" . $idpreg . ";");
     $stmt->execute();
     $resultado = $stmt->fetchAll(PDO::FETCH_BOTH);
-    
+
     $idu = $resultado[0]['id_usuario'];
     //echo json_encode($idu);
     $conexion = mysqli_connect('localhost', 'root', '', 'academiacead');
     mysqli_query($conexion, "update tbl_usuarios set contrasena = '". password_hash($contrasena, PASSWORD_DEFAULT)."' where id_usuario = ".$idu.";");
     mysqli_close($conexion);
-    
+
     echo json_encode('');
 //    if (strtolower($resultado[0]['respuesta']) == strtolower($resp)) {
 //        $conexion = mysqli_connect('localhost', 'root', '', 'academiacead');
 //        mysqli_query($conexion, "update tbl_usuarios set contrasena = '". password_hash($contrasena, PASSWORD_DEFAULT)."' where id_usuario = ".$idu.";");
-//        mysqli_close($conexion); 
-//    } 
+//        mysqli_close($conexion);
+//    }
 }
 
 function actualiza_pass($id, $pass) {
     $aaa = password_hash($pass, PASSWORD_DEFAULT);
-    
+
     $stmtB = ConexionBD::Abrir_Conexion()->prepare("update tbl_usuarios set contrasena = '".$aaa."' where id_usuario = ".$id.";");
     $stmtB->execute();
 }

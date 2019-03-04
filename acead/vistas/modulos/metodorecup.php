@@ -1,17 +1,17 @@
 <div class="content-wrapper">
 
   <section class="content-header">
-    
+
     <h1>
-      
+
       Seguridad del Sistema
-  
-      
+
+
       <small>Seleccionar metodo de recuperacion de constraseña</small>
-    
+
     </h1>
 
-    
+
 
   </section>
 
@@ -34,7 +34,7 @@
       <div class="box-body">
        <div class="box box-success">
             <div class="box-header with-border">
-             
+
             </div>
             <div class="box-body">
                 <div class="form-group" style="margin-left: auto; margin-right: auto; width: 50%;">
@@ -51,7 +51,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        
+
       </div>
       <!-- /.box-footer-->
     </div>
