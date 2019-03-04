@@ -1,5 +1,5 @@
 //alert("hola");
-var dataFromLocalStorage = JSON.parse(localStorage.getItem("data1"));
+var dataFromLocalStorage = JSON.parse(localStorage.getItem("obj1"));
 
 //alert(dataFromLocalStorage.uname);
 

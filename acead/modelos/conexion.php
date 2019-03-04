@@ -4,6 +4,9 @@ class ConexionBD{
 	public $conn ;
 	public $statement ;
 	public $result ;
+        
+        private $idu;
+        private $cont;
 
 	static public function Abrir_Conexion(){
 
@@ -94,6 +97,21 @@ class ConexionBD{
    public function rollback()
    {
        $this->conn->rollBack();
+   }
+   
+   static public function setUID($id){
+       $this->idu = $id;
+   }
+   
+   static public function getUID(){
+       return $this->idu;
+   }
+   static public function setCONT($c){
+       $this->cont = $c;
+   }
+   
+   static public function getCONT(){
+       return $this->cont;
    }
 
 }

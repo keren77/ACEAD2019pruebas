@@ -138,8 +138,8 @@
     </div>
         
     <?php include "footer.php"; ?>
-
-    <script type="text/javascript" src="vistas/js/autoRegistro.js"></script>
+      
+    <script type="text/javascript" src="../acead/vistas/js/autoRegistro.js"></script>
 
   </body>
 

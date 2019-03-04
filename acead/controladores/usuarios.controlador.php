@@ -92,8 +92,56 @@ class ControladorUsuarios{
 
 
 						case '1':
+                                                    $_SESSION["iniciarSesion"] = "ok";
+                                                    $_SESSION["id"] = $respuesta["Id_usuario"];
+                                                    $_SESSION["usuario"] = $respuesta["Id_usuario"];
+                                                    $_SESSION["nombre"] = $respuesta["PrimerNombre"];
+                                                    $_SESSION["perfil"] = $respuesta["Id_Rol"];
 
-						$_SESSION["iniciarSesion"] = "ok";
+
+                                                    /*=============================================
+                                                    REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
+                                                    =============================================*/
+
+                                                    date_default_timezone_set('America/Tegucigalpa');
+
+                                                    $fecha = date('Y-m-d');
+                                                    $hora = date('H:i:s');
+
+                                                    $fechaActual = $fecha.' '.$hora;
+
+                                                    $item1 = "FechaUltimaConex";
+                                                    $valor1 = $fechaActual;
+
+                                                    $item2 = "Id_usuario";
+                                                    $valor2 = $respuesta["Id_usuario"];
+
+                                                    $ultimoLogin = ModeloUsuarios::mdlActualizarUsuario($tabla, $item1, $valor1, $item2, $valor2);
+
+                                                    if($ultimoLogin == "ok"){
+                                                        
+                                                        //$valor3 = "PrimerIngreso";
+                                                        $revisaPacceso = ModeloUsuarios::obtenerPrimerIngreso($valor2);
+                                                        
+                                                        ConexionBD::Inserta_bitacora($fechaActual, 'Ingreso al sistema', 'Contestando las preguntas de seguridad para primer acceso!', $_SESSION['id'], 2);
+
+                                                        if($revisaPacceso === true){
+                                                            echo '<script> window.location = "preguntas"; </script>';
+                                                        }else{
+                                                            //session_destroy();
+                                                            echo '<script>
+
+                                                                    window.location = "inicio";
+
+                                                            </script>'; 
+                                                          
+                                                        }
+
+                                                    }
+
+                                                    break;
+
+						/*$_SESSION["iniciarSesion"] = "ok";
 						$_SESSION["id"] = $respuesta["Id_usuario"];
 						$_SESSION["usuario"] = $respuesta["Id_usuario"];
 						$_SESSION["nombre"] = $respuesta["PrimerNombre"];
@@ -103,7 +151,7 @@ class ControladorUsuarios{
 						/*=============================================
 						REGISTRAR FECHA PARA SABER EL ÚLTIMO LOGIN
 						=============================================*/
-
+                                                    /*
 						date_default_timezone_set('America/Tegucigalpa');
 
 						$fecha = date('Y-m-d');
@@ -129,7 +177,7 @@ class ControladorUsuarios{
 
 						}
 
-						break;
+						break; */
 
 					}
 

@@ -1,4 +1,5 @@
-$( document ).ready(function() {   
+$( document ).ready(function() {
+    
 	getGeneros();
 	getEstadoCiviles();
 	getDepartamento();    
@@ -53,7 +54,7 @@ $('#guardar').click(function()
 
 							    $.ajax({
 							        type: "POST",
-							        url: "ajax/ajaxAutoRegistro.php",
+							        url: "../../ajax/ajaxAutoRegistro.php",
 							        data: datos,
 							        success: function(response)
 							        {  						        	

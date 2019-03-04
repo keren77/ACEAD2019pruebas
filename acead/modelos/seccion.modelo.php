@@ -44,7 +44,7 @@ class ModeloSeccion
 
 			foreach ($result as $indice => $row)
 			{
-				$modalidades [$indice] =
+                                $modalidades [$indice] = 
 				{
 					"codigo" => $row["Cod"],
 					"nombre" => $row["Desc"]

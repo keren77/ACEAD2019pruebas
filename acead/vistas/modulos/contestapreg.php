@@ -44,7 +44,7 @@
                                 <div class="form-group">
 
                                     <label for="resp1"></label>
-                                    <input type="text" class="form-control" id="resp1" placeholder="Ingrese la respuesta a la pregunta seleccionada" name="txtresp">
+                                    <input type="text" class="form-control" id="resp1" placeholder="Ingrese la respuesta a la pregunta seleccionada" name="txtresp" autocomplete="off">
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -91,4 +91,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<script src="../acead/vistas/js/metodorecup.js"></script>
+<script src="../acead/vistas/js/contestapreg.js"></script>
 <script src="../acead/vistas/js/recupera.js"></script>
