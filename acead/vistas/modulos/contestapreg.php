@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="width: 900px; top:30%; transform:translate(50%); box-sizing: border-box; padding:30px 30px; position:center">
 
     <section class="content-header">
 
@@ -37,7 +37,7 @@
                                     <label>Seleccione la pregunta</label>
                                     <select class="form-control" id="cbopreguntas">
                                         <option value="" selected="" disabled="">seleccione...</option>
-                                       
+
                                     </select>
                                 </div>
 
@@ -50,9 +50,9 @@
                                     <div class="input-group">
 
                                         <input type="password" class="form-control" id="nuevopass" name="nuevopass" placeholder="Nueva contraseña">
-                                        <span class="input-group-btn"> 
+                                        <span class="input-group-btn">
                                             <button id="btnojito2" class="btn btn-default reveal1" type="button"> <i class="fa fa-eye" id="ojito"></i></button>
-                                        </span>                          
+                                        </span>
 
                                     </div>
                                 </div>
@@ -60,9 +60,9 @@
                                     <div class="input-group">
 
                                         <input type="password" class="form-control" id="confirmapass" name="confirmapass" placeholder="Confirma la nueva contraseña">
-                                        <span class="input-group-btn"> 
+                                        <span class="input-group-btn">
                                             <button id="btnojito3" class="btn btn-default reveal1" type="button"> <i class="fa fa-eye" id="ojito"></i></button>
-                                        </span>                          
+                                        </span>
 
                                     </div>
                                 </div>

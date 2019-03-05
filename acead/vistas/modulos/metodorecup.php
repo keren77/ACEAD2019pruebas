@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" style="width: 900px; top:30%; transform:translate(50%); box-sizing: border-box; padding:30px 30px; position:center">
 
   <section class="content-header">
 
