@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2019 at 09:05 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Mar 08, 2019 at 07:19 AM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -142,6 +142,7 @@ CREATE TABLE `tbl_alumnos` (
   `SegundoNombre` varchar(15) DEFAULT NULL,
   `PrimerApellido` varchar(15) NOT NULL,
   `SegundoApellido` varchar(15) DEFAULT NULL,
+  `CorreoElectronico` varchar(30) DEFAULT NULL,
   `FechaNacimiento` date NOT NULL,
   `Cedula` decimal(13,0) NOT NULL,
   `Telefono` decimal(12,0) NOT NULL,
@@ -160,8 +161,8 @@ CREATE TABLE `tbl_asistencia` (
   `Id_asistencia` int(11) NOT NULL,
   `Asistencia` decimal(4,0) DEFAULT NULL,
   `Fecha` date NOT NULL,
-  `Id_Clase` int(11) NOT NULL,
-  `Id_Empleado` int(11) NOT NULL
+  `Id_usuario` int(11) NOT NULL,
+  `Id_clase` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -172,12 +173,24 @@ CREATE TABLE `tbl_asistencia` (
 
 CREATE TABLE `tbl_bitacora` (
   `Id_Bitacora` int(11) NOT NULL,
-  `Fecha` date NOT NULL,
+  `Fecha` datetime NOT NULL,
   `Accion` varchar(20) NOT NULL,
   `Descripcion` varchar(100) NOT NULL,
   `Id_usuario` int(11) NOT NULL,
   `Id_Objeto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_bitacora`
+--
+
+INSERT INTO `tbl_bitacora` (`Id_Bitacora`, `Fecha`, `Accion`, `Descripcion`, `Id_usuario`, `Id_Objeto`) VALUES
+(25, '2019-03-08 00:16:57', 'Ingreso al sistema', 'Accediendo por el Login del sistema', 1, 1),
+(26, '2019-03-08 07:17:07', 'Seguridad en acceso', 'Agregando pregunta de seguridad', 1, 2),
+(27, '2019-03-08 07:17:15', 'Seguridad en acceso', 'Agregando pregunta de seguridad', 1, 2),
+(28, '2019-03-08 07:17:22', 'Seguridad en acceso', 'Agregando pregunta de seguridad', 1, 2),
+(29, '2019-03-08 07:17:39', 'Cambio de password', 'Cambiando el password en el primer acceso del usuario', 1, 6),
+(30, '2019-03-08 00:17:54', 'Ingreso al sistema', 'Accediendo por el Login del sistema', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -598,8 +611,8 @@ INSERT INTO `tbl_descuento` (`Id_Descuento`, `Descuento`, `DescripDesc`, `ValorD
 CREATE TABLE `tbl_direcciones` (
   `Id_Direcciones` int(11) NOT NULL,
   `Direccion` varchar(45) DEFAULT NULL,
-  `Id_Alumno` int(11) DEFAULT NULL,
-  `Id_Empleado` int(11) DEFAULT NULL
+  `Id_usuario` int(11) NOT NULL,
+  `Id_alumno` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -639,8 +652,8 @@ CREATE TABLE `tbl_estadocivil` (
 --
 
 INSERT INTO `tbl_estadocivil` (`Id_EstadoCivil`, `Descripcion`) VALUES
-(1, 'Soltero'),
-(2, 'Casado');
+(1, 'SOLTERO'),
+(2, 'CASADO');
 
 -- --------------------------------------------------------
 
@@ -697,13 +710,6 @@ CREATE TABLE `tbl_hist_contrasena` (
   `ModificadoPor` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tbl_hist_contrasena`
---
-
-INSERT INTO `tbl_hist_contrasena` (`Id_Hist`, `Contrasena`, `Id_usuario`, `FechaModificacion`, `FechaCreacion`, `CreadoPor`, `ModificadoPor`) VALUES
-(1, '$2y$10$yXHKpcdEmCwO7csb/0MO5.D3pMZTkNrRef0Ni01SOM3oziKojVAu2', 1, NULL, '2018-10-24', 'adminsis', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -733,9 +739,9 @@ CREATE TABLE `tbl_modalidades` (
 --
 
 INSERT INTO `tbl_modalidades` (`Id_Modalidad`, `DescripModalidad`) VALUES
-(1, 'Diplomado'),
-(2, 'Tecnico'),
-(3, 'Curso Libre');
+(1, 'DIPLOMADO'),
+(2, 'TECNICO'),
+(3, 'CURSO LIBRE');
 
 -- --------------------------------------------------------
 
@@ -874,8 +880,8 @@ CREATE TABLE `tbl_parametros` (
 --
 
 INSERT INTO `tbl_parametros` (`Id_Parametro`, `Parametro`, `Valor`, `FechaCreacion`, `FechaModificacion`, `Id_usuario`) VALUES
-(1, 'ADMIN_INTENTOS_INVALIDOS', '99', '2018-11-07', NULL, 1),
-(2, 'ADMIN_PREGUNTAS', '1', '2018-11-07', NULL, 1);
+(1, 'ADMIN_INTENTOS_INVALIDOS', '3', '2019-03-07', '2019-03-07', 1),
+(2, 'ADMIN_PREGUNTAS', '3', '2019-03-07', '2019-03-07', 1);
 
 -- --------------------------------------------------------
 
@@ -919,64 +925,6 @@ CREATE TABLE `tbl_permisos` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_personal`
---
-
-CREATE TABLE `tbl_personal` (
-  `Id_Empleado` int(11) NOT NULL,
-  `PrimerNombre` varchar(15) NOT NULL,
-  `SegundoNombre` varchar(15) DEFAULT NULL,
-  `PrimerApellido` varchar(15) NOT NULL,
-  `SegundoApellido` varchar(15) DEFAULT NULL,
-  `Telefono` decimal(12,0) NOT NULL,
-  `Email` varchar(30) NOT NULL,
-  `Cedula` decimal(13,0) NOT NULL,
-  `CreadoPor` varchar(15) NOT NULL,
-  `ModificadoPor` varchar(15) DEFAULT NULL,
-  `FechaCreacion` date NOT NULL,
-  `FechaModificacion` date DEFAULT NULL,
-  `Id_Departamentos` int(11) DEFAULT NULL,
-  `Id_estadocivil` int(11) NOT NULL,
-  `Id_genero` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_personal`
---
-
-INSERT INTO `tbl_personal` (`Id_Empleado`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Telefono`, `Email`, `Cedula`, `CreadoPor`, `ModificadoPor`, `FechaCreacion`, `FechaModificacion`, `Id_Departamentos`, `Id_estadocivil`, `Id_genero`) VALUES
-(1, 'MANUEL', NULL, 'ARGOS', 'PEREZ', '98703456', 'MANU.AORS3@HOTMAIL.COM', '1517198956702', 'PRUEBA', 'PRUEBA', '2018-10-10', '2018-10-10', 1, 1, 2),
-(2, 'Keren', NULL, 'Yanes', NULL, '12345678', 'keren@yahoo.com', '801000000000', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(3, 'JONATHAN', '', 'CARCAMO', '', '0', '', '0', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(4, 'JONATHAN', '', 'CARCAMO', '', '0', '', '0', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(5, 'JONATHAN', '', 'CARCAMO', '', '0', '', '0', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(6, 'AUTO', 'REGISTRO', 'PRUEBA', '', '123456789', 'kul@gh.hn', '801000000000', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(7, 'FLOR', 'KARINA', 'PRUEBA', 'ZELEDON', '34343434', 'flor@gmail.com', '801199089675', 'PRUEBA', 'PRUEBA', '2018-10-10', '2018-10-10', 1, 1, 2),
-(8, 'Leonardo', 'Jose', 'Ramos', 'Suazo', '98981212', 'leonardo@yahoo.com', '802199012121', 'Autoregistro', 'AutoRegistro', '2018-11-16', '2018-11-16', 1, 1, 1),
-(9, 'Anderson', 'Luis', 'Souza', 'Farias', '33402121', 'leonardo@yahoo.com', '802199023231', 'Autoregistro', 'AutoRegistro', '2018-11-16', '2018-11-16', 1, 1, 1),
-(10, 'Yency', 'pamela', 'aguilera', 'landa', '99081212', 'yency@yahoo.com', '801199012121', 'Autoregistro', 'AutoRegistro', '2018-11-16', '2018-11-16', 1, 1, 1),
-(11, 'ana', 'nohelia', 'martinez', 'lozano', '22355412', 'ana@yahoo.com', '803199511223', 'Autoregistro', 'AutoRegistro', '2018-11-16', '2018-11-16', 1, 1, 1),
-(12, 'juan', 'pablo', 'montes', 'rodezno', '90871234', 'juanp@yahoo.es', '804199055663', 'Autoregistro', 'AutoRegistro', '2018-11-16', '2018-11-16', 1, 1, 1),
-(13, 'ruben', 'antonio', 'aguirre', 'soto', '23243434', 'benru@yahoo.com', '802199034344', 'Autoregistro', 'AutoRegistro', '2018-11-16', '2018-11-16', 1, 1, 1),
-(14, 'Ringo', 'Saul', 'Star', 'Johnson', '99891212', 'ringo@hotmail.com', '801199023344', 'Autoregistro', 'AutoRegistro', '2018-11-17', '2018-11-17', 1, 1, 1),
-(15, 'adelaida', 'joselina', 'flores', 'garcia', '95678912', 'adelaida@gmail.com', '802199023233', 'Autoregistro', 'AutoRegistro', '2018-11-18', '2018-11-18', 1, 1, 1),
-(16, 'carlos', 'alberto', 'pavon', 'plumer', '98786745', 'carlos@gmail.com', '805197012345', 'Autoregistro', 'AutoRegistro', '2018-11-18', '2018-11-18', 1, 1, 1),
-(17, 'silvia', 'florinda', 'villalobos', 'facusse', '22239898', 'silvia@gmail.com', '802197823456', 'Autoregistro', 'AutoRegistro', '2018-11-18', '2018-11-18', 1, 1, 1),
-(18, 'mayra', 'eliza', 'zuniga', 'argueta', '98784512', 'mayra@gmail.com', '802199023231', 'Autoregistro', 'AutoRegistro', '2018-11-19', '2018-11-19', 1, 1, 1),
-(19, 'rocko', 'wallaby', 'peña', 'ucles', '34567890', 'carlos_metalmaniac@hotmail.com', '801199056564', 'Autoregistro', 'AutoRegistro', '2018-11-21', '2018-11-21', 1, 1, 1),
-(20, 'Yosseline', 'Nicolle', 'Varela', 'Lanza', '22222222', 'ni-colle@hotmail.com', '801199588746', 'Autoregistro', 'AutoRegistro', '2018-12-01', '2018-12-01', 1, 1, 1),
-(21, 'Cesar', 'paulino', 'lopez', 'lopez', '98693654', 'mariovarela018@gmail.com', '801195878963', 'Autoregistro', 'AutoRegistro', '2018-12-01', '2018-12-01', 1, 1, 1),
-(22, 'gabriela', 'maria', 'cerrato', 'gomez', '36965479', 'gabriela@hotmail.com', '801195636974', 'Autoregistro', 'AutoRegistro', '2018-12-01', '2018-12-01', 1, 1, 1),
-(23, 'Maria', 'magdalena', 'lanza', 'martinez', '23256987', 'magda@gmail.com', '801159636957', 'Autoregistro', 'AutoRegistro', '2018-12-01', '2018-12-01', 1, 1, 1),
-(24, 'axel', 'jose', 'flores', 'landa', '23232625', 'juanc.romeroruiz@hotmail.com', '801195878960', 'Autoregistro', 'AutoRegistro', '2018-12-01', '2018-12-01', 1, 1, 1),
-(25, 'luz', NULL, 'gonzalez', NULL, '22556396', 'luz@gmail.com', '801195636987', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(26, 'luz', NULL, 'gonzalez', NULL, '22556396', 'luz@gmail.com', '801195636987', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(27, 'luz', NULL, 'gonzalez', NULL, '22556396', 'luz@gmail.com', '801195636987', '', NULL, '0000-00-00', NULL, NULL, 1, 2),
-(28, 'irma', 'lastenia', 'gonzales', 'lopez', '22222222', 'irma.alonzo1@hotmail.com', '801199585968', 'Autoregistro', 'AutoRegistro', '2018-12-01', '2018-12-01', 1, 1, 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_planilla`
 --
 
@@ -998,10 +946,10 @@ CREATE TABLE `tbl_planillapago` (
   `TotalPagar` decimal(8,2) DEFAULT NULL,
   `FechaGen` date DEFAULT NULL,
   `FechaPago` date DEFAULT NULL,
-  `Id_Empleado` int(11) NOT NULL,
   `Id_asistencia` int(11) NOT NULL,
   `Id_Planilla` int(11) NOT NULL,
-  `Id_Pago` int(11) NOT NULL
+  `Id_Pago` int(11) NOT NULL,
+  `Id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -1058,6 +1006,15 @@ CREATE TABLE `tbl_preguntasusuario` (
   `ModificadoPor` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_preguntasusuario`
+--
+
+INSERT INTO `tbl_preguntasusuario` (`Respuesta`, `Id_usuario`, `Id_Pregunta`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`) VALUES
+('mei', 1, 1, '2019-03-08', '2019-03-08', 'Autoregistro', 'Autoregistro'),
+('keren', 1, 3, '2019-03-08', '2019-03-08', 'Autoregistro', 'Autoregistro'),
+('negro', 1, 5, '2019-03-08', '2019-03-08', 'Autoregistro', 'Autoregistro');
+
 -- --------------------------------------------------------
 
 --
@@ -1096,33 +1053,9 @@ CREATE TABLE `tbl_secciones` (
   `HraClase` time DEFAULT NULL,
   `AulaClase` varchar(15) DEFAULT NULL,
   `Id_Clase` int(11) NOT NULL,
-  `Id_Empleado` int(11) NOT NULL,
-  `Id_PeriodoAcm` int(11) NOT NULL
+  `Id_PeriodoAcm` int(11) NOT NULL,
+  `Id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_secciones`
---
-
-INSERT INTO `tbl_secciones` (`Id_Seccion`, `DescripSeccion`, `HraClase`, `AulaClase`, `Id_Clase`, `Id_Empleado`, `Id_PeriodoAcm`) VALUES
-(1, '10 am', '00:59:00', '206', 1, 1, 2),
-(2, '11 am', '00:59:00', '306', 201, 1, 2),
-(3, '10 am', '00:50:00', '235', 2, 3, 2),
-(7, '10 am', '00:50:00', '123', 245, 12, 2),
-(8, '1 pm', '00:50:00', '456', 233, 15, 2),
-(9, '2 pm', '00:45:00', '123', 228, 12, 2),
-(10, '11 am', '00:50:00', '89', 257, 7, 2),
-(11, '10 am', '00:45:00', '265', 200, 8, 2),
-(12, '10 am', '00:45:00', '265', 199, 5, 2),
-(13, '8 AM', '00:50:00', '156', 101, 1, 2),
-(14, '8 AM', '00:50:00', '156', 102, 12, 2),
-(15, '8 AM', '00:50:00', '63', 171, 14, 2),
-(16, '9 am', '00:50:00', '123', 264, 15, 2),
-(17, '10 am', '00:50:00', '263', 101, 7, 2),
-(18, '11 am', '00:50:00', '123', 202, 3, 2),
-(19, '1 pm', '00:50:00', '123', 202, 3, 2),
-(20, '9 am', '00:45:00', '456', 203, 10, 2),
-(21, '10-11', '00:45:00', '102', 205, 10, 2);
 
 -- --------------------------------------------------------
 
@@ -1146,20 +1079,20 @@ CREATE TABLE `tbl_usuarios` (
   `Id_usuario` int(11) NOT NULL,
   `Usuario` varchar(15) NOT NULL,
   `Contrasena` longtext NOT NULL,
-  `FechaUltimaConex` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `FechaUltimaConex` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `PrimerNombre` varchar(15) NOT NULL,
   `SegundoNombre` varchar(15) DEFAULT NULL,
   `PrimerApellido` varchar(15) NOT NULL,
   `SegundoApellido` varchar(15) DEFAULT NULL,
   `Telefono` int(11) NOT NULL,
-  `Cedula` int(13) NOT NULL,
+  `Cedula` bigint(13) NOT NULL,
   `PreguntasContestadas` bigint(20) DEFAULT NULL,
   `PrimerIngreso` bigint(20) DEFAULT NULL,
   `FechaVencimiento` date DEFAULT NULL,
   `CorreoElectronico` varchar(50) DEFAULT NULL,
-  `Id_Departamento` int(11) DEFAULT NULL,
-  `Id_EstadoCivil` int(11) DEFAULT NULL,
-  `Id_Genero` int(11) DEFAULT NULL,
+  `Id_Departamento` int(11) NOT NULL,
+  `Id_Genero` int(11) NOT NULL,
+  `Id_EstadoCivil` int(11) NOT NULL,
   `Id_Estado` int(11) DEFAULT NULL,
   `Id_Rol` int(11) DEFAULT NULL,
   `FechaCreacion` date DEFAULT NULL,
@@ -1173,8 +1106,9 @@ CREATE TABLE `tbl_usuarios` (
 -- Dumping data for table `tbl_usuarios`
 --
 
-INSERT INTO `tbl_usuarios` (`Id_usuario`, `Usuario`, `Contrasena`, `FechaUltimaConex`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Telefono`, `Cedula`, `PreguntasContestadas`, `PrimerIngreso`, `FechaVencimiento`, `CorreoElectronico`, `Id_Departamento`, `Id_EstadoCivil`, `Id_Genero`, `Id_Estado`, `Id_Rol`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`, `code`) VALUES
-(1, 'ADMIN', '$2y$10$KBv7ZLSMURl3ipU0f03lFu.vZ435MhsnNh0upmRjPDiZaKptU8Ht.', '2019-03-03 07:27:13', 'Administrador', NULL, '', NULL, 0, 0, 1, 1, '2020-12-31', 'admin@admin.com', 0, 0, 0, 3, 1, '2018-10-22', '2018-10-22', 'adminsis', 'adminsis', NULL);
+INSERT INTO `tbl_usuarios` (`Id_usuario`, `Usuario`, `Contrasena`, `FechaUltimaConex`, `PrimerNombre`, `SegundoNombre`, `PrimerApellido`, `SegundoApellido`, `Telefono`, `Cedula`, `PreguntasContestadas`, `PrimerIngreso`, `FechaVencimiento`, `CorreoElectronico`, `Id_Departamento`, `Id_Genero`, `Id_EstadoCivil`, `Id_Estado`, `Id_Rol`, `FechaCreacion`, `FechaModificacion`, `CreadoPor`, `ModificadoPor`, `code`) VALUES
+(1, 'ADMIN', '$2y$10$jKczoPIcnHY3dTat6UBmxePTNKhS8UP.2PKqOb3S2QYYtl8q6mSBW', '2019-03-08 06:17:54', 'ADMIN', NULL, 'ADMIN', NULL, 11111111, 801000011111, NULL, 1, NULL, 'admin@admin.com', 2, 1, 1, 3, 1, NULL, NULL, NULL, NULL, NULL),
+(72, 'KERENY', '$2y$10$EzPOcGHPLgelAGAN.p6Ue.V9zg/UypIsOuqD/GgCuZ8X/GqUUSHJG', NULL, 'KEREN', '', 'YANES', '', 88888888, 801000011111, NULL, 0, NULL, 'abc@abc.com', 1, 1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1193,8 +1127,8 @@ ALTER TABLE `tbl_alumnos`
 --
 ALTER TABLE `tbl_asistencia`
   ADD PRIMARY KEY (`Id_asistencia`),
-  ADD KEY `fkIdx_Clas_Asis` (`Id_Clase`),
-  ADD KEY `fkIdx_Pers_Asis` (`Id_Empleado`);
+  ADD KEY `FK_User_Asis` (`Id_usuario`),
+  ADD KEY `FK_Clases_Asis` (`Id_clase`);
 
 --
 -- Indexes for table `tbl_bitacora`
@@ -1264,8 +1198,8 @@ ALTER TABLE `tbl_descuento`
 --
 ALTER TABLE `tbl_direcciones`
   ADD PRIMARY KEY (`Id_Direcciones`),
-  ADD KEY `fkIdx_Alumno_Dir` (`Id_Alumno`),
-  ADD KEY `fkIdx_Pers_Dir` (`Id_Empleado`);
+  ADD KEY `FK_User_Dir` (`Id_usuario`),
+  ADD KEY `FK_alumno_Dir` (`Id_alumno`);
 
 --
 -- Indexes for table `tbl_estado`
@@ -1367,15 +1301,6 @@ ALTER TABLE `tbl_permisos`
   ADD KEY `fkIdx_Obj_Permisos` (`Id_Objeto`);
 
 --
--- Indexes for table `tbl_personal`
---
-ALTER TABLE `tbl_personal`
-  ADD PRIMARY KEY (`Id_Empleado`),
-  ADD KEY `fkIdx_Dept_Pers` (`Id_Departamentos`),
-  ADD KEY `fkIdx_estcivil_pers` (`Id_estadocivil`),
-  ADD KEY `fkIdx_gen_pers` (`Id_genero`);
-
---
 -- Indexes for table `tbl_planilla`
 --
 ALTER TABLE `tbl_planilla`
@@ -1385,10 +1310,10 @@ ALTER TABLE `tbl_planilla`
 -- Indexes for table `tbl_planillapago`
 --
 ALTER TABLE `tbl_planillapago`
-  ADD KEY `fkIdx_Pers_PPago` (`Id_Empleado`),
   ADD KEY `fkIdx_Asist_PPago` (`Id_asistencia`),
   ADD KEY `fkIdx_Planilla_PPago` (`Id_Planilla`),
-  ADD KEY `fkIdx_PClases_PPago` (`Id_Pago`);
+  ADD KEY `fkIdx_PClases_PPago` (`Id_Pago`),
+  ADD KEY `FK_User_Ppago` (`Id_usuario`);
 
 --
 -- Indexes for table `tbl_precio`
@@ -1421,9 +1346,9 @@ ALTER TABLE `tbl_roles`
 ALTER TABLE `tbl_secciones`
   ADD PRIMARY KEY (`Id_Seccion`),
   ADD KEY `fkIdx_clase_Seccion` (`Id_PeriodoAcm`),
-  ADD KEY `fkIdx_Pers_Seccion` (`Id_Empleado`),
   ADD KEY `fkIdx_Periodo_Seccion` (`Id_PeriodoAcm`),
-  ADD KEY `FK_Clase_Seccion` (`Id_Clase`);
+  ADD KEY `FK_Clase_Seccion` (`Id_Clase`),
+  ADD KEY `FK_User_Seccion` (`Id_usuario`);
 
 --
 -- Indexes for table `tbl_tipocontacto`
@@ -1438,10 +1363,9 @@ ALTER TABLE `tbl_usuarios`
   ADD PRIMARY KEY (`Id_usuario`),
   ADD KEY `fkIdx_Rol_Usuario` (`Id_Rol`),
   ADD KEY `fkIdx_Est_Usuario` (`Id_Estado`),
-  ADD KEY `fkIdx_Id_Departamento` (`Id_Departamento`) USING BTREE,
-  ADD KEY `fkidx_Genero` (`Id_Genero`),
-  ADD KEY `fkidx_EstadoCivil_Pers` (`Id_EstadoCivil`),
-  ADD KEY `fkidx_Dept_Personal` (`Id_Departamento`);
+  ADD KEY `FK_Depto_User` (`Id_Departamento`),
+  ADD KEY `FK_User_estcivil` (`Id_EstadoCivil`),
+  ADD KEY `FK_User_Genero` (`Id_Genero`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1463,7 +1387,7 @@ ALTER TABLE `tbl_asistencia`
 -- AUTO_INCREMENT for table `tbl_bitacora`
 --
 ALTER TABLE `tbl_bitacora`
-  MODIFY `Id_Bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `Id_Bitacora` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_calificaciones`
@@ -1598,12 +1522,6 @@ ALTER TABLE `tbl_periodoacademico`
   MODIFY `Id_PeriodoAcm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tbl_personal`
---
-ALTER TABLE `tbl_personal`
-  MODIFY `Id_Empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
 -- AUTO_INCREMENT for table `tbl_planilla`
 --
 ALTER TABLE `tbl_planilla`
@@ -1643,7 +1561,7 @@ ALTER TABLE `tbl_tipocontacto`
 -- AUTO_INCREMENT for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- Constraints for dumped tables
@@ -1660,8 +1578,8 @@ ALTER TABLE `tbl_alumnos`
 -- Constraints for table `tbl_asistencia`
 --
 ALTER TABLE `tbl_asistencia`
-  ADD CONSTRAINT `FK_Clas_Asis` FOREIGN KEY (`Id_Clase`) REFERENCES `tbl_clases` (`Id_Clase`),
-  ADD CONSTRAINT `FK_Pers_Asis` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`);
+  ADD CONSTRAINT `FK_Clases_Asis` FOREIGN KEY (`Id_clase`) REFERENCES `tbl_clases` (`Id_Clase`),
+  ADD CONSTRAINT `FK_User_Asis` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
 -- Constraints for table `tbl_bitacora`
@@ -1707,8 +1625,8 @@ ALTER TABLE `tbl_cuentacorriente`
 -- Constraints for table `tbl_direcciones`
 --
 ALTER TABLE `tbl_direcciones`
-  ADD CONSTRAINT `FK_Alumno_Dir` FOREIGN KEY (`Id_Alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`),
-  ADD CONSTRAINT `FK_Pers_Dir` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`);
+  ADD CONSTRAINT `FK_User_Dir` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`),
+  ADD CONSTRAINT `FK_alumno_Dir` FOREIGN KEY (`Id_alumno`) REFERENCES `tbl_alumnos` (`Id_Alumno`);
 
 --
 -- Constraints for table `tbl_hist_contrasena`
@@ -1757,21 +1675,13 @@ ALTER TABLE `tbl_permisos`
   ADD CONSTRAINT `FK_Rol_Permisos` FOREIGN KEY (`Id_Rol`) REFERENCES `tbl_roles` (`Id_Rol`);
 
 --
--- Constraints for table `tbl_personal`
---
-ALTER TABLE `tbl_personal`
-  ADD CONSTRAINT `FK_Dept_Pers` FOREIGN KEY (`Id_Departamentos`) REFERENCES `tbl_departamentos` (`Id_Departamentos`),
-  ADD CONSTRAINT `FK_estcivil_pers` FOREIGN KEY (`Id_estadocivil`) REFERENCES `tbl_estadocivil` (`Id_EstadoCivil`),
-  ADD CONSTRAINT `FK_gen_pers` FOREIGN KEY (`Id_genero`) REFERENCES `tbl_genero` (`Id_Genero`);
-
---
 -- Constraints for table `tbl_planillapago`
 --
 ALTER TABLE `tbl_planillapago`
   ADD CONSTRAINT `FK_Asist_PPago` FOREIGN KEY (`Id_asistencia`) REFERENCES `tbl_asistencia` (`Id_asistencia`),
   ADD CONSTRAINT `FK_PClases_PPago` FOREIGN KEY (`Id_Pago`) REFERENCES `tbl_pagoclases` (`Id_Pago`),
-  ADD CONSTRAINT `FK_Pers_PPago` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`),
-  ADD CONSTRAINT `FK_Planilla_PPago` FOREIGN KEY (`Id_Planilla`) REFERENCES `tbl_planilla` (`Id_Planilla`);
+  ADD CONSTRAINT `FK_Planilla_PPago` FOREIGN KEY (`Id_Planilla`) REFERENCES `tbl_planilla` (`Id_Planilla`),
+  ADD CONSTRAINT `FK_User_Ppago` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
 -- Constraints for table `tbl_preguntasusuario`
@@ -1786,13 +1696,16 @@ ALTER TABLE `tbl_preguntasusuario`
 ALTER TABLE `tbl_secciones`
   ADD CONSTRAINT `FK_Clase_Seccion` FOREIGN KEY (`Id_Clase`) REFERENCES `tbl_clases` (`Id_Clase`),
   ADD CONSTRAINT `FK_Periodo_Seccion` FOREIGN KEY (`Id_PeriodoAcm`) REFERENCES `tbl_periodoacademico` (`Id_PeriodoAcm`),
-  ADD CONSTRAINT `FK_Pers_Seccion` FOREIGN KEY (`Id_Empleado`) REFERENCES `tbl_personal` (`Id_Empleado`);
+  ADD CONSTRAINT `FK_User_Seccion` FOREIGN KEY (`Id_usuario`) REFERENCES `tbl_usuarios` (`Id_usuario`);
 
 --
 -- Constraints for table `tbl_usuarios`
 --
 ALTER TABLE `tbl_usuarios`
-  ADD CONSTRAINT `FK_Est_Usuario` FOREIGN KEY (`Id_Estado`) REFERENCES `tbl_estado` (`Id_Estado`);
+  ADD CONSTRAINT `FK_Depto_User` FOREIGN KEY (`Id_Departamento`) REFERENCES `tbl_departamentos` (`Id_Departamentos`),
+  ADD CONSTRAINT `FK_Est_Usuario` FOREIGN KEY (`Id_Estado`) REFERENCES `tbl_estado` (`Id_Estado`),
+  ADD CONSTRAINT `FK_User_Genero` FOREIGN KEY (`Id_Genero`) REFERENCES `tbl_genero` (`Id_Genero`),
+  ADD CONSTRAINT `FK_User_estcivil` FOREIGN KEY (`Id_EstadoCivil`) REFERENCES `tbl_estadocivil` (`Id_EstadoCivil`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
