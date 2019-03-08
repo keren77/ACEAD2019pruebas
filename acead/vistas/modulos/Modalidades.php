@@ -61,10 +61,9 @@
 
               $item = null;
               $valor = null;
+              $modalidades = ControladorModalidades::ctrMostrarModalidades($item, $valor);
 
-              $mod = ControladorModalidades::ctrMostrarModalidades($item, $valor);
-
-             foreach ($mod as $key => $value){
+             foreach ($modalidades as $key => $value){
 
                 echo ' <tr>
                         <td>'.($key+1).'</td>
