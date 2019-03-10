@@ -24,6 +24,8 @@ class ControladorUsuarios{
 
 				if($respuesta["Usuario"] == strtoupper($_POST["ingUsuario"]) && password_verify($_POST["ingPassword"], $respuesta['Contrasena'])){
 					$_SESSION['intentos']=0;
+                                        
+                                        //switch controla la sesion y el estado del usuario
 
 					switch($respuesta["Id_Estado"]){
 						case '3':
@@ -90,7 +92,7 @@ class ControladorUsuarios{
 
 						break;
 
-
+                                                //control del estado 1 primer ingreso
 						case '1':
                                                     $_SESSION["iniciarSesion"] = "ok";
                                                     $_SESSION["id"] = $respuesta["Id_usuario"];

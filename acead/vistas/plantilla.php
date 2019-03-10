@@ -105,6 +105,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "reportes" ||
          $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "cambiopass" ||
+         $_GET["ruta"] == "cambiapasspreg" ||
          $_GET["ruta"] == "cambiocontrasena" ||
          $_GET["ruta"] == "recupera" ||
          $_GET["ruta"] == "salir"){
@@ -120,6 +121,7 @@ CUERPO DOCUMENTO
     =============================================*/
     include "modulos/footer.php";
     echo '</div>';
+    //rutas que se requieren sin manejo de sesion(por ejemplo recuperacion de contraseña etc)
   }else{
     //include "modulos/login.php";
       if(isset($_GET['ruta'])){
@@ -136,6 +138,7 @@ CUERPO DOCUMENTO
                  $_GET["ruta"] == "preguntas" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "recupera" ||
+                $_GET["ruta"] == "cambiapasspreg" ||
                 $_GET["ruta"] == "salir"){
                include "modulos/".$_GET["ruta"].".php";
              }else{

@@ -1,24 +1,25 @@
-//alert("sdfdf");
+//archivo jquery para controlar el formulario y las peticiones ajax 
+//variables para obtener el id_usuario y el nombre de usuario global
 var usuario;
 var idusuario;
 var usuarioT;
-
+//funcion del boton recupcorreo
 $("#recupcorreo").click(function () {
-
-    usuario = $("input[name=txtusuario]").val();
+    
+    usuario = $("input[name=txtusuario]").val(); 
     usuarioT = $("input[name=txtusuario]").val();
     if (usuario == "" || usuario == null) {
         alert("Debe introducir el nombre de usuario!!");
-    } else {
-        params = {
+    } else { 
+        params = { 
             "usuario": usuario
         };
-        $.ajax({
+        $.ajax({ 
             url: "../acead/modelos/usuarios.modelo.php?caso=metcorreo",
             data: params,
             type: "post",
 
-            success: function (data) {
+            success: function (data) { 
                 if(data=='exito'){
                   window.location.href='cambiocontrasena';
 
@@ -26,47 +27,49 @@ $("#recupcorreo").click(function () {
                     alert("lo siento");
                 }
             },
-            error: function () {}
+            error: function () {} 
         });
     }
 
 });
 
 $("#recupreguntas").click(function () {
+    //se captura el usuario del input 
     usuario = $("input[name=txtusuario]").val();
     var data2 = {
             "uname": usuario
         }
+        // se almacena tambien en la variable global obj2
     localStorage.setItem("obj2", JSON.stringify(data2));
 
-    if (usuario == '' || usuario == null || usuario == 'undefined') {
+    if (usuario == '' || usuario == null || usuario == 'undefined') { //se revisa que los inputs no vengan vacios
         alert("Debe ingresar un usuario valido!!");
     } else {
-        var param1 = {
+        var param1 = {//si todo va bien se define el objeto json a utilizar
             "usuario": usuario
         }
 
-        $.ajax({
+        $.ajax({ //se define ajax con metodo post
             url: "../acead/modelos/usuarios.modelo.php?caso=verifuser",
             data: param1,
             type: "post",
             dataType: 'json',
-            success: function (data) {
-                if (data == '') {
-                    alert('Usuario no existe en el sistema!!');
+            success: function (data) { //captura estado exitoso
+                if (data == '') { //si el resultado viene vacio es porque usuario no exite en la bd
+                    alert('Usuario no existe en el sistema!!'); 
                     $('input[name=txtusuario]').val('');
-                } else {
+                } else { //si el usuario exite se agrega a la variable id_usuario
                     $.each(data, function (i, item) {
                         //alert(item[0]);
                         idusuario = item[0];
                     });
 
-                    var data1 = {
+                    var data1 = { //nuevo objeto json con el nombre del usuario
                         "uname": usuario
                     }
 
-                    localStorage.setItem("obj1", JSON.stringify(data1));
-                    window.location.href = "contestapreg";
+                    localStorage.setItem("obj1", JSON.stringify(data1)); //se almacena en la cache el usuario capturado
+                    window.location.href = "contestapreg"; //se redirecciona a la ruta contestapreg
                 }
 
             },

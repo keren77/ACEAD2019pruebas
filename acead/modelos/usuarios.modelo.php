@@ -263,12 +263,12 @@ class ModeloUsuarios {
 }
 
 // ELEMENTOS AGREGADOS POR NICOLLE
-$funcion = filter_input(INPUT_GET, 'caso');
+$funcion = filter_input(INPUT_GET, 'caso'); //capturando el parametro caso enviado por ajax el cual escoje el metodo a ejecutar
 //$r = filter_input(INPUT_GET, 'r');
 //$ip = filter_input(INPUT_GET, 'ip');
 
-switch ($funcion) {
-    case 'respuestas':
+switch ($funcion) { //ejecucion del metodo recibido, capturado por input_get
+    case 'respuestas': 
         Agregarespuesta();
         break;
     case 'cambiapass':
@@ -287,7 +287,7 @@ switch ($funcion) {
         metodo_porpreguntas();
         break;
     case 'verifuser':
-        metodo_verifuser();
+        metodo_verifuser(); //metodo para verificar la existencia del usuario capturado en el input
         break;
     case 'cargapreguntas':
         metodo_cargapreguntas();
@@ -303,6 +303,12 @@ switch ($funcion) {
         break;
     case 'actpass':
         metodo_actpass();
+        break;
+    case 'contpregunta':
+        metodo_contpregunta();        
+        break;
+    case 'nuevopass':
+        metodo_nuevopass(); //se invoca al metodo que cambia la nueva pass del usuario solicitado        
         break;
 }
 
@@ -412,38 +418,41 @@ function metodo_porpreguntas() {
     $stmt->execute();
 }
 
+
 function metodo_verifuser() {
+    //se capturan los datos del objeto json enviado por ajax
     $usuario = filter_input(INPUT_POST, 'usuario');
-
+    //sentencia preparada para la base de datos
     $stmt = ConexionBD::Abrir_Conexion()->prepare("select * from tbl_usuarios where usuario='" . $usuario . "';");
-    $stmt->execute();
+    $stmt->execute(); //ejecucion de la sentencia
 
-    $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+    $result = $stmt->fetchAll(PDO::FETCH_BOTH); //obtencion de la consulta como un arreglo asociativo
 
-    if (isset($result)) {
-        echo json_encode($result);
+    if (isset($result)) { //si hubo resultado
+        echo json_encode($result); //se envia un objeto json con el resultado en formato json
     } else {
-        echo '0';
+        echo '0'; //si no hubo resultado de envia 0
     }
 }
 
 function metodo_cargapreguntas() {
-    $uname = filter_input(INPUT_GET, 'un');
-
+    //metodo que devuelve las preguntas segun el usuario seleccionado
+    $uname = filter_input(INPUT_GET, 'un'); //caputa el usuario actual por input_get
+    //consulta preparada para obtener id_usuario
     $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT TU.Id_usuario, TU.Usuario, TU.correoElectronico, TU.contrasena FROM tbl_Usuarios TU WHERE Usuario = '" . $uname . "';");
     $stmt->execute();
 
-    $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+    $result = $stmt->fetchAll(PDO::FETCH_BOTH); //convertir el resultado en un arreglo asociativo
 
     //Este es el ID del usuario del que se intenta cambiar el password
     //echo json_encode($result[0]['Id_usuario']);
-    $idU = $result[0]['Id_usuario'];
-
+    $idU = $result[0]['Id_usuario']; //obteniendo el id del arreglo asociativo
+    //consulta preparada para obtener las preguntas contestadas con su respuesta respectiva segun usuario capturado
     $stmt2 = ConexionBD::Abrir_Conexion()->prepare("select tpu.id_pregunta, tp.pregunta, tpu.respuesta, tpu.id_usuario from tbl_preguntasusuario tpu inner join tbl_preguntas tp on tpu.id_pregunta = tp.id_pregunta where tpu.id_usuario =" . $idU . ";");
-    $stmt2->execute();
-    $result2 = $stmt2->fetchAll(PDO::FETCH_BOTH);
+    $stmt2->execute(); //ejecucion del query
+    $result2 = $stmt2->fetchAll(PDO::FETCH_BOTH); //obteniendo el susltado como un arreglo asociativo
 
-    echo json_encode($result2);
+    echo json_encode($result2); //envuando arreglo asociativo como estado json
     /*
       foreach($result as $fila){
       echo '<option value="'.$fila["Id_Pregunta"].'">'.$fila["Pregunta"].'</option>';
@@ -521,6 +530,49 @@ function actualiza_pass($id, $pass) {
     $stmtB->execute();
 }
 
+
+function metodo_contpregunta() {
+    $uname = filter_input(INPUT_POST, 'uname');
+    $idpreg = filter_input(INPUT_POST, 'idpreg');
+    $resp = filter_input(INPUT_POST, 'resp');
+    
+
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("select tpu.respuesta, tpu.id_usuario from tbl_preguntasusuario tpu inner join tbl_usuarios tu on tpu.id_usuario=tu.id_usuario where tu.usuario='" . $uname . "' AND tpu.id_pregunta=" . $idpreg . ";");
+    $stmt->execute();
+    $resultado = $stmt->fetchAll(PDO::FETCH_BOTH);
+    
+    $idu = $resultado[0]['id_usuario'];
+    
+    if(strtolower($resp)== strtolower($resultado[0]['respuesta'])){
+        
+        echo(json_encode('1'));        
+    }else{
+         echo(json_encode('0')); 
+    }
+}
+
+function metodo_nuevopass(){ 
+    //se capturas los compònentes del objeto json recibidos
+    $uname = filter_input(INPUT_POST, 'uname');
+    $c1 = filter_input(INPUT_POST, 'contra1');
+    $c2 = filter_input(INPUT_POST, 'contra2');
+    //sentencia preparada para la base de datos
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("select tu.id_usuario AS id from tbl_usuarios tu where tu.usuario='".$uname."';");
+    $stmt->execute(); //ejecucion de la sentencia
+    
+    $resultado=$stmt->fetchAll(PDO::FETCH_BOTH); //se captura el resultado de la consulta como  un arreglo asociado de objetos
+           
+    $idu=$resultado[0]['id']; //se obtiene el id de usuario con el resultado obtenido en el paso anterior
+    
+    echo json_encode($idu);
+//    $stmt2= ConexionBD::Abrir_Conexion()->prepare("update tbl_usuarios set contrasena = '".password_hash($c1, PASSWORD_DEFAULT)."' where id_usuario = ".$idu.";");
+//    if($stmt2->execute()){
+//        echo json_encode('1');
+//        
+//    }else{
+//        echo json_encode('0');
+//    }
+}
 /*
     function metodo_porcorreo(){
          $usuario = filter_input(INPUT_POST, 'usuario');

@@ -73,7 +73,7 @@
       </div>
 
   <!-- Recuperar contraseña y auto refistro -->
-
+<!--     enlace a la ruta metodorecup que es el archivo que permite seleccionar el metodo de recuperacion de contraseña-->
   <button class="btn btn-link" type="button"><a href="metodorecup">¿Olvidaste tu contraseña?</a></button>
   <button class="btn btn-link" type="button"><a href="autoregistro">Registrate en el sistema</a></button>
 

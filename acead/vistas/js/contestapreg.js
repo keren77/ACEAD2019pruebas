@@ -1,103 +1,71 @@
-var id_pregunta, respuesta, contrasena, confcontrasena;
+//archivo jquery para controlar el formulario y el ajax
 
-var usuariotemporal = JSON.parse(localStorage.getItem("obj1"));
+var id_pregunta, respuesta, contrasena, confcontrasena; //variables para obtener los datos
+
+var usuariotemporal = JSON.parse(localStorage.getItem("obj1")); //variable global para obtener el usuario requerido
 
 var uT;
-var dataT = JSON.parse(localStorage.getItem("obj2"));
+var dataT = JSON.parse(localStorage.getItem("obj2")); //tomando el usuario de la cache del sistema
 
-$("#btnojito2").mousedown(function () {
-    $("#nuevopass").removeAttr("type");
-    $("#nuevopass").attr("type", "text");
-
-});
-
-$("#btnojito2").mouseup(function () {
-    $("#nuevopass").removeAttr("type");
-    $("#nuevopass").attr("type", "password");
-
-});
-
-
-$("#btnojito3").mousedown(function () {
-    $("#confirmapass").removeAttr("type");
-    $("#confirmapass").attr("type", "text");
-
-});
-
-$("#btnojito3").mouseup(function () {
-    $("#confirmapass").removeAttr("type");
-    $("#confirmapass").attr("type", "password");
-
-});
-
-
-$('#btngenviar').on("click", function () {
+$('#btngenviar').on("click", function () { //accion del boton enviar al darle click
+    //se obtiene el id_pregunta y la respuesta del control select y el input
     id_pregunta = $("#cbopreguntas").val();
     respuesta = $("#resp1").val();
-    contrasena = $("#nuevopass").val();
-    confcontrasena = $("#confirmapass").val();
-
-    if ((id_pregunta == '' || id_pregunta == null) || (respuesta == '' || respuesta == null) || (contrasena == '' || contrasena == null) || (confcontrasena == '' || confcontrasena == null)) {
-        alert("debe contestar todos los campos");
-    } else {
-        if (contrasena !== confcontrasena) {
-            alert("Las contraseñas no coinciden")
-        } else {
-            uT = usuarioT;
-            var param2= {
+//    contrasena = $("#nuevopass").val();
+//    confcontrasena = $("#confirmapass").val();
+       //se evalua que los datos no esten vacios ni nulos
+    if ((id_pregunta == '' || id_pregunta == null) || (respuesta == '' || respuesta == null) ) {
+        alert("debe contestar la pregunta"); 
+    } else { // si todo va bien se define el ajax
+        //se obtiene el usuario de cache 
+        uT = usuarioT;
+            var param2= { //se llena un objeto json con los datos a enviar
                 "uname": dataT.uname,
                 "idpreg": id_pregunta,
-                "resp": respuesta,
-                "contrasena": contrasena,
-                "confcontrasena": confcontrasena
-            }
-            
+                "resp": respuesta
+             }
+            //definicion del ajax por el metodo post
             $.ajax({
                 type: "POST",
-                url: "../acead/modelos/usuarios.modelo.php?caso=cambiauserpass&un=" + dataT.uname,
+                url: "../acead/modelos/usuarios.modelo.php?caso=contpregunta&un=" + dataT.uname,
                 data: param2,
                 dataType: 'json',
-                success: function(msj){  
-                    
-                   if(msj=='exito'){
-                        alert("se actualizo la nueva ");
-                        window.location.href="acceso";
-                        act_pass();
+                success: function(msj){  //captura resultado exitoso
+                    if(msj==1){
+                        window.location.href='cambiapasspreg'; //redirecciona a la ruta cambiapasspreg
                     }else{
-                        alert('la respuesta no es la misma');
+                        alert('Respuesta incorrecta');
                     }
                 },
-                error: function(xhr, status){
+                error: function(xhr, status){ //captura resultado fallido
                     alert(xhr.response + " -- " + status);
                 }
-            });            
-            
-        }
+            }); 
     }
 
 
 });
 
-function act_pass(){
-    uT = usuarioT;
-            var param3= {
-                "uname": dataT.uname,
-                "idpreg": id_pregunta,
-                "resp": respuesta,
-                "contrasena": contrasena,
-                "confcontrasena": confcontrasena
-            }
-            
-    $.ajax({
-                type: "POST",
-                url: "../acead/modelos/usuarios.modelo.php?caso=actpass&un=" + dataT.uname,
-                data: param3,
-                dataType: 'json',
-                success: function(msj){
-                    //alert(msj);
-                },
-                error: function(xhr, status){
-                    //alert(xhr.response);
-                }
-            });
-}
+//function act_pass(){
+//    uT = usuarioT;
+//            var param3= {
+//                "uname": dataT.uname,
+//                "idpreg": id_pregunta,
+//                "resp": respuesta,
+//                "contrasena": contrasena,
+//                "confcontrasena": confcontrasena
+//            }
+//            
+//    $.ajax({
+//                type: "POST",
+//                url: "../acead/modelos/usuarios.modelo.php?caso=actpass&un=" + dataT.uname,
+//                data: param3,
+//                dataType: 'json',
+//                success: function(msj){
+//                    //alert(msj);
+//                },
+//                error: function(xhr, status){
+//                    //alert(xhr.response);
+//                }
+//            });
+//}
