@@ -19,12 +19,12 @@
   </section>
 
   <!-- Main content -->
-  <section class="content">
+  <section class="content" style="width:550px">
 
     <div class="box">
 
       <!-- BOTON AGREGAE USUARIO -->
-            <div class="box-header with-border">
+        <div class="box-header with-border">
 
               <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarModalidad">
 
@@ -35,68 +35,156 @@
             </div>
 
 
-            <div class="box-body">
+              <div class="box-body">
 
-             <table class="table table-bordered table-striped dt-responsive tablas">
+                <table class="table table-bordered table-striped dt-responsive tablas">
 
-              <thead>
+                  <thead>
 
-               <tr>
+                   <tr>
 
-                 <th style="width:10px">#</th>
-                 <th style="width:10px">Id</th>
-                 <th>Modalidad</th>
-                 <th>Acciones</th>
-
-
-               </tr>
-
-              </thead>
-
-              <tbody>
-
-              <?php
+                     <th style="width:10px">#</th>
+                     <th style="width:10px">Id</th>
+                     <th>Modalidad</th>
+                     <th>Acciones</th>
 
 
+                   </tr>
 
-              $item = null;
-              $valor = null;
-              $modalidades = ControladorModalidades::ctrMostrarModalidades($item, $valor);
+                  </thead>
 
-             foreach ($modalidades as $key => $value){
+                  <tbody>
 
-                echo ' <tr>
-                        <td>'.($key+1).'</td>
-                        <td>'.$value["Id_Modalidad"].'</td>
-                        <td>'.$value["DescripModalidad"].'</td>
-
-                        <td>
-
-                          <div class="btn-group">
-
-                            <button class="btn btn-warning btnEditarModalidad" idUsuario="'.$value["Id_Modalidad"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+                      <?php
 
 
 
-                          </div>
+                      $item = null;
+                      $valor = null;
+                      $modalidades = ControladorModalidades::ctrMostrarModalidades($item, $valor);
 
-                        </td>
+                     foreach ($modalidades as $key => $value){
 
-                      </tr>';
-              }
+                        echo ' <tr>
+                                <td>'.($key+1).'</td>
+                                <td>'.$value["Id_Modalidad"].'</td>
+                                <td>'.$value["DescripModalidad"].'</td>
+
+                                <td>
+
+                                  <div class="btn-group">
+
+                                    <button class="btn btn-warning btnEditarModalidad" idUsuario="'.$value["Id_Modalidad"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
 
 
-              ?>
+
+                                  </div>
+
+                                </td>
+
+                              </tr>';
+                      }
 
 
-              </tbody>
+                      ?>
 
-             </table>
 
+                  </tbody>
+
+                </table>
+
+              </div>
+
+              <!-- /.content -->
     </div>
+
     <!-- /.box -->
 
   </section>
-  <!-- /.content -->
+
+  <section class="content" style="width:550px">
+
+    <div class="box">
+
+      <!-- BOTON AGREGAE USUARIO -->
+        <div class="box-header with-border">
+
+              <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarModalidad">
+
+                Agregar Modalidades
+
+              </button>
+
+            </div>
+
+
+              <div class="box-body">
+
+                <table class="table table-bordered table-striped dt-responsive tablas">
+
+                  <thead>
+
+                   <tr>
+
+                     <th style="width:10px">#</th>
+                     <th style="width:10px">Id</th>
+                     <th>Modalidad</th>
+                     <th>Acciones</th>
+
+
+                   </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                      <?php
+
+
+
+                      $item = null;
+                      $valor = null;
+                      $modalidades = ControladorModalidades::ctrMostrarModalidades($item, $valor);
+
+                     foreach ($modalidades as $key => $value){
+
+                        echo ' <tr>
+                                <td>'.($key+1).'</td>
+                                <td>'.$value["Id_Modalidad"].'</td>
+                                <td>'.$value["DescripModalidad"].'</td>
+
+                                <td>
+
+                                  <div class="btn-group">
+
+                                    <button class="btn btn-warning btnEditarModalidad" idUsuario="'.$value["Id_Modalidad"].'" data-toggle="modal" data-target="#modalEditarUsuario"><i class="fa fa-pencil"></i></button>
+
+
+
+                                  </div>
+
+                                </td>
+
+                              </tr>';
+                      }
+
+
+                      ?>
+
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+              <!-- /.content -->
+    </div>
+
+    <!-- /.box -->
+
+  </section>
+
+
 </div>
 <!-- /.content-wrapper -->
