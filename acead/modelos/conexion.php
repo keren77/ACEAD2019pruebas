@@ -24,6 +24,11 @@ class ConexionBD{
             $stmt = ConexionBD::Abrir_Conexion()->prepare("CALL sp_addbitacora('".$f."','".$a."','".$d."',".$iu.",".$io.");");
             $stmt->execute();
         }
+        
+        static public function obtieneHash($pass){
+            $hash = password_hash($pass, PASSWORD_DEFAULT);
+            return (string)$hash;
+        }
 
 
 

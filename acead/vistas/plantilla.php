@@ -126,15 +126,15 @@ CUERPO DOCUMENTO
     //include "modulos/login.php";
       if(isset($_GET['ruta'])){
           if($_GET["ruta"] == "inicio" ||
-                $_GET["ruta"] == "" ||
-                $_GET["ruta"] == "" ||
+                $_GET["ruta"] == "usuarios" ||
+                $_GET["ruta"] == "alumnos" ||
                 $_GET["ruta"] == "autoregistro" ||
                 $_GET["ruta"] == "cambiocontrasena" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "cambiocontrasena-correo" ||
                 $_GET["ruta"] == "metodorecup" ||
                 $_GET["ruta"] == "contestapreg" ||
-                $_GET["ruta"] == "" ||
+                $_GET["ruta"] == "reportes" ||
                  $_GET["ruta"] == "preguntas" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "recupera" ||

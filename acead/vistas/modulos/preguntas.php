@@ -36,8 +36,13 @@ $idu = $_SESSION['id'];
             <div class="box-body">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>(Tiene un maximo de 3 preguntas)</label>
-                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" id="cboPreguntas">
+                                    <label>Pregunta</label>
+                                    <label id="cantpreg"></label>
+                                    <label> de 3 permitidas </label>
+                                </div>
+                    <div class="form-group">
+                      
+                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%; text-transform: uppercase;" tabindex="-1" aria-hidden="true" id="cboPreguntas">
                             <option selected="selected" value="0" disabled="">Seleccione pregunta</option>
                             <!-- <option value="1">¿Cual era el nombre de tu primer mascota?</option>
                             <option value="2">¿Cual es el nombre de la ciudad en que naciste?</option>
@@ -61,8 +66,8 @@ $idu = $_SESSION['id'];
                             ?>
                         </select>
                         <br><br>
-                        <input type="text" class="form-control" placeholder="Ingrese su respuesta" id="txtRespuesta">
-
+                        <input type="text" class="form-control" placeholder="Ingrese su respuesta" id="txtRespuesta" style="text-transform: uppercase;">
+                      
                     </div> 
                 </div>
 
@@ -70,7 +75,7 @@ $idu = $_SESSION['id'];
             <!-- /.box-body -->
             <div class="box-footer">
                 <button class="btn btn-success" id="btnAgregar">Agregar</button>
-                <button  class="btn btn-primary" id="btnGuardar" disabled="true">Guardar y Avanzar</button> <BR><BR>
+<!--                <button  class="btn btn-primary" id="btnGuardar" disabled="true">Guardar y Avanzar</button> <BR><BR>-->
                 <!--
                 <div class="alert alert-warning alert-dismissable" id="alerta1" >
                     

@@ -41,7 +41,7 @@ class ControladorPass{
     }
 
   /*=============================================
-  ENVIO DE CORREO
+  CORREO
   =============================================*/
 
   static public function ctrEMAIL(){
@@ -107,16 +107,26 @@ class ControladorPass{
 
 
     if ($mail->send()) {
-
-        echo '<br><div class="alert alert-warning">Correo Enviado Exitosamente.</div>';
+        //echo "Mailer Error: " . $mail->ErrorInfo;
+        echo '<br><div class="alert alert-warning">Correo Enviado.</div>';
     } else {
+        //header("Location: ../index.php");
 
-        echo '<br><div class="alert alert-danger">Error al enviar Correo Electronico</div>';
-
+        //echo "<script type='text/javascript'>alert('AQUI')</script>";
+    		/*$_SESSION["recuperar"]=1;
+    		$_SESSION["ERRORRECUPERAR"]=2;*/
     }
 
-    		
+    		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     	}
+    	else{
+        //echo "<script type='text/javascript'>alert('POSAQUI')</script>";
+        /*
+    		header("Location: ../index.php?ruta=Recuperar");
+    		$_SESSION["ERRORRECUPERAR"]=1;  */
+    	}
+
 
     }
   }

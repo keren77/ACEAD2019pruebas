@@ -1,4 +1,12 @@
-<div class="content-wrapper" style="width: 900px; top:30%; transform:translate(50%); box-sizing: border-box; padding:30px 30px; position:center">
+<!-- 
+archivo:            formulario para contestar la pregunta de seguridad predefinida por el usuario
+autor:              nicolle varela
+fecha:              02/2019
+correo:             nicollevarela1995@gmail.com
+proyecto:           academia cead
+-->
+
+<div class="content-wrapper">
 
     <section class="content-header">
 
@@ -33,39 +41,40 @@
                         <!-- form start -->
                         <form role="form">
                             <div class="box-body">
+                                
                                 <div class="form-group">
                                     <label>Seleccione la pregunta</label>
-                                    <select class="form-control" id="cbopreguntas">
+                                    <select class="form-control" id="cbopreguntas" style="text-transform: uppercase;">
                                         <option value="" selected="" disabled="">seleccione...</option>
-
+                                       
                                     </select>
                                 </div>
 
                                 <div class="form-group">
 
                                     <label for="resp1"></label>
-                                    <input type="text" class="form-control" id="resp1" placeholder="Ingrese la respuesta a la pregunta seleccionada" name="txtresp" autocomplete="off">
+                                    <input type="text" class="form-control" id="resp1" placeholder="Ingrese la respuesta a la pregunta seleccionada" name="txtresp" autocomplete="off" style="text-transform: uppercase;">
                                 </div>
-                                <div class="form-group">
+<!--                                <div class="form-group">
                                     <div class="input-group">
 
                                         <input type="password" class="form-control" id="nuevopass" name="nuevopass" placeholder="Nueva contraseña">
-                                        <span class="input-group-btn">
+                                        <span class="input-group-btn"> 
                                             <button id="btnojito2" class="btn btn-default reveal1" type="button"> <i class="fa fa-eye" id="ojito"></i></button>
-                                        </span>
+                                        </span>                          
 
                                     </div>
-                                </div>
-                                <div class="form-group">
+                                </div>-->
+<!--                                <div class="form-group">
                                     <div class="input-group">
-
+<
                                         <input type="password" class="form-control" id="confirmapass" name="confirmapass" placeholder="Confirma la nueva contraseña">
-                                        <span class="input-group-btn">
+                                        <span class="input-group-btn"> 
                                             <button id="btnojito3" class="btn btn-default reveal1" type="button"> <i class="fa fa-eye" id="ojito"></i></button>
-                                        </span>
+                                        </span>                          
 
                                     </div>
-                                </div>
+                                </div>-->
 
                             </div>
                             <!-- /.box-body -->
@@ -91,7 +100,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
+<!--asociando los archivos js que controlan el formulario-->
 <script src="../acead/vistas/js/metodorecup.js"></script>
 <script src="../acead/vistas/js/contestapreg.js"></script>
 <script src="../acead/vistas/js/recupera.js"></script>

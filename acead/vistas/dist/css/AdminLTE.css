@@ -1613,20 +1613,6 @@ a:focus {
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-
-.boxcambiopass {
-  position: relative;
-  border-radius: 3px;
-  background: #ffffff;
-  border-top: 3px solid #d2d6de;
-  margin-bottom: 20px;
-  /*width: 100%;*/
-  width: 500px;
-  padding: 10px;
-  margin:auto;
-  margin-top: 15%;
-  margin-bottom: 25%
-}
 .box.box-primary {
   border-top-color: #3c8dbc;
 }

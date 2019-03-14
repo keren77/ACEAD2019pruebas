@@ -13,34 +13,39 @@ $('#btngenviar').on("click", function () { //accion del boton enviar al darle cl
     respuesta = $("#resp1").val();
 //    contrasena = $("#nuevopass").val();
 //    confcontrasena = $("#confirmapass").val();
-       //se evalua que los datos no esten vacios ni nulos
+
+    
+    //se evalua que los datos no esten vacios ni nulos
     if ((id_pregunta == '' || id_pregunta == null) || (respuesta == '' || respuesta == null) ) {
-        alert("debe contestar la pregunta"); 
+        alert("Debe contestar la pregunta!"); 
     } else { // si todo va bien se define el ajax
         //se obtiene el usuario de cache 
+        alert("Respuesta recibida!!");
         uT = usuarioT;
-            var param2= { //se llena un objeto json con los datos a enviar
-                "uname": dataT.uname,
-                "idpreg": id_pregunta,
-                "resp": respuesta
-             }
-            //definicion del ajax por el metodo post
-            $.ajax({
-                type: "POST",
-                url: "../acead/modelos/usuarios.modelo.php?caso=contpregunta&un=" + dataT.uname,
-                data: param2,
-                dataType: 'json',
-                success: function(msj){  //captura resultado exitoso
-                    if(msj==1){
-                        window.location.href='cambiapasspreg'; //redirecciona a la ruta cambiapasspreg
-                    }else{
-                        alert('Respuesta incorrecta');
-                    }
-                },
-                error: function(xhr, status){ //captura resultado fallido
-                    alert(xhr.response + " -- " + status);
+        var param2= { //se llena un objeto json con los datos a enviar
+            "uname": dataT.uname,
+            "idpreg": id_pregunta,
+            "resp": respuesta
+         };
+
+        //definicion del ajax por el metodo post
+        $.ajax({
+            type: "POST",
+            url: "../acead/modelos/usuarios.modelo.php?caso=contpregunta&un=" + dataT.uname,
+            data: param2,
+            dataType: 'json',
+            success: function(msj){  //captura resultado exitoso
+                //alert("EEE::" + msj);
+                if(msj==1){
+                    window.location.href='cambiapasspreg'; //redirecciona a la ruta cambiapasspreg
+                }else{
+                    alert('Respuesta incorrecta');
                 }
-            }); 
+            },
+            error: function(xhr, status){ //captura resultado fallido
+                alert(xhr.response + " -- " + status);
+            }
+        }); 
     }
 
 

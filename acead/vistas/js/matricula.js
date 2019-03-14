@@ -22,7 +22,7 @@ $(".tablas").on("click", ".btnMatriculaAlumno", function(){
 		success: function(respuesta){
 
 			$("#editarAlumno").val(respuesta["PrimerNombre"]);
-
+                            
 			}
 
 	});
