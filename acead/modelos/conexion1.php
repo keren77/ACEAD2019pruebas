@@ -24,7 +24,7 @@
       private $uname;
 
       //Metodo para abrir la conexion
-      public function Abrir_ConexionE(){
+      public function Abrir_Conexion(){
           $this->conexion = new mysqli($this->host, $this->usuario, $this->password, $this->basedatos);
           $this->conexion->set_charset("utf8");
           if($this->conexion->connect_errno){

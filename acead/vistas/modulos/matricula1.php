@@ -109,7 +109,7 @@ MODAL MATRICULA ALUMNO
 
                         <div class="row">
                           <div class="col-lg-4 col-sm-4 mb-4">
-                              <select class="form-control" id="adicionar1" size="9" name="adicionar1"></select>
+                            <select class="form-control" id="adicionar1" size="9"></select>
 
 
 
@@ -118,11 +118,11 @@ MODAL MATRICULA ALUMNO
                           </div>
 
                           <div class="col-xl-4 col-sm-4 mb-4">
-                            <select class="form-control" id="adicionar2" size="9" name="adicionar2"></select>
+                            <select class="form-control" id="adicionar2" size="9"></select>
                           </div>
 
                           <div class="col-xl-4 col-sm-4 mb-4">
-                            <select class="form-control" id="adicionar3" size="9" name="adicionar3"></select>
+                            <select class="form-control" id="adicionar3" size="9"></select>
                           </div>
                         </div>
 
@@ -173,5 +173,3 @@ MODAL MATRICULA ALUMNO
   </div>
 
 </div>
-
-<script src="../acead/vistas/js/matricula1.js"></script>

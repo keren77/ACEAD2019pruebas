@@ -37,37 +37,6 @@
 
 			</li>
 
-			<li>
-
-				<a href="modalidades">
-
-					<i class="fa fa-asterisk"></i>
-					<span>Modalidades</span>
-
-				</a>
-
-			</li>
-
-			<li>
-
-				<a href="seccion">
-
-					<i class="fa fa-tasks"></i>
-					<span>Secciones</span>
-
-				</a>
-
-			</li>
-
-			<li class= "treeview" >
-
-				<a href="gestionacademica">
-
-					<i class="fa fa-university"></i>
-				</a>
-
-			</li>
-
 			<li class="treeview">
 
 				<a href="gestionacademica">
@@ -120,6 +89,17 @@
 					</li>
 
 				</ul>
+
+			</li>
+
+			<li>
+
+				<a href="configuracion">
+
+					<i class="fa fa-cog"></i>
+					<span>Configuracion</span>
+
+				</a>
 
 			</li>
 

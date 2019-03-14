@@ -41,7 +41,7 @@ class ControladorPass{
     }
 
   /*=============================================
-  CORREO
+  ENVIO DE CORREO
   =============================================*/
 
   static public function ctrEMAIL(){
@@ -67,12 +67,26 @@ class ControladorPass{
         //echo $correo;
 
 
+        // ENVIO DE CORREO //
 
-	//Envio de correo
+      $tabla2 = "tbl_parametros";
+      $bus3 = "valor";
+
+      $param1 = "CORREO_ELECTRONICO";
+      $param2 = "CONTRASENA_CORREO";
+      $param3 = "REMITENTE_CORREO";
+
+      $parametro = ModeloPass::mdlObtenerParamCorreo($tabla2, $bus3, $param1);
+      $parametro2 = ModeloPass::mdlObtenerParamPass($tabla2, $bus3, $param2);
+      $parametro3 = ModeloPass::mdlObtenerParamRemitente($tabla2, $bus3, $param3);
+
+      $correoinstit = $parametro["valor"];
+      $pass = $parametro2["valor"];
+      $remitente = $parametro3["valor"];
 
   		$email_address = $correo;
 
-    	$email_subject = "Recuperacion de contrasena: ";
+    	$email_subject = "Recuperacion de contraseña: ";
 
     	$email_body= "<p>Hola <b>".$valor."</b> Su Link de recuperacion de contraseña es el siguiente:</p>
     							  </p> http://localhost/acead/index.php?ruta=cambiocontrasena-correo&user=".$valor."</p>";
@@ -94,11 +108,11 @@ class ControladorPass{
 
     $mail->SMTPAuth = true;
 
-    $mail->Username = "academiacead@gmail.com";
+    $mail->Username = $correo2;
 
-    $mail->Password = "Academia2019";
+    $mail->Password = $pass;
 
-    $mail->setFrom('academiacead@gmail.com', 'Academia Cead');
+    $mail->setFrom($correoinstit, $remitente);
 
     $mail->addAddress($email_address, $valor);
 
@@ -107,26 +121,16 @@ class ControladorPass{
 
 
     if ($mail->send()) {
-        //echo "Mailer Error: " . $mail->ErrorInfo;
-        echo '<br><div class="alert alert-warning">Correo Enviado.</div>';
-    } else {
-        //header("Location: ../index.php");
 
-        //echo "<script type='text/javascript'>alert('AQUI')</script>";
-    		/*$_SESSION["recuperar"]=1;
-    		$_SESSION["ERRORRECUPERAR"]=2;*/
+        echo '<br><div class="alert alert-warning">Correo Enviado Exitosamente.</div>';
+    } else {
+
+        echo '<br><div class="alert alert-danger">Error al enviar Correo Electronico</div>';
+
     }
 
-    		////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     	}
-    	else{
-        //echo "<script type='text/javascript'>alert('POSAQUI')</script>";
-        /*
-    		header("Location: ../index.php?ruta=Recuperar");
-    		$_SESSION["ERRORRECUPERAR"]=1;  */
-    	}
-
 
     }
   }
