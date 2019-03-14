@@ -155,7 +155,7 @@ MODAL AGREGAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoNombre1" id="nuevoNombre1" style="text-transform: uppercase" placeholder="Primer Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoNombre1" id="nuevoNombre1" placeholder="Primer Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
 
               </div>
 
@@ -169,7 +169,7 @@ MODAL AGREGAR ALUMNO
 
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control input-lg" name="nuevoNombre2" style="text-transform: uppercase" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                  <input type="text" class="form-control input-lg" name="nuevoNombre2" placeholder="Segundo Nombre" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
@@ -183,7 +183,7 @@ MODAL AGREGAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoApellido1" style="text-transform: uppercase" placeholder="Primer Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="nuevoApellido1" placeholder="Primer Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
 
               </div>
 
@@ -197,7 +197,7 @@ MODAL AGREGAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="nuevoApellido2" style="text-transform: uppercase" placeholder="Segundo Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                <input type="text" class="form-control input-lg" name="nuevoApellido2" placeholder="Segundo Apellido" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
@@ -410,7 +410,7 @@ MODAL EDITAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarNombre1" id="editarNombre1" style="text-transform: uppercase" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="editarNombre1" id="editarNombre1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
 
               </div>
 
@@ -424,7 +424,7 @@ MODAL EDITAR ALUMNO
 
                   <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                  <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" style="text-transform: uppercase" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                  <input type="text" class="form-control input-lg" name="editarNombre2" id="editarNombre2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
@@ -438,13 +438,13 @@ MODAL EDITAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarApellido1" id="editarApellido1" style="text-transform: uppercase" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
+                <input type="text" class="form-control input-lg" name="editarApellido1" id="editarApellido1" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" required>
 
               </div>
 
             </div>
 
-            <!-- ENTRADA PARA EL SEGUNDO APELLIDO -->
+            <!-- ENTRADA PARA EL PRIMER APELLIDO -->
 
             <div class="form-group">
 
@@ -452,7 +452,7 @@ MODAL EDITAR ALUMNO
 
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                <input type="text" class="form-control input-lg" name="editarApellido2" id="editarApellido2" style="text-transform: uppercase" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
+                <input type="text" class="form-control input-lg" name="editarApellido2" id="editarApellido2" value="" pattern="|^[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]*$|">
 
               </div>
 
@@ -517,7 +517,7 @@ MODAL EDITAR ALUMNO
 
                   $civil = ControladorAlumnos::ctrCargarSelectEstCivil();
                   foreach ($civil as $key => $value) {
-                    echo "<option value='".$value['Id_estadoCivil']."'>".$value['Descripcion']."</option>";
+                    echo "<option value='".$value['Id_EstadoCivil']."'>".$value['Descripcion']."</option>";
                   }
                   ?>
 
@@ -543,7 +543,7 @@ MODAL EDITAR ALUMNO
 
                   $genero = ControladorAlumnos::ctrCargarSelectGenero();
                   foreach ($genero as $key => $value) {
-                    echo "<option value='".$value['Id_genero']."'>".$value['Descripcion']."</option>";
+                    echo "<option value='".$value['Id_Genero']."'>".$value['Descripcion']."</option>";
                   }
                   ?>
 

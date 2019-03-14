@@ -16,10 +16,10 @@ class ControladorAlumnos{
 				$tabla = "tbl_alumnos";
 
 
-				$datos = array("PrimerNombre" => strtoupper($_POST["nuevoNombre1"]),
-										 "PrimerApellido"	=> strtoupper($_POST["nuevoApellido1"]),
-										 "SegundoNombre"	=> strtoupper($_POST["nuevoNombre2"]),
-										 "SegundoApellido"	=> strtoupper($_POST["nuevoApellido2"]),
+				$datos = array("PrimerNombre" => $_POST["nuevoNombre1"],
+										 "PrimerApellido"	=> $_POST["nuevoApellido1"],
+										 "SegundoNombre"	=> $_POST["nuevoNombre2"],
+										 "SegundoApellido"	=> $_POST["nuevoApellido2"],
 										 "FechaNacimiento" => $_POST["nuevoFechaNac"],
 										 "CorreoElectronico" => $_POST["nuevoEmail"],
 										 "Telefono" => $_POST["nuevoTelefono"],
@@ -113,6 +113,7 @@ class ControladorAlumnos{
 
 
 		if(isset($_POST["editarAlumno"])){
+//echo "<script type='text/javascript'>alert('funcion')</script>";
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarNombre1"])){
 
@@ -120,15 +121,17 @@ class ControladorAlumnos{
 
 
 
-				$datos = array("PrimerNombre" => $_POST["editarNombre1"],
+				$datos = array("Id_Alumno" => $_POST["editarAlumno"],
+										 "PrimerNombre" => $_POST["editarNombre1"],
 										 "PrimerApellido"	=> $_POST["editarApellido1"],
 										 "SegundoNombre"	=> $_POST["editarNombre2"],
 										 "SegundoApellido"	=> $_POST["editarApellido2"],
+
 										 "CorreoElectronico" => $_POST["editarEmail"],
 										 "Telefono" => $_POST["editarTelefono"],
 										 "Cedula" => $_POST["editarCedula"],
-										 "Id_estadocivil" => $_POST["editarEstCivil"],
-										 "Id_genero" => $_POST["editarGenero"]);
+										 "Id_EstadoCivil" => $_POST["editarEstCivil"],
+										 "Id_Genero" => $_POST["editarGenero"]);
 
 				$respuesta = ModeloAlumnos::mdlEditarAlumno($tabla, $datos);
 

@@ -5,14 +5,14 @@ $('.main-sidebar').css('display', 'none');
 $('.logo').removeAttr('href');
 
 $("#btnojito1").mousedown(function(){
-    $("#cambiopass").removeAttr("type");
-    $("#cambiopass").attr("type","text");
+    $("#passactual").removeAttr("type");
+    $("#passactual").attr("type","text");
 
 });
 
 $("#btnojito1").mouseup(function(){
-    $("#cambiopass").removeAttr("type");
-    $("#cambiopass").attr("type","password");
+    $("#passactual").removeAttr("type");
+    $("#passactual").attr("type","password");
 
 });
 

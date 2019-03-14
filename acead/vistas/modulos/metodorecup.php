@@ -1,23 +1,31 @@
-<div class="content-wrapper" style="width: 900px; top:30%; transform:translate(50%); box-sizing: border-box; padding:30px 30px; position:center">
+<!-- 
+archivo:            formulario del metodo de recuperacion de contraseña
+autor:              nicolle varela
+fecha:              02/2019
+correo:             nicollevarela1995@gmail.com
+proyecto:           academia cead
+-->
+
+<div class="content-wrapper">
 
   <section class="content-header">
-
+    
     <h1>
-
+      
       Seguridad del Sistema
-
-
+  
+      
       <small>Seleccionar metodo de recuperacion de constraseña</small>
-
+    
     </h1>
 
-
+    
 
   </section>
 
   <!-- Main content -->
   <section class="content">
-
+<!-- contenido del formulario-->
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
@@ -34,7 +42,7 @@
       <div class="box-body">
        <div class="box box-success">
             <div class="box-header with-border">
-
+             
             </div>
             <div class="box-body">
                 <div class="form-group" style="margin-left: auto; margin-right: auto; width: 50%;">
@@ -51,7 +59,7 @@
       </div>
       <!-- /.box-body -->
       <div class="box-footer">
-
+        
       </div>
       <!-- /.box-footer-->
     </div>
@@ -61,4 +69,5 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<!--archivo js asociado al formulario(jquery- ajax)-->
 <script src="../acead/vistas/js/metodorecup.js"></script>
