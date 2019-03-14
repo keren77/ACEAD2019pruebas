@@ -83,6 +83,49 @@ class ModeloPass{
   }
 
 
+  /*=============================================
+  OBTENER PARAMETROS
+  =============================================*/
+  //CORREO
+  static public function mdlObtenerParamCorreo($tabla2, $bus3, $param1){
+    //echo "<script type='text/javascript'>alert('.$datos["Parametro"].')</script>";
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT $bus3 FROM $tabla2 WHERE Parametro = :parametro");
+
+    $stmt -> bindParam(":parametro", $param1, PDO::PARAM_STR);
+
+    $stmt -> execute();
+    //echo "<script type='text/javascript'>alert('yes')</script>";
+    return $stmt -> fetch();
+
+  }
+
+  //CONTRASEÑA
+  static public function mdlObtenerParamPass($tabla2, $bus3, $param2){
+    //echo "<script type='text/javascript'>alert('.$datos["Parametro"].')</script>";
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT $bus3 FROM $tabla2 WHERE Parametro = :parametro2");
+
+    $stmt -> bindParam(":parametro2", $param2, PDO::PARAM_STR);
+
+    $stmt -> execute();
+    //echo "<script type='text/javascript'>alert('yes')</script>";
+    return $stmt -> fetch();
+
+  }
+
+  //REMITENTE
+  static public function mdlObtenerParamRemitente($tabla2, $bus3, $param3){
+    //echo "<script type='text/javascript'>alert('.$datos["Parametro"].')</script>";
+    $stmt = ConexionBD::Abrir_Conexion()->prepare("SELECT $bus3 FROM $tabla2 WHERE Parametro = :parametro3");
+
+    $stmt -> bindParam(":parametro3", $param3, PDO::PARAM_STR);
+
+    $stmt -> execute();
+    //echo "<script type='text/javascript'>alert('yes')</script>";
+    return $stmt -> fetch();
+
+  }
+
+
 
 
 }

@@ -4,11 +4,11 @@
 
  ?>
 
- <div class="login-box">
+ <div class="boxcambiopass">
 
-   <div class="login-box-body">
+   <div class="box-body">
 
-    <p class="login-box-msg">Cambio de Contraseña</p>
+    <p class="box-msg"><b>CAMBIO DE CONTRASEÑA</b></p>
 
     <form method="post">
 
@@ -23,9 +23,12 @@
 
       </div>
 
-      <div class="row">
-        <div class="col-xs-8">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Generar Nueva Contraseña</button>
+      <div class="row" style="padding: 15px">
+        <div class="">
+
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Generar Nueva Contraseña</button>
+          <button type="button" class="btn btn-default pull-right"><i class="fa fa-user"></i><a href="login"> Volver al Login</a></button>
+
         </div>
       </div>
 

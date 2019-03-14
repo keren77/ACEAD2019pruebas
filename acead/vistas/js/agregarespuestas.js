@@ -17,9 +17,6 @@ $.ajax({
                 $("#cboPreguntas").attr("disabled", "true");
                 $('#btnAgregar').attr('disabled', "true")
                 $('#btnGuardar').removeAttr('disabled');
-                actualizaprimeringreso();
-                window.location.href ="cambiopass";
-                
                 //$('#alerta1').show();
             }
         });
@@ -60,8 +57,7 @@ $('#btnAgregar').click(function () {
             //reset();
         });
     }else{
-//        alert('YA COMPLETASTE LAS 3 PREGUNTAS!!!!');
-          
+        alert('YA COMPLETASTE LAS 3 PREGUNTAS!!!!');
     }
     
 contVeces = contVeces + 1;
@@ -69,11 +65,6 @@ contVeces = contVeces + 1;
 });
 
 $('#btnGuardar').click(function(){
-    
-});
-
-
-function actualizaprimeringreso(){
     $.ajax({
        url: "../acead/modelos/usuarios.modelo.php?caso=cambiapass",
             data:"",
@@ -89,4 +80,4 @@ function actualizaprimeringreso(){
                 alert("¡Algo salió mal! : " + xhr + "(" + status + ")");
             }
     });
-}
+});

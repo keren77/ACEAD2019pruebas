@@ -108,6 +108,7 @@ CUERPO DOCUMENTO
          $_GET["ruta"] == "cambiapasspreg" ||
          $_GET["ruta"] == "cambiocontrasena" ||
          $_GET["ruta"] == "recupera" ||
+         $_GET["ruta"] == "configuracion" ||
          $_GET["ruta"] == "salir"){
         include "modulos/".$_GET["ruta"].".php";
       }else{
@@ -126,15 +127,15 @@ CUERPO DOCUMENTO
     //include "modulos/login.php";
       if(isset($_GET['ruta'])){
           if($_GET["ruta"] == "inicio" ||
-                $_GET["ruta"] == "usuarios" ||
-                $_GET["ruta"] == "alumnos" ||
+                $_GET["ruta"] == "" ||
+                $_GET["ruta"] == "" ||
                 $_GET["ruta"] == "autoregistro" ||
                 $_GET["ruta"] == "cambiocontrasena" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "cambiocontrasena-correo" ||
                 $_GET["ruta"] == "metodorecup" ||
                 $_GET["ruta"] == "contestapreg" ||
-                $_GET["ruta"] == "reportes" ||
+                $_GET["ruta"] == "" ||
                  $_GET["ruta"] == "preguntas" ||
                 $_GET["ruta"] == "cambiopass" ||
                 $_GET["ruta"] == "recupera" ||
@@ -156,6 +157,7 @@ CUERPO DOCUMENTO
 <script src="vistas/js/alumnos.js"></script>
 <script src="vistas/js/ctrespacios.js"></script>
 <script src="vistas/js/matricula.js"></script>
+<script src="vistas/js/configuracion.js"></script>
 
 
 </body>
